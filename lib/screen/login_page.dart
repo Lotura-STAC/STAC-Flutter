@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  late TextEditingController idController;
+  late TextEditingController pwdController;
+
+  @override
+  void initState() {
+    super.initState();
+    idController = TextEditingController();
+    pwdController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    idController.dispose();
+    pwdController.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextField(
+            controller: idController,
+          ),
+          TextField(
+            controller: pwdController,
+          ),
+          ElevatedButton(onPressed: null, child: Text("로그인")),
+        ],
+      ),
+    );
+  }
+}
