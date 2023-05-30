@@ -31,13 +31,18 @@ class _LoginPageState extends State<LoginPage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextField(
-            controller: idController,
+          Expanded(
+            flex: 5,
+            child: Container(
+              color: Colors.blue,
+            ),
           ),
-          TextField(
-            controller: pwdController,
+          Expanded(
+            flex: 2,
+            child: Container(
+              color: Colors.white,
+            ),
           ),
-          ElevatedButton(onPressed: null, child: Text("로그인")),
         ],
       ),
     );
