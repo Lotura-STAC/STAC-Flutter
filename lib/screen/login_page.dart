@@ -35,6 +35,12 @@ class _LoginPageState extends State<LoginPage> {
             flex: 5,
             child: Container(
               color: Colors.blue,
+              child: Center(
+                child: Image.asset(
+                  "assets/images/applogo.png",
+                  height: MediaQuery.of(context).size.width * 0.6,
+                ),
+              ),
             ),
           ),
           Expanded(
