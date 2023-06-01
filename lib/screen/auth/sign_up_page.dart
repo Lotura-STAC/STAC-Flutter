@@ -10,12 +10,17 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   late TextEditingController idController;
   late TextEditingController pwdController;
+  late TextEditingController pwdCheckController;
+  FocusNode firstFocusNode = FocusNode();
+  FocusNode secondFocusNode = FocusNode();
+  FocusNode thirdFocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
     idController = TextEditingController();
     pwdController = TextEditingController();
+    pwdCheckController = TextEditingController();
   }
 
   @override
@@ -23,6 +28,7 @@ class _SignUpPageState extends State<SignUpPage> {
     super.dispose();
     idController.dispose();
     pwdController.dispose();
+    pwdCheckController.dispose();
   }
 
   @override
@@ -47,28 +53,63 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
       body: Column(
         children: [
-          _textField(idController, "아이디를 입력해주세요"),
-          _textField(pwdController, "비밀번호를 입력해주세요"),
+          SizedBox(height: 100),
+          _textField(
+              controller: idController,
+              hintText: "아이디를 입력해주세요",
+              context: context,
+              focusNode: firstFocusNode,
+              autofocus: true),
+          const SizedBox(height: 20.0),
+          _textField(
+              controller: pwdController,
+              hintText: "비밀번호를 입력해주세요",
+              context: context,
+              focusNode: secondFocusNode,
+              autofocus: false),
+          const SizedBox(height: 20.0),
+          _textField(
+              controller: pwdCheckController,
+              hintText: "비밀번호를 확인해주세요",
+              context: context,
+              focusNode: thirdFocusNode,
+              autofocus: false),
         ],
       ),
     );
   }
 }
 
-_textField(TextEditingController controller, String hintText) {
-  return TextField(
-    controller: controller,
-    decoration: InputDecoration(
-      fillColor: const Color(0xfff4edff),
-      filled: true,
-      hintText: hintText,
-      border: const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        borderSide: BorderSide(width: 1, color: Colors.grey),
-      ),
-      focusedBorder: const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        borderSide: BorderSide(width: 1, color: Colors.grey),
+_textField(
+    {TextEditingController? controller,
+    String? hintText,
+    BuildContext? context,
+    FocusNode? focusNode,
+    bool? autofocus}) {
+  return Center(
+    child: SizedBox(
+      width: MediaQuery.of(context!).size.width - 40,
+      child: TextField(
+        focusNode: focusNode,
+        autofocus: autofocus!,
+        controller: controller,
+        decoration: InputDecoration(
+          fillColor: const Color(0xfff4edff),
+          filled: true,
+          hintText: hintText,
+          border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            borderSide: BorderSide(width: 1, color: Colors.grey),
+          ),
+          enabledBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            borderSide: BorderSide(width: 1, color: Colors.grey),
+          ),
+          focusedBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            borderSide: BorderSide(width: 1, color: Colors.grey),
+          ),
+        ),
       ),
     ),
   );
