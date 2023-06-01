@@ -59,7 +59,7 @@ class _StartingPageState extends State<StartingPage> {
                     child: ElevatedButton(
                       onPressed: () => Navigator.of(context).push(
                           MaterialPageRoute(
-                              builder: (context) => SignInPage())),
+                              builder: (context) => SignUpPage())),
                       child: Text(
                         "바로 시작하기",
                         style: TextStyle(fontSize: 20),
@@ -69,7 +69,7 @@ class _StartingPageState extends State<StartingPage> {
                   SizedBox(height: 30),
                   TextButton(
                     onPressed: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => SignUpPage())),
+                        MaterialPageRoute(builder: (context) => SignInPage())),
                     child: Text(
                       "이미 계정이 있으신가요? 로그인하기",
                       style: TextStyle(fontSize: 18),
