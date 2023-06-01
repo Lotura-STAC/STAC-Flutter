@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:stac_flutter/screen/auth/sign_up_page.dart';
+import 'package:stac_flutter/screen/auth/sing_in_page.dart';
 
 class StartingPage extends StatefulWidget {
   const StartingPage({Key? key}) : super(key: key);
@@ -55,7 +57,9 @@ class _StartingPageState extends State<StartingPage> {
                     width: MediaQuery.of(context).size.width - 60,
                     height: MediaQuery.of(context).size.height * 0.05,
                     child: ElevatedButton(
-                      onPressed: null,
+                      onPressed: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => SignInPage())),
                       child: Text(
                         "바로 시작하기",
                         style: TextStyle(fontSize: 20),
@@ -64,7 +68,8 @@ class _StartingPageState extends State<StartingPage> {
                   ),
                   SizedBox(height: 30),
                   TextButton(
-                    onPressed: null,
+                    onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => SignUpPage())),
                     child: Text(
                       "이미 계정이 있으신가요? 로그인하기",
                       style: TextStyle(fontSize: 18),
