@@ -56,7 +56,10 @@ class _LoginPageState extends State<LoginPage> {
                     height: MediaQuery.of(context).size.height * 0.05,
                     child: ElevatedButton(
                       onPressed: null,
-                      child: Text("바로 시작하기"),
+                      child: Text(
+                        "바로 시작하기",
+                        style: TextStyle(fontSize: 20),
+                      ),
                     ),
                   ),
                   SizedBox(height: 30),
