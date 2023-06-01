@@ -46,7 +46,29 @@ class _LoginPageState extends State<LoginPage> {
           Expanded(
             flex: 2,
             child: Container(
+              width: double.infinity,
               color: Colors.white,
+              child: Column(
+                children: [
+                  SizedBox(height: 50),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width - 60,
+                    height: MediaQuery.of(context).size.height * 0.05,
+                    child: ElevatedButton(
+                      onPressed: null,
+                      child: Text("바로 시작하기"),
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                  TextButton(
+                    onPressed: null,
+                    child: Text(
+                      "이미 계정이 있으신가요? 로그인하기",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
