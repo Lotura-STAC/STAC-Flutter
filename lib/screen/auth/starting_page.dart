@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class StartingPage extends StatefulWidget {
+  const StartingPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<StartingPage> createState() => _StartingPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _StartingPageState extends State<StartingPage> {
   late TextEditingController idController;
   late TextEditingController pwdController;
 
