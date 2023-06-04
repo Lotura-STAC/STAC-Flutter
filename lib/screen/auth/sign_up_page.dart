@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stac_flutter/screen/widget/custom_text_field.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -54,21 +55,21 @@ class _SignUpPageState extends State<SignUpPage> {
       body: Column(
         children: [
           SizedBox(height: 100),
-          _textField(
+          customTextField(
               controller: idController,
               hintText: "아이디를 입력해주세요",
               context: context,
               focusNode: firstFocusNode,
               autofocus: true),
           const SizedBox(height: 20.0),
-          _textField(
+          customTextField(
               controller: pwdController,
               hintText: "비밀번호를 입력해주세요",
               context: context,
               focusNode: secondFocusNode,
               autofocus: false),
           const SizedBox(height: 20.0),
-          _textField(
+          customTextField(
               controller: pwdCheckController,
               hintText: "비밀번호를 확인해주세요",
               context: context,
@@ -78,39 +79,4 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
-}
-
-_textField(
-    {TextEditingController? controller,
-    String? hintText,
-    BuildContext? context,
-    FocusNode? focusNode,
-    bool? autofocus}) {
-  return Center(
-    child: SizedBox(
-      width: MediaQuery.of(context!).size.width - 40,
-      child: TextField(
-        focusNode: focusNode,
-        autofocus: autofocus!,
-        controller: controller,
-        decoration: InputDecoration(
-          fillColor: const Color(0xfff4edff),
-          filled: true,
-          hintText: hintText,
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            borderSide: BorderSide(width: 1, color: Colors.grey),
-          ),
-          enabledBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            borderSide: BorderSide(width: 1, color: Colors.grey),
-          ),
-          focusedBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            borderSide: BorderSide(width: 1, color: Colors.grey),
-          ),
-        ),
-      ),
-    ),
-  );
 }
