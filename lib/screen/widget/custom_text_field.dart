@@ -14,7 +14,7 @@ Center customTextField(
         autofocus: autofocus!,
         controller: controller,
         decoration: InputDecoration(
-          fillColor: const Color(0xfff4edff),
+          fillColor: const Color(0xfff6f0fd),
           filled: true,
           hintText: hintText,
           border: const OutlineInputBorder(
