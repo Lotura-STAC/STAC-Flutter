@@ -61,6 +61,7 @@ class _SignUpPageState extends State<SignUpPage> {
             customTextField(
                 controller: idController,
                 hintText: "아이디를 입력해주세요",
+                textInputType: TextInputType.emailAddress,
                 context: context,
                 focusNode: firstFocusNode,
                 autofocus: true),
@@ -69,6 +70,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 controller: pwdController,
                 hintText: "비밀번호를 입력해주세요",
                 context: context,
+                textInputType: TextInputType.visiblePassword,
                 focusNode: secondFocusNode,
                 autofocus: false),
             const SizedBox(height: 20.0),
@@ -77,6 +79,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 hintText: "비밀번호를 확인해주세요",
                 context: context,
                 focusNode: thirdFocusNode,
+                textInputType: TextInputType.visiblePassword,
                 autofocus: false),
             SizedBox(
               width: MediaQuery.of(context).size.width - 40,

@@ -19,17 +19,20 @@ class _SignInPageState extends State<SignInPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            SizedBox(height: 0),
             Column(
               children: [
                 customTextField(
                   autofocus: true,
                   hintText: "아이디를 입력해주세요",
                   controller: idController,
+                  textInputType: TextInputType.emailAddress,
                   context: context,
                 ),
                 const SizedBox(height: 20),
                 customTextField(
                   autofocus: false,
+                  textInputType: TextInputType.visiblePassword,
                   hintText: "비밀번호를 입력해주세요",
                   controller: pwdController,
                   context: context,
