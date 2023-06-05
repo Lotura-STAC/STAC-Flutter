@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 Center customTextField(
     {TextEditingController? controller,
+    TextInputType? textInputType,
     String? hintText,
     BuildContext? context,
     FocusNode? focusNode,
@@ -12,6 +13,7 @@ Center customTextField(
       child: TextField(
         focusNode: focusNode,
         autofocus: autofocus!,
+        keyboardType: textInputType,
         controller: controller,
         decoration: InputDecoration(
           fillColor: const Color(0xfff6f0fd),
