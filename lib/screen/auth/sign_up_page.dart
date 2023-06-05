@@ -54,56 +54,58 @@ class _SignUpPageState extends State<SignUpPage> {
           style: TextStyle(color: Colors.black, fontSize: 30),
         ),
       ),
-      body: Column(
-        children: [
-          SizedBox(height: 100),
-          customTextField(
-              controller: idController,
-              hintText: "아이디를 입력해주세요",
-              context: context,
-              focusNode: firstFocusNode,
-              autofocus: true),
-          const SizedBox(height: 20.0),
-          customTextField(
-              controller: pwdController,
-              hintText: "비밀번호를 입력해주세요",
-              context: context,
-              focusNode: secondFocusNode,
-              autofocus: false),
-          const SizedBox(height: 20.0),
-          customTextField(
-              controller: pwdCheckController,
-              hintText: "비밀번호를 확인해주세요",
-              context: context,
-              focusNode: thirdFocusNode,
-              autofocus: false),
-          SizedBox(
-            width: MediaQuery.of(context).size.width - 40,
-            height: MediaQuery.of(context).size.height * 0.06,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xffc4a6ea),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(99),
+      body: SafeArea(
+        child: Column(
+          children: [
+            SizedBox(height: 100),
+            customTextField(
+                controller: idController,
+                hintText: "아이디를 입력해주세요",
+                context: context,
+                focusNode: firstFocusNode,
+                autofocus: true),
+            const SizedBox(height: 20.0),
+            customTextField(
+                controller: pwdController,
+                hintText: "비밀번호를 입력해주세요",
+                context: context,
+                focusNode: secondFocusNode,
+                autofocus: false),
+            const SizedBox(height: 20.0),
+            customTextField(
+                controller: pwdCheckController,
+                hintText: "비밀번호를 확인해주세요",
+                context: context,
+                focusNode: thirdFocusNode,
+                autofocus: false),
+            SizedBox(
+              width: MediaQuery.of(context).size.width - 40,
+              height: MediaQuery.of(context).size.height * 0.06,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xffc4a6ea),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(99),
+                  ),
+                ),
+                onPressed: () {
+                  AuthService.signUp(idController.text, pwdController.text)
+                      .then((value) {
+                    if (value == 200) {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (context) => MainPage()),
+                          (route) => false);
+                    }
+                  });
+                },
+                child: Text(
+                  "바로 시작하기",
+                  style: TextStyle(fontSize: 20),
                 ),
               ),
-              onPressed: () {
-                AuthService.signUp(idController.text, pwdController.text)
-                    .then((value) {
-                  if (value == 200) {
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => MainPage()),
-                        (route) => false);
-                  }
-                });
-              },
-              child: Text(
-                "바로 시작하기",
-                style: TextStyle(fontSize: 20),
-              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
