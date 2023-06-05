@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:stac_flutter/screen/main/main_page.dart';
 import 'package:stac_flutter/screen/widget/custom_text_field.dart';
+import 'package:stac_flutter/service/auth/auth_service.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -75,6 +77,32 @@ class _SignUpPageState extends State<SignUpPage> {
               context: context,
               focusNode: thirdFocusNode,
               autofocus: false),
+          SizedBox(
+            width: MediaQuery.of(context).size.width - 40,
+            height: MediaQuery.of(context).size.height * 0.06,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xffc4a6ea),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(99),
+                ),
+              ),
+              onPressed: () {
+                AuthService.signUp(idController.text, pwdController.text)
+                    .then((value) {
+                  if (value == 200) {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (context) => MainPage()),
+                        (route) => false);
+                  }
+                });
+              },
+              child: Text(
+                "바로 시작하기",
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
         ],
       ),
     );
