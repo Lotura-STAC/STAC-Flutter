@@ -43,7 +43,7 @@ class _StartingPageState extends State<StartingPage> {
                   padding: EdgeInsets.only(top: 50),
                   child: Image.asset(
                     "assets/images/applogo.png",
-                    height: MediaQuery.of(context).size.width * 0.8,
+                    height: MediaQuery.of(context).size.width * 0.75,
                   ),
                 ),
               ),
@@ -62,10 +62,10 @@ class _StartingPageState extends State<StartingPage> {
               ),
               child: Column(
                 children: [
-                  SizedBox(height: 100),
+                  SizedBox(height: 90),
                   SizedBox(
                     width: MediaQuery.of(context).size.width - 60,
-                    height: MediaQuery.of(context).size.height * 0.05,
+                    height: MediaQuery.of(context).size.height * 0.06,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xff3b56d5),
