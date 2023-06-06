@@ -39,9 +39,12 @@ class _StartingPageState extends State<StartingPage> {
             child: Container(
               color: Color(0xff5c80d6),
               child: Center(
-                child: Image.asset(
-                  "assets/images/applogo.png",
-                  height: MediaQuery.of(context).size.width * 0.8,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 50),
+                  child: Image.asset(
+                    "assets/images/applogo.png",
+                    height: MediaQuery.of(context).size.width * 0.8,
+                  ),
                 ),
               ),
             ),
