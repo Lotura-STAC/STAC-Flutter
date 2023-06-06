@@ -56,54 +56,60 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
       body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(height: 100),
-            customTextField(
-                controller: idController,
-                hintText: "아이디를 입력해주세요",
-                textInputType: TextInputType.emailAddress,
-                context: context,
-                focusNode: firstFocusNode,
-                autofocus: true),
-            const SizedBox(height: 20.0),
-            customTextField(
-                controller: pwdController,
-                hintText: "비밀번호를 입력해주세요",
-                context: context,
-                textInputType: TextInputType.visiblePassword,
-                focusNode: secondFocusNode,
-                autofocus: false),
-            const SizedBox(height: 20.0),
-            customTextField(
-                controller: pwdCheckController,
-                hintText: "비밀번호를 확인해주세요",
-                context: context,
-                focusNode: thirdFocusNode,
-                textInputType: TextInputType.visiblePassword,
-                autofocus: false),
-            SizedBox(
-              width: MediaQuery.of(context).size.width - 40,
-              height: MediaQuery.of(context).size.height * 0.06,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xffc4a6ea),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(99),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: 100),
+                CustomTextField(
+                    controller: idController,
+                    hintText: "아이디를 입력해주세요",
+                    textInputType: TextInputType.emailAddress,
+                    focusNode: firstFocusNode,
+                    autofocus: true),
+                const SizedBox(height: 20.0),
+                CustomTextField(
+                    controller: pwdController,
+                    hintText: "비밀번호를 입력해주세요",
+                    textInputType: TextInputType.visiblePassword,
+                    focusNode: secondFocusNode,
+                    autofocus: false),
+                const SizedBox(height: 20.0),
+                CustomTextField(
+                    controller: pwdCheckController,
+                    hintText: "비밀번호를 확인해주세요",
+                    focusNode: thirdFocusNode,
+                    textInputType: TextInputType.visiblePassword,
+                    autofocus: false),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 30),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width - 40,
+                height: MediaQuery.of(context).size.height * 0.06,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xff3b56d5),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(99),
+                    ),
                   ),
-                ),
-                onPressed: () {
-                  AuthService.signUp(idController.text, pwdController.text)
-                      .then((value) {
-                    if (value == 200) {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => MainPage()),
-                          (route) => false);
-                    }
-                  });
-                },
-                child: Text(
-                  "바로 시작하기",
-                  style: TextStyle(fontSize: 20),
+                  onPressed: () {
+                    AuthService.signUp(idController.text, pwdController.text)
+                        .then((value) {
+                      if (value == 200) {
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(builder: (context) => MainPage()),
+                            (route) => false);
+                      }
+                    });
+                  },
+                  child: Text(
+                    "바로 시작하기",
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
               ),
             ),
