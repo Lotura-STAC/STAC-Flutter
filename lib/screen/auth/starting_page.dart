@@ -30,6 +30,7 @@ class _StartingPageState extends State<StartingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff5c80d6),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -49,10 +50,16 @@ class _StartingPageState extends State<StartingPage> {
             flex: 4,
             child: Container(
               width: double.infinity,
-              color: Colors.white,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
+              ),
               child: Column(
                 children: [
-                  SizedBox(height: 50),
+                  SizedBox(height: 100),
                   SizedBox(
                     width: MediaQuery.of(context).size.width - 60,
                     height: MediaQuery.of(context).size.height * 0.05,
@@ -73,13 +80,13 @@ class _StartingPageState extends State<StartingPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 50),
                   TextButton(
                     onPressed: () => Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => SignInPage())),
                     child: Text(
                       "이미 계정이 있으신가요? 로그인하기",
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: 18, color: Colors.black),
                     ),
                   ),
                 ],
