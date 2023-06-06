@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stac_flutter/common/common.dart';
 import 'package:stac_flutter/screen/auth/sign_up_page.dart';
 import 'package:stac_flutter/screen/auth/sing_in_page.dart';
 
@@ -30,14 +31,14 @@ class _StartingPageState extends State<StartingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff5c80d6),
+      backgroundColor: CustomColor.logoImageBackgroundColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
             flex: 7,
             child: Container(
-              color: Color(0xff5c80d6),
+              color: CustomColor.logoImageBackgroundColor,
               child: Center(
                 child: Padding(
                   padding: EdgeInsets.only(top: 50),
@@ -68,7 +69,7 @@ class _StartingPageState extends State<StartingPage> {
                     height: MediaQuery.of(context).size.height * 0.06,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xff3b56d5),
+                        backgroundColor: CustomColor.pointColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(99),
                         ),
