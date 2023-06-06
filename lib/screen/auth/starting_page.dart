@@ -34,19 +34,19 @@ class _StartingPageState extends State<StartingPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            flex: 5,
+            flex: 7,
             child: Container(
-              color: Colors.blue,
+              color: Color(0xff5c80d6),
               child: Center(
                 child: Image.asset(
                   "assets/images/applogo.png",
-                  height: MediaQuery.of(context).size.width * 0.6,
+                  height: MediaQuery.of(context).size.width * 0.8,
                 ),
               ),
             ),
           ),
           Expanded(
-            flex: 2,
+            flex: 4,
             child: Container(
               width: double.infinity,
               color: Colors.white,
@@ -57,9 +57,16 @@ class _StartingPageState extends State<StartingPage> {
                     width: MediaQuery.of(context).size.width - 60,
                     height: MediaQuery.of(context).size.height * 0.05,
                     child: ElevatedButton(
-                      onPressed: () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => SignUpPage())),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xff3b56d5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(99),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => SignUpPage()));
+                      },
                       child: Text(
                         "바로 시작하기",
                         style: TextStyle(fontSize: 20),
