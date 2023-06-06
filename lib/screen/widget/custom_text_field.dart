@@ -1,38 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:stac_flutter/common/common.dart';
 
-Center customTextField(
-    {TextEditingController? controller,
-    TextInputType? textInputType,
-    String? hintText,
-    BuildContext? context,
-    FocusNode? focusNode,
-    bool? autofocus}) {
-  return Center(
-    child: SizedBox(
-      width: MediaQuery.of(context!).size.width - 40,
-      child: TextField(
-        focusNode: focusNode,
-        autofocus: autofocus!,
-        keyboardType: textInputType,
-        controller: controller,
-        decoration: InputDecoration(
-          fillColor: const Color(0xfff6f0fd),
-          filled: true,
-          hintText: hintText,
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            borderSide: BorderSide(width: 1, color: Colors.grey),
-          ),
-          enabledBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            borderSide: BorderSide(width: 1, color: Colors.grey),
-          ),
-          focusedBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            borderSide: BorderSide(width: 1, color: Colors.grey),
+class CustomTextField extends StatefulWidget {
+  CustomTextField({
+    super.key,
+    required this.controller,
+    required this.hintText,
+    this.focusNode,
+    this.textInputType = TextInputType.text,
+    this.autofocus = false,
+  });
+
+  TextEditingController controller;
+  TextInputType textInputType;
+  String? hintText;
+  FocusNode? focusNode;
+  bool autofocus;
+
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: SizedBox(
+        width: MediaQuery
+            .of(context)
+            .size
+            .width - 40,
+        child: TextField(
+          onChanged: (value) => setState(() {}),
+          focusNode: widget.focusNode,
+          autofocus: widget.autofocus,
+          keyboardType: widget.textInputType,
+          controller: widget.controller,
+          decoration: InputDecoration(
+            hintText: widget.hintText,
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  width: 1,
+                  color: widget.controller.text.isNotEmpty
+                      ? Colors.black
+                      : Colors.grey),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(width: 1, color: CustomColor.pointColor),
+            ),
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
