@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stac_flutter/common/common.dart';
-import 'package:stac_flutter/screen/main/main_page.dart';
+import 'package:stac_flutter/screen/auth/starting_page.dart';
 import 'package:stac_flutter/screen/widget/custom_text_field.dart';
-import 'package:stac_flutter/service/auth/auth_service.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -76,9 +75,16 @@ class _SignUpPageState extends State<SignUpPage> {
                 // AuthService.signUp(idController.text, pwdController.text)
                 //     .then((value) {
                 //   if (value == 200) {
-                //     Navigator.of(context).pushAndRemoveUntil(
-                //         MaterialPageRoute(builder: (context) => MainPage()),
-                //         (route) => false);
+                Navigator.of(context).pushAndRemoveUntil(
+                    PageRouteBuilder(
+                      transitionDuration: Duration.zero,
+                      reverseTransitionDuration: Duration.zero,
+                      pageBuilder: (BuildContext context,
+                              Animation<double> animation1,
+                              Animation<double> animation2) =>
+                          const StartingPage(),
+                    ),
+                    (route) => false);
                 //   }
                 // });
               },
