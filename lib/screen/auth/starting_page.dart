@@ -14,7 +14,6 @@ class _StartingPageState extends State<StartingPage>
     with SingleTickerProviderStateMixin {
   late TextEditingController idController;
   late TextEditingController pwdController;
-  late AnimationController animationController;
 
   int screenState = 0;
 
@@ -25,9 +24,6 @@ class _StartingPageState extends State<StartingPage>
     super.initState();
     idController = TextEditingController();
     pwdController = TextEditingController();
-    animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 700));
-    animationController.repeat();
   }
 
   @override
@@ -35,14 +31,15 @@ class _StartingPageState extends State<StartingPage>
     super.dispose();
     idController.dispose();
     pwdController.dispose();
-    animationController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: CustomColor.logoImageBackgroundColor,
-      body: Container(
+      body: AnimatedContainer(
+        duration: const Duration(milliseconds: 700),
+        curve: Curves.easeIn,
         width: double.infinity,
         height: screenState == 0
             ? MediaQuery.of(context).size.height
@@ -50,7 +47,8 @@ class _StartingPageState extends State<StartingPage>
         color: CustomColor.logoImageBackgroundColor,
         child: screenState == 0
             ? Padding(
-                padding: EdgeInsets.only(bottom: 200),
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).size.height * 0.3),
                 child: Center(
                   child: Image.asset(
                     "assets/images/applogo.png",
@@ -60,7 +58,8 @@ class _StartingPageState extends State<StartingPage>
               )
             : Center(
                 child: Padding(
-                  padding: EdgeInsets.only(top: 50),
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.05),
                   child: Image.asset(
                     "assets/images/applogo.png",
                     height: MediaQuery.of(context).size.width * 0.75,
@@ -69,7 +68,9 @@ class _StartingPageState extends State<StartingPage>
               ),
       ),
       bottomSheet: screenState == 0
-          ? Container(
+          ? AnimatedContainer(
+              duration: const Duration(milliseconds: 700),
+              curve: Curves.easeIn,
               width: double.infinity,
               height: screenState == 0
                   ? MediaQuery.of(context).size.height * 0.4
@@ -83,7 +84,7 @@ class _StartingPageState extends State<StartingPage>
               ),
               child: Column(
                 children: [
-                  SizedBox(height: 90),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.09),
                   SizedBox(
                     width: MediaQuery.of(context).size.width - 60,
                     height: MediaQuery.of(context).size.height * 0.06,
@@ -99,20 +100,20 @@ class _StartingPageState extends State<StartingPage>
                           screenState = 1;
                         });
                       },
-                      child: Text(
+                      child: const Text(
                         "바로 시작하기",
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
                   ),
-                  SizedBox(height: 50),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                   TextButton(
                     onPressed: () {
                       setState(() {
                         screenState = 2;
                       });
                     },
-                    child: Text(
+                    child: const Text(
                       "이미 계정이 있으신가요? 로그인하기",
                       style: TextStyle(fontSize: 18, color: Colors.black),
                     ),
@@ -122,12 +123,10 @@ class _StartingPageState extends State<StartingPage>
             )
           : screenState == 1
               ? AnimatedContainer(
-                  duration: Duration(milliseconds: 700),
+                  duration: const Duration(milliseconds: 700),
                   curve: Curves.easeIn,
                   width: double.infinity,
-                  height: screenState == 0
-                      ? MediaQuery.of(context).size.height * 0.4
-                      : MediaQuery.of(context).size.height * 0.6,
+                  height: MediaQuery.of(context).size.height * 0.6,
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -138,12 +137,10 @@ class _StartingPageState extends State<StartingPage>
                   child: const SignUpPage(),
                 )
               : AnimatedContainer(
-                  duration: Duration(milliseconds: 700),
+                  duration: const Duration(milliseconds: 700),
                   curve: Curves.easeIn,
                   width: double.infinity,
-                  height: screenState == 0
-                      ? MediaQuery.of(context).size.height * 0.4
-                      : MediaQuery.of(context).size.height * 0.6,
+                  height: MediaQuery.of(context).size.height * 0.6,
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
