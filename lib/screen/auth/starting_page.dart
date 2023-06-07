@@ -92,9 +92,11 @@ class _StartingPageState extends State<StartingPage> {
                         ),
                         SizedBox(height: 50),
                         TextButton(
-                          onPressed: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) => SignInPage())),
+                          onPressed: () {
+                            setState(() {
+                              screenState = 2;
+                            });
+                          },
                           child: Text(
                             "이미 계정이 있으신가요? 로그인하기",
                             style: TextStyle(fontSize: 18, color: Colors.black),
@@ -112,6 +114,7 @@ class _StartingPageState extends State<StartingPage> {
                             topRight: Radius.circular(30),
                           ),
                         ),
+                        child: const SignUpPage(),
                       )
                     : Container(
                         decoration: const BoxDecoration(
@@ -121,6 +124,7 @@ class _StartingPageState extends State<StartingPage> {
                             topRight: Radius.circular(30),
                           ),
                         ),
+                        child: const SignInPage(),
                       ),
           ),
         ],
