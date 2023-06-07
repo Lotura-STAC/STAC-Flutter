@@ -56,51 +56,72 @@ class _StartingPageState extends State<StartingPage> {
           ),
           Expanded(
             flex: screenState == 0 ? 4 : 6,
-            child: Container(
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                ),
-              ),
-              child: Column(
-                children: [
-                  SizedBox(height: 90),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width - 60,
-                    height: MediaQuery.of(context).size.height * 0.06,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: CustomColor.pointColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(99),
+            child: screenState == 0
+                ? Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(height: 90),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width - 60,
+                          height: MediaQuery.of(context).size.height * 0.06,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: CustomColor.pointColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(99),
+                              ),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                screenState = 1;
+                              });
+                            },
+                            child: Text(
+                              "바로 시작하기",
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 50),
+                        TextButton(
+                          onPressed: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => SignInPage())),
+                          child: Text(
+                            "이미 계정이 있으신가요? 로그인하기",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : screenState == 1
+                    ? Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30),
+                          ),
+                        ),
+                      )
+                    : Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30),
+                          ),
                         ),
                       ),
-                      onPressed: () {
-                        setState(() {
-                          screenState = 1;
-                        });
-                      },
-                      child: Text(
-                        "바로 시작하기",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 50),
-                  TextButton(
-                    onPressed: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => SignInPage())),
-                    child: Text(
-                      "이미 계정이 있으신가요? 로그인하기",
-                      style: TextStyle(fontSize: 18, color: Colors.black),
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ),
         ],
       ),
