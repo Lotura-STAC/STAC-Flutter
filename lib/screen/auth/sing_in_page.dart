@@ -20,14 +20,14 @@ class _SignInPageState extends State<SignInPage> {
       children: [
         Column(
           children: [
-            SizedBox(height: 80),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.08),
             CustomTextField(
               autofocus: true,
               hintText: "아이디를 입력해주세요",
               controller: idController,
               textInputType: TextInputType.emailAddress,
             ),
-            const SizedBox(height: 30),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             CustomTextField(
               autofocus: false,
               textInputType: TextInputType.visiblePassword,
@@ -37,7 +37,7 @@ class _SignInPageState extends State<SignInPage> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 40),
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.04),
           child: SizedBox(
             width: MediaQuery.of(context).size.width - 40,
             height: MediaQuery.of(context).size.height * 0.06,

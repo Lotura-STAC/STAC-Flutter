@@ -38,21 +38,20 @@ class _SignUpPageState extends State<SignUpPage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 80),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.08),
             CustomTextField(
                 controller: idController,
                 hintText: "아이디를 입력해주세요",
                 textInputType: TextInputType.emailAddress,
                 autofocus: true),
-            const SizedBox(height: 30.0),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             CustomTextField(
                 controller: pwdController,
                 hintText: "비밀번호를 입력해주세요",
                 textInputType: TextInputType.visiblePassword,
                 autofocus: false),
-            const SizedBox(height: 20.0),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             CustomTextField(
                 controller: pwdCheckController,
                 hintText: "비밀번호를 확인해주세요",
@@ -61,7 +60,8 @@ class _SignUpPageState extends State<SignUpPage> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 40),
+          padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).size.height * 0.04),
           child: SizedBox(
             width: MediaQuery.of(context).size.width - 40,
             height: MediaQuery.of(context).size.height * 0.06,
@@ -73,14 +73,14 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
               onPressed: () {
-                AuthService.signUp(idController.text, pwdController.text)
-                    .then((value) {
-                  if (value == 200) {
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => MainPage()),
-                        (route) => false);
-                  }
-                });
+                // AuthService.signUp(idController.text, pwdController.text)
+                //     .then((value) {
+                //   if (value == 200) {
+                //     Navigator.of(context).pushAndRemoveUntil(
+                //         MaterialPageRoute(builder: (context) => MainPage()),
+                //         (route) => false);
+                //   }
+                // });
               },
               child: Text(
                 "회원가입",
