@@ -14,6 +14,10 @@ class _StartingPageState extends State<StartingPage> {
   late TextEditingController idController;
   late TextEditingController pwdController;
 
+  int screenState = 0;
+
+  //1이면 회원가입, 2면 로그인
+
   @override
   void initState() {
     super.initState();
@@ -36,7 +40,7 @@ class _StartingPageState extends State<StartingPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            flex: 7,
+            flex: screenState == 0 ? 7 : 4,
             child: Container(
               color: CustomColor.logoImageBackgroundColor,
               child: Center(
@@ -51,7 +55,7 @@ class _StartingPageState extends State<StartingPage> {
             ),
           ),
           Expanded(
-            flex: 4,
+            flex: screenState == 0 ? 4 : 6,
             child: Container(
               width: double.infinity,
               decoration: const BoxDecoration(
@@ -75,8 +79,9 @@ class _StartingPageState extends State<StartingPage> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => SignUpPage()));
+                        setState(() {
+                          screenState = 1;
+                        });
                       },
                       child: Text(
                         "바로 시작하기",
