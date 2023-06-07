@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stac_flutter/common/common.dart';
+import 'package:stac_flutter/screen/main/main_page.dart';
 import 'package:stac_flutter/screen/widget/custom_text_field.dart';
 
 class SignInPage extends StatefulWidget {
@@ -37,7 +38,8 @@ class _SignInPageState extends State<SignInPage> {
           ],
         ),
         Padding(
-          padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.04),
+          padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).size.height * 0.04),
           child: SizedBox(
             width: MediaQuery.of(context).size.width - 40,
             height: MediaQuery.of(context).size.height * 0.06,
@@ -48,7 +50,11 @@ class _SignInPageState extends State<SignInPage> {
                   borderRadius: BorderRadius.circular(99),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => MainPage()),
+                    (route) => false);
+              },
               child: Text(
                 "로그인",
                 style: TextStyle(fontSize: 20),
