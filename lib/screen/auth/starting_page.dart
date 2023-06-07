@@ -39,94 +39,109 @@ class _StartingPageState extends State<StartingPage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-            flex: screenState == 0 ? 7 : 4,
-            child: Container(
-              color: CustomColor.logoImageBackgroundColor,
-              child: Center(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 50),
-                  child: Image.asset(
-                    "assets/images/applogo.png",
-                    height: MediaQuery.of(context).size.width * 0.75,
-                  ),
+          Container(
+            width: double.infinity,
+            height: screenState == 0
+                ? MediaQuery.of(context).size.height * 0.6
+                : MediaQuery.of(context).size.height * 0.4,
+            color: CustomColor.logoImageBackgroundColor,
+            child: Center(
+              child: Padding(
+                padding: EdgeInsets.only(top: 50),
+                child: Image.asset(
+                  "assets/images/applogo.png",
+                  height: MediaQuery.of(context).size.width * 0.75,
                 ),
               ),
             ),
           ),
-          Expanded(
-            flex: screenState == 0 ? 4 : 6,
-            child: screenState == 0
-                ? Container(
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
+          screenState == 0
+              ? AnimatedContainer(
+                  width: double.infinity,
+                  curve: Curves.easeIn,
+                  height: screenState == 0
+                      ? MediaQuery.of(context).size.height * 0.4
+                      : MediaQuery.of(context).size.height * 0.6,
+                  duration: Duration(milliseconds: 500),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
                     ),
-                    child: Column(
-                      children: [
-                        SizedBox(height: 90),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width - 60,
-                          height: MediaQuery.of(context).size.height * 0.06,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: CustomColor.pointColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(99),
-                              ),
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                screenState = 1;
-                              });
-                            },
-                            child: Text(
-                              "바로 시작하기",
-                              style: TextStyle(fontSize: 20),
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 90),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width - 60,
+                        height: MediaQuery.of(context).size.height * 0.06,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: CustomColor.pointColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(99),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 50),
-                        TextButton(
                           onPressed: () {
                             setState(() {
-                              screenState = 2;
+                              screenState = 1;
                             });
                           },
                           child: Text(
-                            "이미 계정이 있으신가요? 로그인하기",
-                            style: TextStyle(fontSize: 18, color: Colors.black),
+                            "바로 시작하기",
+                            style: TextStyle(fontSize: 20),
                           ),
                         ),
-                      ],
-                    ),
-                  )
-                : screenState == 1
-                    ? Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30),
-                          ),
-                        ),
-                        child: const SignUpPage(),
-                      )
-                    : Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30),
-                          ),
-                        ),
-                        child: const SignInPage(),
                       ),
-          ),
+                      SizedBox(height: 50),
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            screenState = 2;
+                          });
+                        },
+                        child: Text(
+                          "이미 계정이 있으신가요? 로그인하기",
+                          style: TextStyle(fontSize: 18, color: Colors.black),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : screenState == 1
+                  ? AnimatedContainer(
+                      duration: Duration(milliseconds: 700),
+                      curve: Curves.easeIn,
+                      width: double.infinity,
+                      height: screenState == 0
+                          ? MediaQuery.of(context).size.height * 0.4
+                          : MediaQuery.of(context).size.height * 0.6,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                        ),
+                      ),
+                      child: const SignUpPage(),
+                    )
+                  : AnimatedContainer(
+                      duration: Duration(milliseconds: 700),
+                      curve: Curves.easeIn,
+                      width: double.infinity,
+                      height: screenState == 0
+                          ? MediaQuery.of(context).size.height * 0.4
+                          : MediaQuery.of(context).size.height * 0.6,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                        ),
+                      ),
+                      child: const SignInPage(),
+                    ),
         ],
       ),
     );
