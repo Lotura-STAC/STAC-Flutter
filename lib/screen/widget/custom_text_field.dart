@@ -26,10 +26,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width - 40,
+        width: MediaQuery.of(context).size.width - 40,
         child: TextField(
           onChanged: (value) => setState(() {}),
           focusNode: widget.focusNode,
@@ -38,12 +35,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
           controller: widget.controller,
           decoration: InputDecoration(
             hintText: widget.hintText,
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                  width: 1,
-                  color: widget.controller.text.isNotEmpty
-                      ? Colors.black
-                      : Colors.grey),
+            enabledBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(width: 1, color: Colors.black),
             ),
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(width: 1, color: CustomColor.pointColor),
