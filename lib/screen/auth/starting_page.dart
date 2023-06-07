@@ -10,9 +10,11 @@ class StartingPage extends StatefulWidget {
   State<StartingPage> createState() => _StartingPageState();
 }
 
-class _StartingPageState extends State<StartingPage> {
+class _StartingPageState extends State<StartingPage>
+    with SingleTickerProviderStateMixin {
   late TextEditingController idController;
   late TextEditingController pwdController;
+  late AnimationController animationController;
 
   int screenState = 0;
 
@@ -23,6 +25,9 @@ class _StartingPageState extends State<StartingPage> {
     super.initState();
     idController = TextEditingController();
     pwdController = TextEditingController();
+    animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 700));
+    animationController.repeat();
   }
 
   @override
@@ -30,39 +35,99 @@ class _StartingPageState extends State<StartingPage> {
     super.dispose();
     idController.dispose();
     pwdController.dispose();
+    animationController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: CustomColor.logoImageBackgroundColor,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: double.infinity,
-            height: screenState == 0
-                ? MediaQuery.of(context).size.height * 0.6
-                : MediaQuery.of(context).size.height * 0.4,
-            color: CustomColor.logoImageBackgroundColor,
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.only(top: 50),
-                child: Image.asset(
-                  "assets/images/applogo.png",
-                  height: MediaQuery.of(context).size.width * 0.75,
+      body: Container(
+        width: double.infinity,
+        height: screenState == 0
+            ? MediaQuery.of(context).size.height
+            : MediaQuery.of(context).size.height * 0.4,
+        color: CustomColor.logoImageBackgroundColor,
+        child: screenState == 0
+            ? Padding(
+                padding: EdgeInsets.only(bottom: 200),
+                child: Center(
+                  child: Image.asset(
+                    "assets/images/applogo.png",
+                    height: MediaQuery.of(context).size.width * 0.7,
+                  ),
+                ),
+              )
+            : Center(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 50),
+                  child: Image.asset(
+                    "assets/images/applogo.png",
+                    height: MediaQuery.of(context).size.width * 0.75,
+                  ),
                 ),
               ),
-            ),
-          ),
-          screenState == 0
+      ),
+      bottomSheet: screenState == 0
+          ? Container(
+              width: double.infinity,
+              height: screenState == 0
+                  ? MediaQuery.of(context).size.height * 0.4
+                  : MediaQuery.of(context).size.height * 0.6,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: 90),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width - 60,
+                    height: MediaQuery.of(context).size.height * 0.06,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: CustomColor.pointColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(99),
+                        ),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          screenState = 1;
+                        });
+                      },
+                      child: Text(
+                        "바로 시작하기",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 50),
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        screenState = 2;
+                      });
+                    },
+                    child: Text(
+                      "이미 계정이 있으신가요? 로그인하기",
+                      style: TextStyle(fontSize: 18, color: Colors.black),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          : screenState == 1
               ? AnimatedContainer(
-                  width: double.infinity,
+                  duration: Duration(milliseconds: 700),
                   curve: Curves.easeIn,
+                  width: double.infinity,
                   height: screenState == 0
                       ? MediaQuery.of(context).size.height * 0.4
                       : MediaQuery.of(context).size.height * 0.6,
-                  duration: Duration(milliseconds: 500),
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -70,80 +135,24 @@ class _StartingPageState extends State<StartingPage> {
                       topRight: Radius.circular(30),
                     ),
                   ),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 90),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width - 60,
-                        height: MediaQuery.of(context).size.height * 0.06,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: CustomColor.pointColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(99),
-                            ),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              screenState = 1;
-                            });
-                          },
-                          child: Text(
-                            "바로 시작하기",
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 50),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            screenState = 2;
-                          });
-                        },
-                        child: Text(
-                          "이미 계정이 있으신가요? 로그인하기",
-                          style: TextStyle(fontSize: 18, color: Colors.black),
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: const SignUpPage(),
                 )
-              : screenState == 1
-                  ? AnimatedContainer(
-                      duration: Duration(milliseconds: 700),
-                      curve: Curves.easeIn,
-                      width: double.infinity,
-                      height: screenState == 0
-                          ? MediaQuery.of(context).size.height * 0.4
-                          : MediaQuery.of(context).size.height * 0.6,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30),
-                        ),
-                      ),
-                      child: const SignUpPage(),
-                    )
-                  : AnimatedContainer(
-                      duration: Duration(milliseconds: 700),
-                      curve: Curves.easeIn,
-                      width: double.infinity,
-                      height: screenState == 0
-                          ? MediaQuery.of(context).size.height * 0.4
-                          : MediaQuery.of(context).size.height * 0.6,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30),
-                        ),
-                      ),
-                      child: const SignInPage(),
+              : AnimatedContainer(
+                  duration: Duration(milliseconds: 700),
+                  curve: Curves.easeIn,
+                  width: double.infinity,
+                  height: screenState == 0
+                      ? MediaQuery.of(context).size.height * 0.4
+                      : MediaQuery.of(context).size.height * 0.6,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
                     ),
-        ],
-      ),
+                  ),
+                  child: const SignInPage(),
+                ),
     );
   }
 }
