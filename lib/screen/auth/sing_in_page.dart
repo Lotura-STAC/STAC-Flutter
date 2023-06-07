@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stac_flutter/common/common.dart';
 import 'package:stac_flutter/screen/widget/custom_text_field.dart';
 
 class SignInPage extends StatefulWidget {
@@ -19,13 +20,14 @@ class _SignInPageState extends State<SignInPage> {
       children: [
         Column(
           children: [
+            SizedBox(height: 80),
             CustomTextField(
               autofocus: true,
               hintText: "아이디를 입력해주세요",
               controller: idController,
               textInputType: TextInputType.emailAddress,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
             CustomTextField(
               autofocus: false,
               textInputType: TextInputType.visiblePassword,
@@ -34,20 +36,23 @@ class _SignInPageState extends State<SignInPage> {
             ),
           ],
         ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width - 40,
-          height: MediaQuery.of(context).size.height * 0.06,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xffc4a6ea),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(99),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 40),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width - 40,
+            height: MediaQuery.of(context).size.height * 0.06,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: CustomColor.pointColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(99),
+                ),
               ),
-            ),
-            onPressed: () {},
-            child: Text(
-              "로그인",
-              style: TextStyle(fontSize: 20),
+              onPressed: () {},
+              child: Text(
+                "로그인",
+                style: TextStyle(fontSize: 20),
+              ),
             ),
           ),
         ),

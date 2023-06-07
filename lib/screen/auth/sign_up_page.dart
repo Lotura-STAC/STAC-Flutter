@@ -40,13 +40,13 @@ class _SignUpPageState extends State<SignUpPage> {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 100),
+            SizedBox(height: 80),
             CustomTextField(
                 controller: idController,
                 hintText: "아이디를 입력해주세요",
                 textInputType: TextInputType.emailAddress,
                 autofocus: true),
-            const SizedBox(height: 20.0),
+            const SizedBox(height: 30.0),
             CustomTextField(
                 controller: pwdController,
                 hintText: "비밀번호를 입력해주세요",
@@ -83,7 +83,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 });
               },
               child: Text(
-                "바로 시작하기",
+                "회원가입",
                 style: TextStyle(fontSize: 20),
               ),
             ),
