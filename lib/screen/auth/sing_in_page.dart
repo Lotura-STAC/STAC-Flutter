@@ -14,49 +14,44 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
           children: [
-            SizedBox(height: 0),
-            Column(
-              children: [
-                CustomTextField(
-                  autofocus: true,
-                  hintText: "아이디를 입력해주세요",
-                  controller: idController,
-                  textInputType: TextInputType.emailAddress,
-                ),
-                const SizedBox(height: 20),
-                CustomTextField(
-                  autofocus: false,
-                  textInputType: TextInputType.visiblePassword,
-                  hintText: "비밀번호를 입력해주세요",
-                  controller: pwdController,
-                ),
-              ],
+            CustomTextField(
+              autofocus: true,
+              hintText: "아이디를 입력해주세요",
+              controller: idController,
+              textInputType: TextInputType.emailAddress,
             ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width - 40,
-              height: MediaQuery.of(context).size.height * 0.06,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xffc4a6ea),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(99),
-                  ),
-                ),
-                onPressed: () {},
-                child: Text(
-                  "로그인",
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
+            const SizedBox(height: 20),
+            CustomTextField(
+              autofocus: false,
+              textInputType: TextInputType.visiblePassword,
+              hintText: "비밀번호를 입력해주세요",
+              controller: pwdController,
             ),
           ],
         ),
-      ),
+        SizedBox(
+          width: MediaQuery.of(context).size.width - 40,
+          height: MediaQuery.of(context).size.height * 0.06,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xffc4a6ea),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(99),
+              ),
+            ),
+            onPressed: () {},
+            child: Text(
+              "로그인",
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
