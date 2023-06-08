@@ -43,6 +43,7 @@ class _MainPageState extends State<MainPage>
   Widget build(BuildContext context) {
     double mosw = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           BackdropFilter(
