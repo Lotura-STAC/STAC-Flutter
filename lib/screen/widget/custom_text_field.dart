@@ -8,14 +8,12 @@ class CustomTextField extends StatefulWidget {
     required this.hintText,
     this.focusNode,
     this.textInputType = TextInputType.text,
-    this.autofocus = false,
   });
 
   TextEditingController controller;
   TextInputType textInputType;
   String? hintText;
   FocusNode? focusNode;
-  bool autofocus;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -30,7 +28,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
         child: TextField(
           onChanged: (value) => setState(() {}),
           focusNode: widget.focusNode,
-          autofocus: widget.autofocus,
           keyboardType: widget.textInputType,
           controller: widget.controller,
           decoration: InputDecoration(

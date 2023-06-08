@@ -23,14 +23,12 @@ class _SignInPageState extends State<SignInPage> {
           children: [
             SizedBox(height: MediaQuery.of(context).size.height * 0.08),
             CustomTextField(
-              autofocus: true,
               hintText: "아이디를 입력해주세요",
               controller: idController,
               textInputType: TextInputType.emailAddress,
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             CustomTextField(
-              autofocus: false,
               textInputType: TextInputType.visiblePassword,
               hintText: "비밀번호를 입력해주세요",
               controller: pwdController,

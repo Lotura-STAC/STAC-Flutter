@@ -42,25 +42,22 @@ class _SignUpPageState extends State<SignUpPage> {
             CustomTextField(
                 controller: idController,
                 hintText: "아이디를 입력해주세요",
-                textInputType: TextInputType.emailAddress,
-                autofocus: true),
+                textInputType: TextInputType.emailAddress),
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             CustomTextField(
                 controller: pwdController,
                 hintText: "비밀번호를 입력해주세요",
-                textInputType: TextInputType.visiblePassword,
-                autofocus: false),
+                textInputType: TextInputType.visiblePassword),
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             CustomTextField(
                 controller: pwdCheckController,
                 hintText: "비밀번호를 확인해주세요",
-                textInputType: TextInputType.visiblePassword,
-                autofocus: false),
+                textInputType: TextInputType.visiblePassword),
           ],
         ),
         Padding(
           padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).size.height * 0.04),
+              bottom: MediaQuery.of(context).size.height * 0.02),
           child: SizedBox(
             width: MediaQuery.of(context).size.width - 40,
             height: MediaQuery.of(context).size.height * 0.06,
