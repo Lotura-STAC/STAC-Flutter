@@ -39,6 +39,7 @@ class _MainPageState extends State<MainPage>
 
   @override
   Widget build(BuildContext context) {
+    double mosw = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(bottom: 70, right: 40),
@@ -48,13 +49,43 @@ class _MainPageState extends State<MainPage>
               alignment: Alignment.bottomRight,
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 500),
-                width: MediaQuery.of(context).size.width * 0.18,
+                width: MediaQuery.of(context).size.width * 0.2,
                 height: isClicked
-                    ? MediaQuery.of(context).size.width * 0.6
-                    : MediaQuery.of(context).size.width * 0.18,
+                    ? MediaQuery.of(context).size.width * 0.7
+                    : MediaQuery.of(context).size.width * 0.2,
                 decoration: BoxDecoration(
                   color: CustomColor.pointColor,
                   borderRadius: BorderRadius.circular(99.0),
+                ),
+                child: Column(
+                  children: [
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 500),
+                      height: isClicked ? mosw * 0.08 : 0,
+                    ),
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 500),
+                      width: isClicked ? mosw * 0.17 : mosw * 0.1,
+                      height: isClicked ? mosw * 0.17 : mosw * 0.1,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(99.0),
+                      ),
+                    ),
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 500),
+                      height: isClicked ? mosw * 0.056 : 0,
+                    ),
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 500),
+                      width: isClicked ? mosw * 0.17 : mosw * 0.1,
+                      height: isClicked ? mosw * 0.17 : mosw * 0.1,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(99.0),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -66,17 +97,15 @@ class _MainPageState extends State<MainPage>
                   angle: isClicked ? 1.5708 : 0,
                   child: GestureDetector(
                     onTap: () {
-                      if (!controller.isAnimating) {
-                        setState(() {
-                          isClicked = !isClicked;
-                        });
-                        controller.reset();
-                        controller.forward();
-                      }
+                      setState(() {
+                        isClicked = !isClicked;
+                      });
+                      controller.reset();
+                      controller.forward();
                     },
                     child: Container(
-                      width: MediaQuery.of(context).size.width * 0.18,
-                      height: MediaQuery.of(context).size.width * 0.18,
+                      width: MediaQuery.of(context).size.width * 0.2,
+                      height: MediaQuery.of(context).size.width * 0.2,
                       decoration: BoxDecoration(
                         color: CustomColor.pointColor,
                         borderRadius: BorderRadius.circular(99.0),
@@ -84,7 +113,7 @@ class _MainPageState extends State<MainPage>
                       child: Icon(
                         Icons.add,
                         color: Colors.white,
-                        size: MediaQuery.of(context).size.width * 0.12,
+                        size: MediaQuery.of(context).size.width * 0.14,
                       ),
                     ),
                   ),
