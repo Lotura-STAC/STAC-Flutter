@@ -14,8 +14,11 @@ class _MainPageState extends State<MainPage>
     with SingleTickerProviderStateMixin {
   bool isClicked = false;
   late final AnimationController controller;
+  late final TextEditingController textController;
 
   late final Animation<double> animation;
+
+  List<String> list = List.empty(growable: true);
 
   @override
   void initState() {
@@ -24,6 +27,7 @@ class _MainPageState extends State<MainPage>
       duration: const Duration(milliseconds: 400),
       vsync: this,
     );
+    textController = TextEditingController();
     animation = Tween<double>(
       begin: 0,
       end: -0.25,
@@ -36,6 +40,7 @@ class _MainPageState extends State<MainPage>
   @override
   void dispose() {
     controller.dispose();
+    textController.dispose();
     super.dispose();
   }
 
@@ -52,6 +57,12 @@ class _MainPageState extends State<MainPage>
               duration: const Duration(milliseconds: 400),
               color:
                   isClicked ? Colors.grey.withOpacity(0.8) : Colors.transparent,
+            ),
+          ),
+          ListView.builder(
+            itemCount: list.length,
+            itemBuilder: (context, index) => ListTile(
+              title: Text(list[index]),
             ),
           ),
           Padding(
@@ -89,7 +100,7 @@ class _MainPageState extends State<MainPage>
                                       title: Column(
                                         children: [
                                           Text("세탁기 이름"),
-                                          TextField(),
+                                          TextField(controller: textController),
                                         ],
                                       ),
                                       actions: [
@@ -105,8 +116,13 @@ class _MainPageState extends State<MainPage>
                                                     BorderRadius.circular(99),
                                               ),
                                             ),
-                                            onPressed: () =>
-                                                Navigator.pop(context),
+                                            onPressed: () {
+                                              setState(() {
+                                                list.add(textController.text);
+                                              });
+                                              textController.clear();
+                                              Navigator.pop(context);
+                                            },
                                             child: const Text(
                                               "확인",
                                               style: TextStyle(fontSize: 20),
@@ -144,40 +160,47 @@ class _MainPageState extends State<MainPage>
                             showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
-                                  insetPadding: EdgeInsets.zero,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(10.0),
-                                  ),
-                                  title: Column(
-                                    children: [
-                                      Text("건조기 이름"),
-                                      TextField(),
-                                    ],
-                                  ),
-                                  actions: [
-                                    SizedBox(
-                                      width: mosw - 50,
-                                      height: mosw * 0.1,
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                          CustomColor.pointColor,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(99),
+                                      insetPadding: EdgeInsets.zero,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      title: Column(
+                                        children: [
+                                          Text("건조기 이름"),
+                                          TextField(
+                                            controller: textController,
+                                          ),
+                                        ],
+                                      ),
+                                      actions: [
+                                        SizedBox(
+                                          width: mosw - 50,
+                                          height: mosw * 0.1,
+                                          child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  CustomColor.pointColor,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(99),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              setState(() {
+                                                list.add(textController.text);
+                                              });
+                                              Navigator.pop(context);
+                                              textController.clear();
+                                            },
+                                            child: const Text(
+                                              "확인",
+                                              style: TextStyle(fontSize: 20),
+                                            ),
                                           ),
                                         ),
-                                        onPressed: () =>
-                                            Navigator.pop(context),
-                                        child: const Text(
-                                          "확인",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ));
+                                      ],
+                                    ));
                             setState(() {
                               isClicked = false;
                             });
