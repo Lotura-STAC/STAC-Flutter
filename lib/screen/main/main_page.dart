@@ -50,9 +50,8 @@ class _MainPageState extends State<MainPage>
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 400),
-              color: isClicked
-                  ? Colors.grey.withOpacity(0.35)
-                  : Colors.transparent,
+              color:
+                  isClicked ? Colors.grey.withOpacity(0.8) : Colors.transparent,
             ),
           ),
           Padding(
@@ -77,26 +76,126 @@ class _MainPageState extends State<MainPage>
                           duration: const Duration(milliseconds: 400),
                           height: isClicked ? mosw * 0.02 : 0,
                         ),
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 400),
-                          width: isClicked ? mosw * 0.17 : mosw * 0.1,
-                          height: isClicked ? mosw * 0.17 : mosw * 0.1,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(99.0),
+                        InkWell(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                      insetPadding: EdgeInsets.zero,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      title: Column(
+                                        children: [
+                                          Text("세탁기 이름"),
+                                          TextField(),
+                                        ],
+                                      ),
+                                      actions: [
+                                        SizedBox(
+                                          width: mosw - 50,
+                                          height: mosw * 0.1,
+                                          child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  CustomColor.pointColor,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(99),
+                                              ),
+                                            ),
+                                            onPressed: () =>
+                                                Navigator.pop(context),
+                                            child: const Text(
+                                              "확인",
+                                              style: TextStyle(fontSize: 20),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ));
+                            setState(() {
+                              isClicked = false;
+                            });
+                          },
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 400),
+                            width: isClicked ? mosw * 0.17 : mosw * 0.1,
+                            height: isClicked ? mosw * 0.17 : mosw * 0.1,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(99.0),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                "세탁기",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ),
                           ),
                         ),
                         AnimatedContainer(
                           duration: const Duration(milliseconds: 400),
                           height: isClicked ? mosw * 0.03 : 0,
                         ),
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 400),
-                          width: isClicked ? mosw * 0.17 : mosw * 0.1,
-                          height: isClicked ? mosw * 0.17 : mosw * 0.1,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(99.0),
+                        InkWell(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  insetPadding: EdgeInsets.zero,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(10.0),
+                                  ),
+                                  title: Column(
+                                    children: [
+                                      Text("건조기 이름"),
+                                      TextField(),
+                                    ],
+                                  ),
+                                  actions: [
+                                    SizedBox(
+                                      width: mosw - 50,
+                                      height: mosw * 0.1,
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                          CustomColor.pointColor,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(99),
+                                          ),
+                                        ),
+                                        onPressed: () =>
+                                            Navigator.pop(context),
+                                        child: const Text(
+                                          "확인",
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ));
+                            setState(() {
+                              isClicked = false;
+                            });
+                          },
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 400),
+                            width: isClicked ? mosw * 0.17 : mosw * 0.1,
+                            height: isClicked ? mosw * 0.17 : mosw * 0.1,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(99.0),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                "건조기",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ),
                           ),
                         ),
                       ],
