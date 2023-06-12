@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:stac_flutter/common/common.dart';
+import 'package:stac_flutter/screen/widget/custom_list_tile.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -61,8 +62,9 @@ class _MainPageState extends State<MainPage>
           ),
           ListView.builder(
             itemCount: list.length,
-            itemBuilder: (context, index) => ListTile(
-              title: Text(list[index]),
+            itemBuilder: (context, index) => CustomListTile(
+              title: list[index],
+              content: "what",
             ),
           ),
           Padding(
