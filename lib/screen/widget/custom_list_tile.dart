@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:stac_flutter/screen/widget/custom_icons.dart';
 
 class CustomListTile extends StatelessWidget {
   const CustomListTile({
     Key? key,
     required this.title,
     required this.content,
+    required this.deviceType,
   }) : super(key: key);
 
   final String title, content;
+  final int deviceType;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +27,9 @@ class CustomListTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            deviceType == 0
+                ? Icon(CustomIcons.washingMachine)
+                : Icon(CustomIcons.dryer),
             Padding(
               padding: const EdgeInsets.only(left: 15.0),
               child: Text(
