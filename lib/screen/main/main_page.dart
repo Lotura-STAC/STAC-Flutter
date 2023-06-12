@@ -19,7 +19,9 @@ class _MainPageState extends State<MainPage>
 
   late final Animation<double> animation;
 
-  List<String> list = List.empty(growable: true);
+  int selectType = 0;
+
+  List<Device> list = List.empty(growable: true);
 
   @override
   void initState() {
@@ -60,12 +62,22 @@ class _MainPageState extends State<MainPage>
                   isClicked ? Colors.grey.withOpacity(0.8) : Colors.transparent,
             ),
           ),
-          ListView.builder(
-            itemCount: list.length,
-            itemBuilder: (context, index) => CustomListTile(
-              title: list[index],
-              content: "what",
-            ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            child: ListView.builder(
+                itemCount: list.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      CustomListTile(
+                        title: list[index].title.toString(),
+                        content: "what",
+                        deviceType: list[index].deviceType!.toInt(),
+                      ),
+                      SizedBox(height: 20),
+                    ],
+                  );
+                }),
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 70, right: 40),
@@ -119,8 +131,11 @@ class _MainPageState extends State<MainPage>
                                               ),
                                             ),
                                             onPressed: () {
+                                              Device device = Device(
+                                                  deviceType: selectType,
+                                                  title: textController.text);
                                               setState(() {
-                                                list.add(textController.text);
+                                                list.add(device);
                                               });
                                               textController.clear();
                                               Navigator.pop(context);
@@ -135,6 +150,7 @@ class _MainPageState extends State<MainPage>
                                     ));
                             setState(() {
                               isClicked = false;
+                              selectType = 0;
                             });
                           },
                           child: AnimatedContainer(
@@ -189,8 +205,11 @@ class _MainPageState extends State<MainPage>
                                               ),
                                             ),
                                             onPressed: () {
+                                              Device device = Device(
+                                                  deviceType: selectType,
+                                                  title: textController.text);
                                               setState(() {
-                                                list.add(textController.text);
+                                                list.add(device);
                                               });
                                               Navigator.pop(context);
                                               textController.clear();
@@ -205,6 +224,7 @@ class _MainPageState extends State<MainPage>
                                     ));
                             setState(() {
                               isClicked = false;
+                              selectType = 1;
                             });
                           },
                           child: AnimatedContainer(
@@ -265,4 +285,11 @@ class _MainPageState extends State<MainPage>
       ),
     );
   }
+}
+
+class Device {
+  int? deviceType;
+  String? title;
+
+  Device({this.deviceType, this.title});
 }
