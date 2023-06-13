@@ -26,23 +26,39 @@ class CustomListTile extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.09,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Icon(
-                deviceType == 0
-                    ? CustomIcons.washingMachine
-                    : CustomIcons.dryer,
-                size: 40,
-                color: CustomColor.pointColor,
-              ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Icon(
+                    deviceType == 0
+                        ? CustomIcons.washingMachine
+                        : CustomIcons.dryer,
+                    size: 40,
+                    color: CustomColor.pointColor,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30.0),
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.05,
+                    ),
+                  ),
+                ),
+              ],
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15.0),
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width * 0.04,
+              padding: EdgeInsets.only(right: 20),
+              child: Container(
+                width: 30,
+                height: 30,
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(20),
                 ),
               ),
             ),
