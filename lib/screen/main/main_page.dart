@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:stac_flutter/common/common.dart';
+import 'package:stac_flutter/screen/widget/custom_icons.dart';
 import 'package:stac_flutter/screen/widget/custom_list_tile.dart';
 
 class MainPage extends StatefulWidget {
@@ -162,9 +163,10 @@ class _MainPageState extends State<MainPage>
                               borderRadius: BorderRadius.circular(99.0),
                             ),
                             child: const Center(
-                              child: Text(
-                                "세탁기",
-                                style: TextStyle(fontSize: 20),
+                              child: Icon(
+                                CustomIcons.washingMachine,
+                                color: Colors.blue,
+                                size: 40,
                               ),
                             ),
                           ),
@@ -236,9 +238,10 @@ class _MainPageState extends State<MainPage>
                               borderRadius: BorderRadius.circular(99.0),
                             ),
                             child: const Center(
-                              child: Text(
-                                "건조기",
-                                style: TextStyle(fontSize: 20),
+                              child: Icon(
+                                CustomIcons.dryer,
+                                color: Colors.blue,
+                                size: 40,
                               ),
                             ),
                           ),
