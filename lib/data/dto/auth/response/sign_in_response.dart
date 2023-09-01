@@ -1,4 +1,4 @@
-import 'package:stac_flutter/domain/entity/jwt_token_entity.dart';
+import 'package:stac_flutter/domain/auth/entity/jwt_token_entity.dart';
 
 class SignInResponse {
   String accessToken;
