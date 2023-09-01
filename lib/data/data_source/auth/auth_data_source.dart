@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:stac_flutter/data/dto/auth/request/refresh_request.dart';
 import 'package:stac_flutter/data/dto/auth/request/sign_in_request.dart';
 import 'package:stac_flutter/data/dto/auth/request/sign_up_request.dart';
+import 'package:stac_flutter/data/dto/auth/response/refresh_response.dart';
 import 'package:stac_flutter/data/dto/auth/response/sign_in_response.dart';
 import 'package:stac_flutter/domain/auth/entity/jwt_token_entity.dart';
 import 'package:stac_flutter/secret.dart';
@@ -24,5 +26,14 @@ class AuthDataSource {
       return false;
     }
     return true;
+  }
+
+  Future<JWTTokenEntity> refresh(RefreshRequest refreshRequest) async {
+    final response = await http.post(Uri.parse("$baseUrl/refresh"),
+        body: refreshRequest.toJson());
+    if (response.statusCode != 200) {
+      throw Exception(response.body);
+    }
+    return RefreshResponse.fromJson(jsonDecode(response.body)).toEntity();
   }
 }
