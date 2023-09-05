@@ -8,7 +8,7 @@ import 'package:stac_flutter/domain/auth/use_case/sign_up_use_case.dart';
 import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_bloc.dart';
 import 'package:stac_flutter/presentation/sign_up/bloc/sign_up_bloc.dart';
 
-Future di() async {
+Future<List<BlocProvider>> di() async {
   AuthDataSource authDataSource = AuthDataSource();
   AuthRepository authRepository =
       AuthRepositoryImpl(dataSource: authDataSource);
