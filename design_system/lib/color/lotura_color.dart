@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class OSJColor {
-  OSJColor._();
+class LoturaColor {
+  LoturaColor._();
 
   static Color primary900 = const Color(0xff164ED4);
   static Color primary700 = const Color(0xff3C70EC);
