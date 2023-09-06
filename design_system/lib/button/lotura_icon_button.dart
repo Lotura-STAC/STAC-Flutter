@@ -4,22 +4,19 @@ import 'package:flutter/material.dart';
 class LoturaIconButton extends StatelessWidget {
   const LoturaIconButton(
       {super.key,
-      required this.width,
-      required this.height,
-      required this.iconSize,
-      required this.iconColor,
-      required this.iconData,
+      this.width = 382,
+      this.height = 50,
+      required this.icon,
       this.function});
 
-  final double width, height, iconSize;
-  final Color iconColor;
-  final IconData iconData;
-  final Function? function;
+  final double width, height;
+  final Icon icon;
+  final void Function()? function;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: function != null ? () => function : null,
+      onTap: function,
       child: Container(
         width: width,
         height: height,
@@ -28,7 +25,7 @@ class LoturaIconButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.0),
         ),
         child: Center(
-          child: Icon(iconData, size: iconSize, color: iconColor),
+          child: icon,
         ),
       ),
     );
