@@ -10,16 +10,16 @@ class LoturaTextButton extends StatelessWidget {
       ),
       this.width = 382,
       this.height = 50,
-      this.function});
+      this.onPressed});
 
   final double width, height;
   final Text text;
-  final void Function()? function;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: function,
+      onTap: onPressed,
       child: Container(
         width: width,
         height: height,
