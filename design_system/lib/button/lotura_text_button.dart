@@ -4,20 +4,22 @@ import 'package:flutter/material.dart';
 class LoturaTextButton extends StatelessWidget {
   const LoturaTextButton(
       {super.key,
-      required this.width,
-      required this.height,
-      required this.fontSize,
-      required this.text,
+      this.text = const Text(
+        "기본 텍스트",
+        style: TextStyle(color: Colors.white),
+      ),
+      this.width = 382,
+      this.height = 50,
       this.function});
 
-  final double width, height, fontSize;
-  final String text;
-  final Function? function;
+  final double width, height;
+  final Text text;
+  final void Function()? function;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: function != null ? () => function!() : null,
+      onTap: function,
       child: Container(
         width: width,
         height: height,
@@ -26,10 +28,7 @@ class LoturaTextButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: Center(
-          child: Text(
-            text,
-            style: TextStyle(fontSize: fontSize, color: LoturaColor.white),
-          ),
+          child: text,
         ),
       ),
     );
