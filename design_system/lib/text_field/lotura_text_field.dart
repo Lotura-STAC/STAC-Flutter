@@ -11,11 +11,15 @@ class LoturaTextField extends StatefulWidget {
     this.obscureText = false,
     this.iconSize = 24,
     this.focusNode,
+    this.hintText,
+    this.hintTextStyle = const TextStyle(fontSize: 24),
   });
 
   final TextEditingController controller;
   final bool autofocus, isPasswordTextField;
   final double iconSize;
+  final String? hintText;
+  final TextStyle hintTextStyle;
   bool obscureText;
   final FocusNode? focusNode;
 
@@ -34,6 +38,8 @@ class _LoturaTextFieldState extends State<LoturaTextField> {
       obscureText: widget.obscureText,
       maxLength: 20,
       decoration: InputDecoration(
+        hintText: widget.hintText,
+        hintStyle: widget.hintTextStyle,
         counterText: '',
         suffixIcon: widget.isPasswordTextField
             ? IconButton(
