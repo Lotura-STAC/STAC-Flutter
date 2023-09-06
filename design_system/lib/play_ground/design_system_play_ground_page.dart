@@ -9,7 +9,7 @@ import 'package:design_system/text_field/lotura_text_field_view.dart';
 import 'package:flutter/material.dart';
 
 class DesignSystemPlayGroundPage extends StatelessWidget {
-  const DesignSystemPlayGroundPage({super.key});
+  DesignSystemPlayGroundPage({super.key});
 
   final List<String> componentList = const [
     "bottom_sheet",
@@ -21,7 +21,7 @@ class DesignSystemPlayGroundPage extends StatelessWidget {
     "text_field"
   ];
 
-  final Map<String, Widget> components = const {
+  final Map<String, Widget> components = {
     "bottom_sheet": LoturaBottomSheetView(),
     "button": LoturaButtonView(),
     "check_box": LoturaCheckBoxView(),
