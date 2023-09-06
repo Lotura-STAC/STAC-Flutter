@@ -14,7 +14,7 @@ Future<List<BlocProvider>> di() async {
   SignInUseCase signInUseCase = SignInUseCase(repository: authRepository);
   SignUpUseCase signUpUseCase = SignUpUseCase(repository: authRepository);
   return [
-    BlocProvider(create: (context) => SignInBloc(signInUseCase)),
-    BlocProvider(create: (context) => SignUpBloc(signUpUseCase)),
+    BlocProvider<SignInBloc>(create: (context) => SignInBloc(signInUseCase)),
+    BlocProvider<SignUpBloc>(create: (context) => SignUpBloc(signUpUseCase)),
   ];
 }
