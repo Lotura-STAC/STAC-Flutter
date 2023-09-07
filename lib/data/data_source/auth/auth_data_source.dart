@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:stac_flutter/data/dto/auth/request/refresh_request.dart';
 import 'package:stac_flutter/data/dto/auth/request/sign_in_request.dart';
@@ -12,7 +13,8 @@ import 'package:stac_flutter/secret.dart';
 class AuthDataSource {
   Future<JWTTokenEntity> signIn(SignInRequest signInRequest) async {
     final response = await http.post(Uri.parse("$baseUrl/login"),
-        body: signInRequest.toJson());
+        headers: <String, String>{"Content-Type": "application/json"},
+        body: jsonEncode(signInRequest.toJson()));
     if (response.statusCode != 200) {
       throw Exception(response.body);
     }
@@ -21,7 +23,8 @@ class AuthDataSource {
 
   Future<bool> signUp(SignUpRequest signUpRequest) async {
     final response = await http.post(Uri.parse("$baseUrl/sign"),
-        body: signUpRequest.toJson());
+        headers: <String, String>{"Content-Type": "application/json"},
+        body: jsonEncode(signUpRequest.toJson()));
     if (response.statusCode == 500) {
       return false;
     }
@@ -30,7 +33,8 @@ class AuthDataSource {
 
   Future<JWTTokenEntity> refresh(RefreshRequest refreshRequest) async {
     final response = await http.post(Uri.parse("$baseUrl/refresh"),
-        body: refreshRequest.toJson());
+        headers: <String, String>{"Content-Type": "application/json"},
+        body: jsonEncode(refreshRequest.toJson()));
     if (response.statusCode != 200) {
       throw Exception(response.body);
     }
