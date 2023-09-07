@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:stac_flutter/data/dto/auth/request/refresh_request.dart';
 import 'package:stac_flutter/data/dto/auth/request/sign_in_request.dart';
@@ -10,7 +8,7 @@ import 'package:stac_flutter/data/dto/auth/response/sign_in_response.dart';
 import 'package:stac_flutter/domain/auth/entity/jwt_token_entity.dart';
 import 'package:stac_flutter/secret.dart';
 
-class AuthDataSource {
+class RemoteAuthDataSource {
   Future<JWTTokenEntity> signIn(SignInRequest signInRequest) async {
     final response = await http.post(Uri.parse("$baseUrl/login"),
         headers: <String, String>{"Content-Type": "application/json"},
