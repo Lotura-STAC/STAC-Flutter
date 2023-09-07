@@ -33,6 +33,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: LoturaColor.gray100,
       body: Padding(
         padding: EdgeInsets.only(
           left: 24.0.r,
