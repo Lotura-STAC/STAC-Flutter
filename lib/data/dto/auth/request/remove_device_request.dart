@@ -1,9 +1,9 @@
-class DeleteDeviceRequest {
+class RemoveDeviceRequest {
   String userId;
   String accessToken;
   String deviceNo;
 
-  DeleteDeviceRequest(
+  RemoveDeviceRequest(
       {required this.userId,
       required this.accessToken,
       required this.deviceNo});
