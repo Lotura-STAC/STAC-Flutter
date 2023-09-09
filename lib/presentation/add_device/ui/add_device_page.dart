@@ -2,7 +2,12 @@ import 'package:design_system/button/lotura_text_button.dart';
 import 'package:design_system/color/lotura_color.dart';
 import 'package:design_system/text_field/lotura_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stac_flutter/data/socket/dto/request/add_device_request.dart';
+import 'package:stac_flutter/presentation/add_device/bloc/add_device_bloc.dart';
+import 'package:stac_flutter/presentation/add_device/bloc/add_device_event.dart';
+import 'package:stac_flutter/presentation/add_device/bloc/add_device_state.dart';
 
 class AddDevicePage extends StatefulWidget {
   const AddDevicePage({super.key});
@@ -14,11 +19,13 @@ class AddDevicePage extends StatefulWidget {
 class _AddDevicePageState extends State<AddDevicePage> {
   late final TextEditingController numController;
   late final TextEditingController nameController;
+  late int selectedIndex;
 
   @override
   void initState() {
     numController = TextEditingController();
     nameController = TextEditingController();
+    selectedIndex = 0;
     super.initState();
   }
 
@@ -41,7 +48,7 @@ class _AddDevicePageState extends State<AddDevicePage> {
         padding: EdgeInsets.only(left: 24.0.r, right: 24.0.r),
         child: Column(
           children: [
-            SizedBox(height: 49.0.r),
+            SizedBox(height: 20.0.r),
             Align(
               alignment: Alignment.topLeft,
               child: Text(
@@ -53,7 +60,35 @@ class _AddDevicePageState extends State<AddDevicePage> {
                 ),
               ),
             ),
-            SizedBox(height: 82.0.r),
+            SizedBox(height: 70.0.r),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TextButton(
+                  onPressed: () => setState(() => selectedIndex = 0),
+                  child: Text(
+                    "세탁기",
+                    style: TextStyle(
+                        color: selectedIndex == 0
+                            ? LoturaColor.black
+                            : LoturaColor.gray200,
+                        fontSize: 20.0.sp),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => setState(() => selectedIndex = 1),
+                  child: Text(
+                    "건조기",
+                    style: TextStyle(
+                        color: selectedIndex == 1
+                            ? LoturaColor.black
+                            : LoturaColor.gray200,
+                        fontSize: 20.0.sp),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 40.0.r),
             SizedBox(
               width: 382.0.r,
               child: LoturaTextField(
@@ -73,14 +108,31 @@ class _AddDevicePageState extends State<AddDevicePage> {
                 ),
               ),
             ),
-            SizedBox(height: 380.0.r),
-            LoturaTextButton(
-              text: Text(
-                "확인",
-                style: TextStyle(
-                    color: LoturaColor.white,
-                    fontSize: 16.0.sp,
-                    fontWeight: FontWeight.w700),
+            SizedBox(height: 330.0.r),
+            BlocListener<AddDeviceBloc, AddDeviceState>(
+              listener: (context, state) {
+                if (state is Loaded) {
+                  Navigator.pop(context);
+                }
+              },
+              child: LoturaTextButton(
+                onPressed: () => context.read<AddDeviceBloc>().add(
+                      AddDevice(
+                          addDeviceRequest: AddDeviceRequest(
+                            userId: "",
+                            accessToken: "",
+                            deviceNo: numController.text,
+                            deviceType: selectedIndex == 0 ? "WASH" : "DRY",
+                          ),
+                          deviceName: nameController.text),
+                    ),
+                text: Text(
+                  "확인",
+                  style: TextStyle(
+                      color: LoturaColor.white,
+                      fontSize: 16.0.sp,
+                      fontWeight: FontWeight.w700),
+                ),
               ),
             ),
           ],
