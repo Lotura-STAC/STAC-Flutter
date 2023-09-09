@@ -3,6 +3,7 @@ import 'package:stac_flutter/data/data_source/socket/remote_socket_data_source.d
 import 'package:stac_flutter/data/dto/auth/request/add_device_request.dart';
 import 'package:stac_flutter/data/dto/auth/request/get_user_device_list_request.dart';
 import 'package:stac_flutter/data/dto/auth/request/remove_device_request.dart';
+import 'package:stac_flutter/data/dto/auth/request/socket_login_request.dart';
 import 'package:stac_flutter/data/dto/auth/response/get_user_device_list_response.dart';
 import 'package:stac_flutter/domain/auth/repository/socket_repository.dart';
 
@@ -38,5 +39,10 @@ class SocketRepositoryImpl implements SocketRepository {
   @override
   Future<void> saveDeviceName(String name, deviceNum) async {
     await _localSocketDataSource.saveDeviceName(name, deviceNum);
+  }
+
+  @override
+  void socketLogin(SocketLoginRequest socketLoginRequest) {
+    _remoteSocketDataSource.socketLogin(socketLoginRequest);
   }
 }
