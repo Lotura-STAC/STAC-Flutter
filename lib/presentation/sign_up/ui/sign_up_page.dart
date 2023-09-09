@@ -4,7 +4,7 @@ import 'package:design_system/text_field/lotura_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stac_flutter/data/dto/auth/request/sign_up_request.dart';
+import 'package:stac_flutter/data/auth/dto/request/sign_up_request.dart';
 import 'package:stac_flutter/presentation/sign_in/ui/sign_in_page.dart';
 import 'package:stac_flutter/presentation/sign_up/bloc/sign_up_bloc.dart';
 import 'package:stac_flutter/presentation/sign_up/bloc/sign_up_event.dart';

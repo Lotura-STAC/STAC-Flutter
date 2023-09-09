@@ -1,4 +1,4 @@
-import 'package:stac_flutter/data/dto/auth/request/sign_up_request.dart';
+import 'package:stac_flutter/data/auth/dto/request/sign_up_request.dart';
 import 'package:stac_flutter/domain/auth/repository/auth_repository.dart';
 
 class SignUpUseCase {

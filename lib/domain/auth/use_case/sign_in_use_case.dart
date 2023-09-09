@@ -1,4 +1,4 @@
-import 'package:stac_flutter/data/dto/auth/request/sign_in_request.dart';
+import 'package:stac_flutter/data/auth/dto/request/sign_in_request.dart';
 import 'package:stac_flutter/domain/auth/entity/jwt_token_entity.dart';
 import 'package:stac_flutter/domain/auth/repository/auth_repository.dart';
 

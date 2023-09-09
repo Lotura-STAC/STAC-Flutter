@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:stac_flutter/data/dto/auth/request/refresh_request.dart';
-import 'package:stac_flutter/data/dto/auth/request/sign_in_request.dart';
-import 'package:stac_flutter/data/dto/auth/request/sign_up_request.dart';
-import 'package:stac_flutter/data/dto/auth/response/refresh_response.dart';
-import 'package:stac_flutter/data/dto/auth/response/sign_in_response.dart';
+import 'package:stac_flutter/data/auth/dto/request/refresh_request.dart';
+import 'package:stac_flutter/data/auth/dto/request/sign_in_request.dart';
+import 'package:stac_flutter/data/auth/dto/request/sign_up_request.dart';
+import 'package:stac_flutter/data/auth/dto/response/refresh_response.dart';
+import 'package:stac_flutter/data/auth/dto/response/sign_in_response.dart';
 import 'package:stac_flutter/domain/auth/entity/jwt_token_entity.dart';
 import 'package:stac_flutter/secret.dart';
 

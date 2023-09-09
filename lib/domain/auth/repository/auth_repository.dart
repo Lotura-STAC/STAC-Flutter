@@ -1,6 +1,6 @@
-import 'package:stac_flutter/data/dto/auth/request/refresh_request.dart';
-import 'package:stac_flutter/data/dto/auth/request/sign_in_request.dart';
-import 'package:stac_flutter/data/dto/auth/request/sign_up_request.dart';
+import 'package:stac_flutter/data/auth/dto/request/refresh_request.dart';
+import 'package:stac_flutter/data/auth/dto/request/sign_in_request.dart';
+import 'package:stac_flutter/data/auth/dto/request/sign_up_request.dart';
 import 'package:stac_flutter/domain/auth/entity/jwt_token_entity.dart';
 
 abstract class AuthRepository {
