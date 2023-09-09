@@ -1,32 +1,45 @@
+import 'package:stac_flutter/domain/socket/entity/user_device_list_entity.dart';
+
 class GetUserDeviceListResponse {
-  final List<_GetUserDeviceListResponse> list;
+  final List<GetUserDeviceResponse> list;
 
   GetUserDeviceListResponse({required this.list});
 
   factory GetUserDeviceListResponse.fromJson(List<dynamic> json) {
-    List<_GetUserDeviceListResponse> list = <_GetUserDeviceListResponse>[];
-    list = json.map((i) => _GetUserDeviceListResponse.fromJson(i)).toList();
+    List<GetUserDeviceResponse> list = <GetUserDeviceResponse>[];
+    list = json.map((i) => GetUserDeviceResponse.fromJson(i)).toList();
 
     return GetUserDeviceListResponse(
       list: list,
     );
   }
+
+  List<UserDeviceEntity> toEntity() {
+    List<UserDeviceEntity> userDeviceListEntity = List.empty(growable: true);
+    for (var e in list) {
+      userDeviceListEntity.add(UserDeviceEntity(
+          deviceNo: e.deviceNo,
+          deviceType: e.deviceType,
+          currStatus: e.currStatus));
+    }
+    return userDeviceListEntity;
+  }
 }
 
-class _GetUserDeviceListResponse {
+class GetUserDeviceResponse {
   String userId;
   String deviceNo;
   String deviceType;
   int currStatus;
 
-  _GetUserDeviceListResponse(
+  GetUserDeviceResponse(
       {required this.userId,
       required this.deviceNo,
       required this.deviceType,
       required this.currStatus});
 
-  factory _GetUserDeviceListResponse.fromJson(Map<String, dynamic> json) =>
-      _GetUserDeviceListResponse(
+  factory GetUserDeviceResponse.fromJson(Map<String, dynamic> json) =>
+      GetUserDeviceResponse(
         userId: json['user_id'],
         deviceNo: json['device_no'],
         deviceType: json['device_type'],
