@@ -19,14 +19,16 @@ class RemoteSocketDataSource {
   late final StreamController<GetUserDeviceListResponse> _streamController;
 
   RemoteSocketDataSource(
-      {required StreamController<GetUserDeviceListResponse> streamController,
-      required SocketLoginRequest socketLoginRequest}) {
+      {required StreamController<GetUserDeviceListResponse> streamController}) {
     _streamController = streamController;
-    _socket.emit('Socket_login', socketLoginRequest);
   }
 
   Stream<GetUserDeviceListResponse> get userDeviceListStream =>
       _streamController.stream.asBroadcastStream();
+
+  void socketLogin(SocketLoginRequest socketLoginRequest) {
+    _socket.emit('Socket_login', socketLoginRequest);
+  }
 
   void addDevice(AddDeviceRequest addDeviceRequest) {
     _socket.emit('Add_Device', addDeviceRequest);
