@@ -7,26 +7,33 @@ import 'package:stac_flutter/domain/auth/repository/auth_repository.dart';
 import 'package:stac_flutter/data/data_source/auth/local_auth_data_source.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final RemoteAuthDataSource remoteAuthDataSource;
-  final LocalAuthDateSource localAuthDateSource;
+  final RemoteAuthDataSource _remoteAuthDataSource;
+  final LocalAuthDateSource _localAuthDateSource;
 
   AuthRepositoryImpl(
-      {required this.remoteAuthDataSource, required this.localAuthDateSource});
+      {required RemoteAuthDataSource remoteAuthDataSource,
+      required LocalAuthDateSource localAuthDateSource})
+      : _remoteAuthDataSource = remoteAuthDataSource,
+        _localAuthDateSource = localAuthDateSource;
 
   @override
-  Future<JWTTokenEntity> signIn(SignInRequest signInRequest) async =>
-      await remoteAuthDataSource.signIn(signInRequest);
+  Future<JWTTokenEntity> signIn(SignInRequest signInRequest) async {
+    final response = await _remoteAuthDataSource.signIn(signInRequest);
+    await _localAuthDateSource.saveUserId(signInRequest.id);
+    await _localAuthDateSource.saveToken(response);
+    return response;
+  }
 
   @override
   Future<bool> signUp(SignUpRequest signUpRequest) async =>
-      await remoteAuthDataSource.signUp(signUpRequest);
+      await _remoteAuthDataSource.signUp(signUpRequest);
 
   @override
   Future<JWTTokenEntity> refresh(RefreshRequest refreshRequest) async =>
-      await remoteAuthDataSource.refresh(refreshRequest);
+      await _remoteAuthDataSource.refresh(refreshRequest);
 
   @override
   Future<void> signOut() async {
-    await localAuthDateSource.signOut();
+    await _localAuthDateSource.signOut();
   }
 }
