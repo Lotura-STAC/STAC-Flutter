@@ -1,6 +1,6 @@
-import 'package:stac_flutter/data/dto/auth/request/get_user_device_list_request.dart';
-import 'package:stac_flutter/data/dto/auth/response/get_user_device_list_response.dart';
-import 'package:stac_flutter/domain/auth/repository/socket_repository.dart';
+import 'package:stac_flutter/data/socket/dto/request/get_user_device_list_request.dart';
+import 'package:stac_flutter/data/socket/dto/response/get_user_device_list_response.dart';
+import 'package:stac_flutter/domain/socket/repository/socket_repository.dart';
 
 class GetUserDeviceListUseCase {
   final SocketRepository _repository;

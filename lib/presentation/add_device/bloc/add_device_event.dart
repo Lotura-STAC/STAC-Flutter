@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:stac_flutter/data/dto/auth/request/add_device_request.dart';
+import 'package:stac_flutter/data/socket/dto/request/add_device_request.dart';
 
 abstract class AddDeviceEvent extends Equatable {}
 
