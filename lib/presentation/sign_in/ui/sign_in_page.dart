@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stac_flutter/data/auth/dto/request/sign_in_request.dart';
 import 'package:stac_flutter/presentation/add_device/ui/add_device_page.dart';
+import 'package:stac_flutter/presentation/main/ui/main_page.dart';
 import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_bloc.dart';
 import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_event.dart';
 import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_state.dart';
@@ -38,7 +39,7 @@ class _SignInPageState extends State<SignInPage> {
           listener: (context, state) {
             if (state is Loaded) {
               Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => const AddDevicePage()),
+                  MaterialPageRoute(builder: (context) => const MainPage()),
                   (route) => false);
             }
           },
