@@ -40,6 +40,9 @@ class RemoteSocketDataSource {
 
   void getUserDeviceList(GetUserDeviceListRequest getUserDeviceListRequest) {
     _socket.emit('request_data_all', getUserDeviceListRequest);
-    _socket.on('update', (data) => _streamController);
+    _socket.on(
+        'update',
+        (data) => _streamController.sink
+            .add(GetUserDeviceListResponse.fromJson(data)));
   }
 }
