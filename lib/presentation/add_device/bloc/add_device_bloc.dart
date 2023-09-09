@@ -13,7 +13,7 @@ class AddDeviceBloc extends Bloc<AddDeviceEvent, AddDeviceState> {
   void _addDeviceHandler(AddDevice event, Emitter<AddDeviceState> emit) {
     try {
       emit(Loading());
-      _addDeviceUseCase.execute(event.addDeviceRequest);
+      _addDeviceUseCase.execute(event.addDeviceRequest, event.deviceName);
       emit(Loaded());
     } catch (e) {
       emit(Error(message: e.toString()));

@@ -5,9 +5,10 @@ abstract class AddDeviceEvent extends Equatable {}
 
 class AddDevice extends AddDeviceEvent {
   final AddDeviceRequest addDeviceRequest;
+  final String deviceName;
 
-  AddDevice({required this.addDeviceRequest});
+  AddDevice({required this.addDeviceRequest, required this.deviceName});
 
   @override
-  List<Object?> get props => [addDeviceRequest];
+  List<Object?> get props => [addDeviceRequest, deviceName];
 }

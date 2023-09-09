@@ -7,7 +7,7 @@ class AddDeviceUseCase {
   AddDeviceUseCase({required SocketRepository repository})
       : _repository = repository;
 
-  void execute(AddDeviceRequest addDeviceRequest) {
-    _repository.addDevice(addDeviceRequest);
+  void execute(AddDeviceRequest addDeviceRequest, String deviceName) async {
+    _repository.addDevice(addDeviceRequest, deviceName);
   }
 }
