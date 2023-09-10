@@ -5,7 +5,7 @@ import 'package:stac_flutter/data/socket/dto/request/socket_login_request.dart';
 import 'package:stac_flutter/data/socket/dto/response/get_user_device_list_response.dart';
 
 abstract class SocketRepository {
-  Stream<GetUserDeviceListResponse> get userDeviceListStream;
+  Stream<GetUserDeviceListResponse> get userDeviceList;
 
   void socketLogin(SocketLoginRequest socketLoginRequest);
 

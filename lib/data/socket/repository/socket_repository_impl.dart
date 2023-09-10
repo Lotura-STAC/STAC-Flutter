@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:stac_flutter/data/socket/data_source/local_socket_data_source.dart';
 import 'package:stac_flutter/data/socket/data_source/remote_socket_data_source.dart';
 import 'package:stac_flutter/data/socket/dto/request/add_device_request.dart';
@@ -18,6 +20,10 @@ class SocketRepositoryImpl implements SocketRepository {
         _localSocketDataSource = localSocketDataSource;
 
   @override
+  Stream<GetUserDeviceListResponse> get userDeviceList =>
+      _remoteSocketDataSource.userDeviceListStream;
+
+  @override
   void addDevice(AddDeviceRequest addDeviceRequest, String deviceName) async {
     addDeviceRequest.userId = await _localSocketDataSource.getUserId();
     addDeviceRequest.accessToken = await _localSocketDataSource.getToken();
@@ -27,7 +33,11 @@ class SocketRepositoryImpl implements SocketRepository {
   }
 
   @override
-  void getUserDeviceList(GetUserDeviceListRequest getUserDeviceListRequest) {
+  void getUserDeviceList(
+      GetUserDeviceListRequest getUserDeviceListRequest) async {
+    getUserDeviceListRequest.userId = await _localSocketDataSource.getUserId();
+    getUserDeviceListRequest.accessToken =
+        await _localSocketDataSource.getToken();
     _remoteSocketDataSource.getUserDeviceList(getUserDeviceListRequest);
   }
 
@@ -37,16 +47,14 @@ class SocketRepositoryImpl implements SocketRepository {
   }
 
   @override
-  Stream<GetUserDeviceListResponse> get userDeviceListStream =>
-      _remoteSocketDataSource.userDeviceListStream;
-
-  @override
   Future<void> saveDeviceName(String name, deviceNum) async {
     await _localSocketDataSource.saveDeviceName(name, deviceNum);
   }
 
   @override
-  void socketLogin(SocketLoginRequest socketLoginRequest) {
+  void socketLogin(SocketLoginRequest socketLoginRequest) async {
+    socketLoginRequest.userId = await _localSocketDataSource.getUserId();
+    socketLoginRequest.accessToken = await _localSocketDataSource.getToken();
     _remoteSocketDataSource.socketLogin(socketLoginRequest);
   }
 }
