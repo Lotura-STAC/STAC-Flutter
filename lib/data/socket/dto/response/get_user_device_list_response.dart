@@ -14,15 +14,15 @@ class GetUserDeviceListResponse {
     );
   }
 
-  List<UserDeviceEntity> toEntity() {
-    List<UserDeviceEntity> userDeviceListEntity = List.empty(growable: true);
-    list.map((e) => userDeviceListEntity.add(UserDeviceEntity(
-        deviceNo: e.deviceNo,
-        deviceType: e.deviceType,
-        currStatus: e.currStatus)));
-
-    return userDeviceListEntity;
-  }
+  // List<UserDeviceEntity> toEntity() {
+  //   List<UserDeviceEntity> userDeviceListEntity = List.empty(growable: true);
+  //   list.map((e) => userDeviceListEntity.add(UserDeviceEntity(
+  //       deviceNo: e.deviceNo,
+  //       deviceType: e.deviceType,
+  //       currStatus: e.currStatus)));
+  //
+  //   return userDeviceListEntity;
+  // }
 }
 
 class GetUserDeviceResponse {
