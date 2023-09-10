@@ -16,12 +16,11 @@ class GetUserDeviceListResponse {
 
   List<UserDeviceEntity> toEntity() {
     List<UserDeviceEntity> userDeviceListEntity = List.empty(growable: true);
-    for (var e in list) {
-      userDeviceListEntity.add(UserDeviceEntity(
-          deviceNo: e.deviceNo,
-          deviceType: e.deviceType,
-          currStatus: e.currStatus));
-    }
+    list.map((e) => userDeviceListEntity.add(UserDeviceEntity(
+        deviceNo: e.deviceNo,
+        deviceType: e.deviceType,
+        currStatus: e.currStatus)));
+
     return userDeviceListEntity;
   }
 }
