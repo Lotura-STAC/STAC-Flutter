@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stac_flutter/data/socket/dto/request/add_device_request.dart';
+import 'package:stac_flutter/data/socket/dto/request/get_user_device_list_request.dart';
 import 'package:stac_flutter/presentation/add_device/bloc/add_device_bloc.dart';
 import 'package:stac_flutter/presentation/add_device/bloc/add_device_event.dart';
 import 'package:stac_flutter/presentation/add_device/bloc/add_device_state.dart';
+import 'package:stac_flutter/presentation/main/bloc/main_bloc.dart';
+import 'package:stac_flutter/presentation/main/bloc/main_event.dart';
 
 class AddDevicePage extends StatefulWidget {
   const AddDevicePage({super.key});
@@ -116,16 +119,24 @@ class _AddDevicePageState extends State<AddDevicePage> {
                 }
               },
               child: LoturaTextButton(
-                onPressed: () => context.read<AddDeviceBloc>().add(
-                      AddDevice(
-                          addDeviceRequest: AddDeviceRequest(
-                            userId: "",
-                            accessToken: "",
-                            deviceNo: numController.text,
-                            deviceType: selectedIndex == 0 ? "WASH" : "DRY",
-                          ),
-                          deviceName: nameController.text),
-                    ),
+                onPressed: () {
+                  context.read<AddDeviceBloc>().add(
+                        AddDevice(
+                            addDeviceRequest: AddDeviceRequest(
+                              userId: "",
+                              accessToken: "",
+                              deviceNo: numController.text,
+                              deviceType: selectedIndex == 0 ? "WASH" : "DRY",
+                            ),
+                            deviceName: nameController.text),
+                      );
+                  context.read<MainBloc>().add(
+                        GetUserDeviceListEvent(
+                          getUserDeviceListRequest: GetUserDeviceListRequest(
+                              userId: "", accessToken: ""),
+                        ),
+                      );
+                },
                 text: Text(
                   "확인",
                   style: TextStyle(
