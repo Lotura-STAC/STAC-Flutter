@@ -7,9 +7,4 @@ class LocalSocketDataSource {
     final accessToken = await _storage.read(key: 'accessToken');
     return accessToken!;
   }
-
-  Future<String> getUserId() async {
-    final userId = await _storage.read(key: 'userId');
-    return userId!;
-  }
 }

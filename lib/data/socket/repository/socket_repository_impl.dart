@@ -24,7 +24,6 @@ class SocketRepositoryImpl implements SocketRepository {
   @override
   void getUserDeviceList(
       GetUserDeviceListRequest getUserDeviceListRequest) async {
-    getUserDeviceListRequest.userId = await _localSocketDataSource.getUserId();
     getUserDeviceListRequest.accessToken =
         await _localSocketDataSource.getToken();
     _remoteSocketDataSource.getUserDeviceList(getUserDeviceListRequest);
