@@ -20,17 +20,9 @@ class AddDevicePage extends StatefulWidget {
 }
 
 class _AddDevicePageState extends State<AddDevicePage> {
-  late final TextEditingController numController;
-  late final TextEditingController nameController;
-  late int selectedIndex;
-
-  @override
-  void initState() {
-    numController = TextEditingController();
-    nameController = TextEditingController();
-    selectedIndex = 0;
-    super.initState();
-  }
+  final TextEditingController numController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -112,38 +104,29 @@ class _AddDevicePageState extends State<AddDevicePage> {
               ),
             ),
             SizedBox(height: 330.0.r),
-            BlocListener<AddDeviceBloc, AddDeviceState>(
-              listener: (context, state) {
-                if (state is Loaded) {
-                  Navigator.pop(context);
-                }
+            LoturaTextButton(
+              onPressed: () {
+                context.read<AddDeviceBloc>().add(
+                      AddDevice(
+                          addDeviceRequest: AddDeviceRequest(
+                            userId: "",
+                            accessToken: "",
+                            deviceNo: numController.text,
+                            name: nameController.text,
+                            deviceType: selectedIndex == 0 ? "WASH" : "DRY",
+                          ),
+                          deviceName: nameController.text),
+                    );
+                Future.delayed(const Duration(milliseconds: 500)).then((value) {
+                  Navigator.of(context).pop();
+                });
               },
-              child: LoturaTextButton(
-                onPressed: () {
-                  context.read<AddDeviceBloc>().add(
-                        AddDevice(
-                            addDeviceRequest: AddDeviceRequest(
-                              userId: "",
-                              accessToken: "",
-                              deviceNo: numController.text,
-                              deviceType: selectedIndex == 0 ? "WASH" : "DRY",
-                            ),
-                            deviceName: nameController.text),
-                      );
-                  context.read<MainBloc>().add(
-                        GetUserDeviceListEvent(
-                          getUserDeviceListRequest: GetUserDeviceListRequest(
-                              userId: "", accessToken: ""),
-                        ),
-                      );
-                },
-                text: Text(
-                  "확인",
-                  style: TextStyle(
-                      color: LoturaColor.white,
-                      fontSize: 16.0.sp,
-                      fontWeight: FontWeight.w700),
-                ),
+              text: Text(
+                "확인",
+                style: TextStyle(
+                    color: LoturaColor.white,
+                    fontSize: 16.0.sp,
+                    fontWeight: FontWeight.w700),
               ),
             ),
           ],
