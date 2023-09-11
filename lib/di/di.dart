@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stac_flutter/data/add_device/data_source/remote_add_device_data_source.dart';
+import 'package:stac_flutter/data/add_device/repository/add_device_repository_impl.dart';
 import 'package:stac_flutter/data/auth/data_source/local_auth_data_source.dart';
 import 'package:stac_flutter/data/auth/data_source/remote_auth_data_source.dart';
 import 'package:stac_flutter/data/auth/repository/auth_repository_impl.dart';
@@ -7,10 +9,11 @@ import 'package:stac_flutter/data/socket/data_source/local_socket_data_source.da
 import 'package:stac_flutter/data/socket/data_source/remote_socket_data_source.dart';
 import 'package:stac_flutter/data/socket/dto/response/get_user_device_list_response.dart';
 import 'package:stac_flutter/data/socket/repository/socket_repository_impl.dart';
+import 'package:stac_flutter/domain/add_device/repository/add_device_repository.dart';
 import 'package:stac_flutter/domain/auth/repository/auth_repository.dart';
 import 'package:stac_flutter/domain/socket/entity/user_device_list_entity.dart';
 import 'package:stac_flutter/domain/socket/repository/socket_repository.dart';
-import 'package:stac_flutter/domain/socket/use_case/add_device_use_case.dart';
+import 'package:stac_flutter/domain/add_device/use_case/add_device_use_case.dart';
 import 'package:stac_flutter/domain/socket/use_case/get_user_device_list_use_case.dart';
 import 'package:stac_flutter/domain/socket/use_case/remove_device_use_case.dart';
 import 'package:stac_flutter/domain/auth/use_case/sign_in_use_case.dart';
@@ -24,6 +27,8 @@ Future<List<BlocProvider>> di() async {
   RemoteAuthDataSource remoteAuthDataSource = RemoteAuthDataSource();
   RemoteSocketDataSource remoteSocketDataSource = RemoteSocketDataSource(
       streamController: StreamController<GetUserDeviceListResponse>());
+  RemoteAddDeviceDataSource remoteAddDeviceDataSource =
+      RemoteAddDeviceDataSource();
 
   LocalAuthDateSource localAuthDateSource = LocalAuthDateSource();
   LocalSocketDataSource localSocketDataSource = LocalSocketDataSource();
@@ -35,8 +40,12 @@ Future<List<BlocProvider>> di() async {
       remoteSocketDataSource: remoteSocketDataSource,
       localSocketDataSource: localSocketDataSource);
 
-  AddDeviceUseCase addDeviceUseCase =
-      AddDeviceUseCase(repository: socketRepository);
+  AddDeviceRepository addDeviceRepository = AddDeviceRepositoryImpl(
+      remoteAddDeviceDataSource: remoteAddDeviceDataSource);
+
+  AddDeviceUseCase addDeviceUseCase = AddDeviceUseCase(
+      addDeviceRepository: addDeviceRepository,
+      socketRepository: socketRepository);
   GetUserDeviceListUseCase getUserDeviceListUseCase =
       GetUserDeviceListUseCase(repository: socketRepository);
   RemoveDeviceUseCase removeDeviceUseCase =
