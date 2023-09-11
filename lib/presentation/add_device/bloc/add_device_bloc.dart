@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stac_flutter/domain/socket/use_case/add_device_use_case.dart';
+import 'package:stac_flutter/domain/add_device/use_case/add_device_use_case.dart';
 import 'package:stac_flutter/presentation/add_device/bloc/add_device_event.dart';
 import 'package:stac_flutter/presentation/add_device/bloc/add_device_state.dart';
 
