@@ -9,7 +9,7 @@ abstract class SocketRepository {
 
   void socketLogin(SocketLoginRequest socketLoginRequest);
 
-  void addDevice(AddDeviceRequest addDeviceRequest, String deviceName);
+  void addDevice(AddDeviceRequest addDeviceRequest);
 
   void removeDevice(RemoveDeviceRequest removeDeviceRequest);
 
