@@ -27,8 +27,6 @@ class SocketRepositoryImpl implements SocketRepository {
   void addDevice(AddDeviceRequest addDeviceRequest) async {
     addDeviceRequest.userId = await _localSocketDataSource.getUserId();
     addDeviceRequest.accessToken = await _localSocketDataSource.getToken();
-    await _localSocketDataSource.saveDeviceName(
-        deviceName, addDeviceRequest.deviceNo);
     _remoteSocketDataSource.addDevice(addDeviceRequest);
   }
 
@@ -44,11 +42,6 @@ class SocketRepositoryImpl implements SocketRepository {
   @override
   void removeDevice(RemoveDeviceRequest removeDeviceRequest) {
     _remoteSocketDataSource.removeDevice(removeDeviceRequest);
-  }
-
-  @override
-  Future<void> saveDeviceName(String name, deviceNum) async {
-    await _localSocketDataSource.saveDeviceName(name, deviceNum);
   }
 
   @override

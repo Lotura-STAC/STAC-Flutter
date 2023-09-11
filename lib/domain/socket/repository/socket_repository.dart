@@ -14,6 +14,4 @@ abstract class SocketRepository {
   void removeDevice(RemoveDeviceRequest removeDeviceRequest);
 
   void getUserDeviceList(GetUserDeviceListRequest getUserDeviceListRequest);
-
-  Future<void> saveDeviceName(String deviceNum, String deviceName);
 }
