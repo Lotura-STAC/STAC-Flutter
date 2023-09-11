@@ -26,10 +26,6 @@ class RemoteSocketDataSource {
   Stream<GetUserDeviceListResponse> get userDeviceListStream =>
       _streamController.stream.asBroadcastStream();
 
-  void socketLogin(SocketLoginRequest socketLoginRequest) {
-    _socket.emit('Socket_login', socketLoginRequest);
-  }
-
   void addDevice(AddDeviceRequest addDeviceRequest) {
     _socket.emit('Add_Device', addDeviceRequest);
   }
@@ -42,7 +38,10 @@ class RemoteSocketDataSource {
     _socket.emit('request_data_all', getUserDeviceListRequest);
     _socket.on(
         'update',
-        (data) => _streamController.sink
-            .add(GetUserDeviceListResponse.fromJson(data)));
+        (data) {
+          print(data);
+          _streamController.sink
+              .add(GetUserDeviceListResponse.fromJson(data));
+        });
   }
 }

@@ -14,8 +14,7 @@ class GetUserDeviceListUseCase {
   Stream<GetUserDeviceListResponse> get userDeviceList =>
       _repository.userDeviceList;
 
-  void execute(GetUserDeviceListRequest getUserDeviceListRequest) async {
-    _repository.socketLogin(SocketLoginRequest(accessToken: "", userId: ""));
+  void execute(GetUserDeviceListRequest getUserDeviceListRequest) {
     _repository.getUserDeviceList(getUserDeviceListRequest);
   }
 }

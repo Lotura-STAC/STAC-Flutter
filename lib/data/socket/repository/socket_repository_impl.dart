@@ -43,11 +43,4 @@ class SocketRepositoryImpl implements SocketRepository {
   void removeDevice(RemoveDeviceRequest removeDeviceRequest) {
     _remoteSocketDataSource.removeDevice(removeDeviceRequest);
   }
-
-  @override
-  void socketLogin(SocketLoginRequest socketLoginRequest) async {
-    socketLoginRequest.userId = await _localSocketDataSource.getUserId();
-    socketLoginRequest.accessToken = await _localSocketDataSource.getToken();
-    _remoteSocketDataSource.socketLogin(socketLoginRequest);
-  }
 }

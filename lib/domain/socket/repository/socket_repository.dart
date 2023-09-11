@@ -7,8 +7,6 @@ import 'package:stac_flutter/data/socket/dto/response/get_user_device_list_respo
 abstract class SocketRepository {
   Stream<GetUserDeviceListResponse> get userDeviceList;
 
-  void socketLogin(SocketLoginRequest socketLoginRequest);
-
   void addDevice(AddDeviceRequest addDeviceRequest);
 
   void removeDevice(RemoveDeviceRequest removeDeviceRequest);
