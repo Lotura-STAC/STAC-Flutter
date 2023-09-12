@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:stac_flutter/data/socket/data_source/local_socket_data_source.dart';
 import 'package:stac_flutter/data/socket/data_source/remote_socket_data_source.dart';
 import 'package:stac_flutter/data/socket/dto/request/get_user_device_list_request.dart';
-import 'package:stac_flutter/data/socket/dto/request/remove_device_request.dart';
 import 'package:stac_flutter/data/socket/dto/response/get_user_device_list_response.dart';
 import 'package:stac_flutter/domain/socket/repository/socket_repository.dart';
 
@@ -27,10 +26,5 @@ class SocketRepositoryImpl implements SocketRepository {
     getUserDeviceListRequest.accessToken =
         await _localSocketDataSource.getToken();
     _remoteSocketDataSource.getUserDeviceList(getUserDeviceListRequest);
-  }
-
-  @override
-  void removeDevice(RemoveDeviceRequest removeDeviceRequest) {
-    _remoteSocketDataSource.removeDevice(removeDeviceRequest);
   }
 }
