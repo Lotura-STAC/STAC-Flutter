@@ -1,5 +1,6 @@
 import 'package:design_system/play_ground/design_system_play_ground_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() => runApp(const MyApp());
 
@@ -10,7 +11,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: DesignSystemPlayGroundPage(),
+      home: ScreenUtilInit(
+        designSize: const Size(430, 932),
+        child: DesignSystemPlayGroundPage(),
+      ),
     );
   }
 }
