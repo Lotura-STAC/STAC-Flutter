@@ -13,11 +13,7 @@ class AddDeviceUseCase {
       : _addDeviceRepository = addDeviceRepository,
         _socketRepository = socketRepository;
 
-  void execute(AddDeviceRequest addDeviceRequest) {
-    _addDeviceRepository.addDevice(addDeviceRequest);
-    Future.delayed(const Duration(milliseconds: 500)).then((value) {
-      _socketRepository.getUserDeviceList(
-          GetUserDeviceListRequest(userId: "", accessToken: ""));
-    });
+  Future<bool> execute(AddDeviceRequest addDeviceRequest) async {
+    return await _addDeviceRepository.addDevice(addDeviceRequest);
   }
 }
