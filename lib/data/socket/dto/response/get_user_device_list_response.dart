@@ -14,32 +14,35 @@ class GetUserDeviceListResponse {
     );
   }
 
-  // List<UserDeviceEntity> toEntity() {
-  //   List<UserDeviceEntity> userDeviceListEntity = List.empty(growable: true);
-  //   list.map((e) => userDeviceListEntity.add(UserDeviceEntity(
-  //       deviceNo: e.deviceNo,
-  //       deviceType: e.deviceType,
-  //       currStatus: e.currStatus)));
-  //
-  //   return userDeviceListEntity;
-  // }
+// List<UserDeviceEntity> toEntity() {
+//   List<UserDeviceEntity> userDeviceListEntity = List.empty(growable: true);
+//   list.map((e) => userDeviceListEntity.add(UserDeviceEntity(
+//       deviceNo: e.deviceNo,
+//       deviceType: e.deviceType,
+//       currStatus: e.currStatus)));
+//
+//   return userDeviceListEntity;
+// }
 }
 
 class GetUserDeviceResponse {
   String userId;
   String deviceNo;
   String deviceType;
+  String name;
   int currStatus;
 
   GetUserDeviceResponse(
       {required this.userId,
       required this.deviceNo,
       required this.deviceType,
+      required this.name,
       required this.currStatus});
 
   factory GetUserDeviceResponse.fromJson(Map<String, dynamic> json) =>
       GetUserDeviceResponse(
         userId: json['user_id'],
+        name: json['name'],
         deviceNo: json['device_no'],
         deviceType: json['device_type'],
         currStatus: json['curr_status'],
