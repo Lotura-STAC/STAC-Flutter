@@ -5,8 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stac_flutter/data/add_device/dto/request/add_device_request.dart';
+import 'package:stac_flutter/data/socket/dto/request/get_user_device_list_request.dart';
 import 'package:stac_flutter/presentation/add_device/bloc/add_device_bloc.dart';
 import 'package:stac_flutter/presentation/add_device/bloc/add_device_event.dart';
+import 'package:stac_flutter/presentation/add_device/bloc/add_device_state.dart';
+import 'package:stac_flutter/presentation/main/bloc/main_bloc.dart';
+import 'package:stac_flutter/presentation/main/bloc/main_event.dart';
 
 class AddDevicePage extends StatefulWidget {
   const AddDevicePage({super.key});
@@ -100,27 +104,37 @@ class _AddDevicePageState extends State<AddDevicePage> {
               ),
             ),
             SizedBox(height: 330.0.r),
-            LoturaTextButton(
-              onPressed: () {
-                context.read<AddDeviceBloc>().add(
-                      AddDevice(
-                        addDeviceRequest: AddDeviceRequest(
-                          deviceNo: numController.text,
-                          name: nameController.text,
-                          deviceType: selectedIndex == 0 ? "WASH" : "DRY",
-                        ),
-                      ),
-                    );
-                Future.delayed(const Duration(milliseconds: 500)).then((value) {
+            BlocListener<AddDeviceBloc, AddDeviceState>(
+              listener: (context, state) {
+                if (state is Loaded) {
                   Navigator.of(context).pop();
-                });
+                }
               },
-              text: Text(
-                "확인",
-                style: TextStyle(
-                    color: LoturaColor.white,
-                    fontSize: 16.0.sp,
-                    fontWeight: FontWeight.w700),
+              child: LoturaTextButton(
+                onPressed: () {
+                  context.read<AddDeviceBloc>().add(
+                        AddDevice(
+                          addDeviceRequest: AddDeviceRequest(
+                            deviceNo: numController.text,
+                            name: nameController.text,
+                            deviceType: selectedIndex == 0 ? "WASH" : "DRY",
+                          ),
+                        ),
+                      );
+                  Future.delayed(const Duration(milliseconds: 300))
+                      .then((value) {
+                    context.read<MainBloc>().add(GetUserDeviceListEvent(
+                        getUserDeviceListRequest: GetUserDeviceListRequest(
+                            userId: "", accessToken: "")));
+                  });
+                },
+                text: Text(
+                  "확인",
+                  style: TextStyle(
+                      color: LoturaColor.white,
+                      fontSize: 16.0.sp,
+                      fontWeight: FontWeight.w700),
+                ),
               ),
             ),
           ],
