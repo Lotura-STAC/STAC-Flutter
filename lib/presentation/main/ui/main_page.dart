@@ -1,5 +1,6 @@
 import 'package:design_system/color/lotura_color.dart';
 import 'package:design_system/list_tile/lotura_list_tile.dart';
+import 'package:design_system/message_box/lotura_message_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,17 +46,23 @@ class _MainPageState extends State<MainPage> {
       ),
       body: Padding(
         padding: EdgeInsets.only(left: 24.0.r, right: 24.0.r),
-        child: Center(
-          child: BlocBuilder<MainBloc, MainState>(
-            builder: (context, state) {
-              if (state is Loading) {
-                return const CircularProgressIndicator();
-              }
-              if (state is Loaded) {
-                if (state.list.list.isEmpty) {
-                  Container();
-                } else {
-                  SizedBox(
+        child: BlocBuilder<MainBloc, MainState>(
+          builder: (context, state) {
+            if (state is Loading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (state is Loaded) {
+              if (state.list.list.isEmpty) {
+                return LoturaMessageBox(
+                  margin: EdgeInsets.only(top: 100.0.r),
+                  onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (context) => const AddDevicePage()),
+                  ),
+                );
+              } else {
+                return Center(
+                  child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height * 0.7,
                     child: ListView.builder(
@@ -71,18 +78,13 @@ class _MainPageState extends State<MainPage> {
                         );
                       },
                     ),
-                  );
-                }
+                  ),
+                );
               }
-              return Container();
-            },
-          ),
+            }
+            return Container();
+          },
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const AddDevicePage())),
-        child: const Icon(Icons.add),
       ),
     );
   }
