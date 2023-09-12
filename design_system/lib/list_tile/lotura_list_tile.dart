@@ -10,17 +10,20 @@ class LoturaListTile extends StatelessWidget {
     required this.deviceType,
     required this.text,
     required this.status,
+    this.margin,
     this.onPressed,
   });
 
   final double width, height;
   final int status;
+  final EdgeInsetsGeometry? margin;
   final String text, deviceType;
   final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: margin,
       padding: EdgeInsets.only(
           top: 12.0.r, bottom: 12.0.r, left: 24.0.r, right: 12.0.r),
       width: width,
