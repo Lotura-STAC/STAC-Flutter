@@ -7,15 +7,15 @@ class LoturaListTile extends StatelessWidget {
     super.key,
     required this.width,
     required this.height,
-    required this.device,
+    required this.deviceType,
     required this.text,
     required this.status,
     this.onPressed,
   });
 
   final double width, height;
-  final int device, status;
-  final String text;
+  final int status;
+  final String text, deviceType;
   final void Function()? onPressed;
 
   @override
@@ -36,7 +36,9 @@ class LoturaListTile extends StatelessWidget {
           Row(
             children: [
               Icon(
-                device == 0 ? Icons.add : Icons.accessible_forward_rounded,
+                deviceType == 'DRY'
+                    ? Icons.add
+                    : Icons.accessible_forward_rounded,
                 size: 28.0.r,
               ),
               SizedBox(width: 20.0.r),
