@@ -1,3 +1,4 @@
+import 'package:stac_flutter/core/utils/jwt_store.dart';
 import 'package:stac_flutter/data/auth/data_source/local_auth_data_source.dart';
 import 'package:stac_flutter/data/auth/data_source/remote_auth_data_source.dart';
 import 'package:stac_flutter/data/auth/dto/request/refresh_request.dart';
@@ -19,8 +20,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<JWTTokenEntity> signIn(SignInRequest signInRequest) async {
     final response = await _remoteAuthDataSource.signIn(signInRequest);
-    await _localAuthDateSource.saveUserId(signInRequest.id);
-    await _localAuthDateSource.saveToken(response);
+    await JWTStore.setToken(response.accessToken, response.refreshToken);
     return response;
   }
 
