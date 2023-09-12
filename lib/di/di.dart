@@ -5,11 +5,15 @@ import 'package:stac_flutter/data/add_device/repository/add_device_repository_im
 import 'package:stac_flutter/data/auth/data_source/local_auth_data_source.dart';
 import 'package:stac_flutter/data/auth/data_source/remote_auth_data_source.dart';
 import 'package:stac_flutter/data/auth/repository/auth_repository_impl.dart';
+import 'package:stac_flutter/data/remove_device/data_source/remote_remove_device_data_source.dart';
+import 'package:stac_flutter/data/remove_device/repository/remove_device_repository_impl.dart';
 import 'package:stac_flutter/data/socket/data_source/remote_socket_data_source.dart';
 import 'package:stac_flutter/data/socket/dto/response/get_user_device_list_response.dart';
 import 'package:stac_flutter/data/socket/repository/socket_repository_impl.dart';
 import 'package:stac_flutter/domain/add_device/repository/add_device_repository.dart';
 import 'package:stac_flutter/domain/auth/repository/auth_repository.dart';
+import 'package:stac_flutter/domain/remove_device/repository/remove_device_repository.dart';
+import 'package:stac_flutter/domain/remove_device/use_case/remove_device_use_case.dart';
 import 'package:stac_flutter/domain/socket/repository/socket_repository.dart';
 import 'package:stac_flutter/domain/add_device/use_case/add_device_use_case.dart';
 import 'package:stac_flutter/domain/socket/use_case/get_user_device_list_use_case.dart';
@@ -26,12 +30,16 @@ Future<List<BlocProvider>> di() async {
       streamController: StreamController<GetUserDeviceListResponse>());
   RemoteAddDeviceDataSource remoteAddDeviceDataSource =
       RemoteAddDeviceDataSource();
+  RemoteRemoveDeviceDataSource remoteRemoveDeviceDataSource =
+      RemoteRemoveDeviceDataSource();
 
   LocalAuthDateSource localAuthDateSource = LocalAuthDateSource();
 
   AuthRepository authRepository = AuthRepositoryImpl(
       remoteAuthDataSource: remoteAuthDataSource,
       localAuthDateSource: localAuthDateSource);
+  RemoveDeviceRepository removeDeviceRepository = RemoveDeviceRepositoryImpl(
+      remoteRemoveDeviceDataSource: remoteRemoveDeviceDataSource);
   SocketRepository socketRepository =
       SocketRepositoryImpl(remoteSocketDataSource: remoteSocketDataSource);
 
@@ -44,6 +52,8 @@ Future<List<BlocProvider>> di() async {
       GetUserDeviceListUseCase(repository: socketRepository);
   SignInUseCase signInUseCase = SignInUseCase(repository: authRepository);
   SignUpUseCase signUpUseCase = SignUpUseCase(repository: authRepository);
+  RemoveDeviceUseCase removeDeviceUseCase =
+      RemoveDeviceUseCase(removeDeviceRepository: removeDeviceRepository);
 
   return [
     BlocProvider<SignInBloc>(create: (context) => SignInBloc(signInUseCase)),
@@ -51,6 +61,7 @@ Future<List<BlocProvider>> di() async {
     BlocProvider<AddDeviceBloc>(
         create: (context) => AddDeviceBloc(addDeviceUseCase)),
     BlocProvider<MainBloc>(
-        create: (context) => MainBloc(getUserDeviceListUseCase))
+        create: (context) =>
+            MainBloc(getUserDeviceListUseCase, removeDeviceUseCase))
   ];
 }
