@@ -5,6 +5,7 @@ import 'package:design_system/color/lotura_color.dart';
 import 'package:design_system/color/lotura_color_view.dart';
 import 'package:design_system/icon/lotura_icon_view.dart';
 import 'package:design_system/image/lotura_image_view.dart';
+import 'package:design_system/list_tile/lotura_list_tile_view.dart';
 import 'package:design_system/text_field/lotura_text_field_view.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,8 @@ class DesignSystemPlayGroundPage extends StatelessWidget {
     "color",
     "icon",
     "image",
-    "text_field"
+    "text_field",
+    "list_tile"
   ];
 
   final Map<String, Widget> components = {
@@ -28,7 +30,8 @@ class DesignSystemPlayGroundPage extends StatelessWidget {
     "color": LoturaColorView(),
     "icon": LoturaIconView(),
     "image": LoturaImageView(),
-    "text_field": LoturaTextFieldView()
+    "text_field": LoturaTextFieldView(),
+    "list_tile": LoturaListTileView()
   };
 
   @override
