@@ -4,13 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoturaMessageBox extends StatelessWidget {
-  const LoturaMessageBox({super.key, this.onPressed});
+  const LoturaMessageBox({
+    super.key,
+    this.onPressed,
+    this.margin,
+  });
 
   final void Function()? onPressed;
+  final EdgeInsetsGeometry? margin;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: margin,
       padding: EdgeInsets.all(24.0.r),
       width: 382.0.r,
       height: 270.0.r,
@@ -22,7 +28,10 @@ class LoturaMessageBox extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(height: 20.0, child: Text("추가할 예정"),),
+          SizedBox(
+            height: 20.0,
+            child: Text("추가할 예정"),
+          ),
           Column(
             children: [
               Text(
