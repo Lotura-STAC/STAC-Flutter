@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stac_flutter/data/socket/dto/request/get_user_device_list_request.dart';
 import 'package:stac_flutter/domain/socket/use_case/get_user_device_list_use_case.dart';
 import 'package:stac_flutter/presentation/main/bloc/main_event.dart';
 import 'package:stac_flutter/presentation/main/bloc/main_state.dart';
@@ -32,8 +33,9 @@ class MainBloc extends Bloc<MainEvent, MainState> {
       RemoveDeviceEvent event, Emitter<MainState> emit) async {
     try {
       emit(Loading());
-      final response =
-          await _removeDeviceUseCase.execute(event.removeDeviceRequest);
+      await _removeDeviceUseCase.execute(event.removeDeviceRequest);
+      _getUserDeviceListUseCase
+          .execute(GetUserDeviceListRequest(accessToken: ""));
     } catch (e) {
       emit(Error(message: e.toString()));
     }
