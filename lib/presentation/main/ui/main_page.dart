@@ -6,6 +6,7 @@ import 'package:design_system/message_box/lotura_message_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stac_flutter/data/remove_device/dto/remove_device_request.dart';
 import 'package:stac_flutter/data/socket/dto/request/get_user_device_list_request.dart';
 import 'package:stac_flutter/presentation/add_device/ui/add_device_page.dart';
 import 'package:stac_flutter/presentation/main/bloc/main_bloc.dart';
@@ -90,13 +91,23 @@ class _MainPageState extends State<MainPage> {
                                         top: Radius.circular(25.0))),
                                 context: (context),
                                 builder: (context) => LoturaBottomSheet(
-                                  subtitle: "장치 설정하기",
-                                  title: "장치에 변경사항이 생겼나요?",
-                                  leftText: "장치 수정하기",
-                                  rightText: "장치 삭제하기",
-                                  onLeftPressed: () => print("장치 수정하기"),
-                                  onRightPressed: () => print("장치 삭제하기"),
-                                ),
+                                    subtitle: "장치 설정하기",
+                                    title: "장치에 변경사항이 생겼나요?",
+                                    leftText: "장치 수정하기",
+                                    rightText: "장치 삭제하기",
+                                    onLeftPressed: () => print("장치 수정하기"),
+                                    onRightPressed: () {
+                                      Navigator.of(context).pop();
+                                      context
+                                          .read<MainBloc>()
+                                          .add(RemoveDeviceEvent(
+                                            removeDeviceRequest:
+                                                RemoveDeviceRequest(
+                                              deviceNo: state
+                                                  .list.list[index].deviceNo,
+                                            ),
+                                          ));
+                                    }),
                               ),
                               width: 382.0.r,
                               height: 78.0.r,
