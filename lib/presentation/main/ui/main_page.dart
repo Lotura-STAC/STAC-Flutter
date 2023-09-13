@@ -34,6 +34,18 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         backgroundColor: LoturaColor.gray100,
         elevation: 0.0,
+        leadingWidth: 200.0.w,
+        leading: Padding(
+          padding: EdgeInsets.only(left: 40.0.r, top: 8.0.r),
+          child: Text(
+            "Lotura",
+            style: TextStyle(
+              fontSize: 28.0.sp,
+              fontWeight: FontWeight.w700,
+              color: LoturaColor.primary700,
+            ),
+          ),
+        ),
         actions: [
           IconButton(
             padding: EdgeInsets.only(right: 30.0.r),
@@ -43,6 +55,7 @@ class _MainPageState extends State<MainPage> {
               color: LoturaColor.black,
             ),
           ),
+          SizedBox(width: 12.0.r),
         ],
       ),
       body: Padding(
@@ -82,6 +95,7 @@ class _MainPageState extends State<MainPage> {
                         ),
                       ),
                       LoturaIconButton(
+                        width: 375.0.r,
                         icon: Icon(
                           Icons.add,
                           color: LoturaColor.white,
