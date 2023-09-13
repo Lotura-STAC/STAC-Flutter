@@ -62,36 +62,36 @@ class _MainPageState extends State<MainPage> {
                   ),
                 );
               } else {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height * 0.7,
-                      child: ListView.builder(
-                        itemCount: state.list.list.length,
-                        itemBuilder: (context, index) {
-                          return LoturaListTile(
-                            width: 382.0.r,
-                            height: 78.0.r,
-                            deviceType: state.list.list[index].deviceType,
-                            text: state.list.list[index].name,
-                            status: state.list.list[index].currStatus,
-                            margin: EdgeInsets.all(8.0.r),
-                          );
-                        },
+                return Padding(
+                  padding: EdgeInsets.only(bottom: 40.0.r),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: state.list.list.length,
+                          itemBuilder: (context, index) {
+                            return LoturaListTile(
+                              width: 382.0.r,
+                              height: 78.0.r,
+                              deviceType: state.list.list[index].deviceType,
+                              text: state.list.list[index].name,
+                              status: state.list.list[index].currStatus,
+                              margin: EdgeInsets.all(8.0.r),
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                    LoturaIconButton(
-                      icon: Icon(
-                        Icons.add,
-                        color: LoturaColor.white,
+                      LoturaIconButton(
+                        icon: Icon(
+                          Icons.add,
+                          color: LoturaColor.white,
+                        ),
+                        function: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => const AddDevicePage())),
                       ),
-                      function: () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => const AddDevicePage())),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               }
             }
