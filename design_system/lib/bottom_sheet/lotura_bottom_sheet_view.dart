@@ -18,7 +18,18 @@ class LoturaBottomSheetView extends StatelessWidget {
               shape: const RoundedRectangleBorder(
                   borderRadius:
                       BorderRadius.vertical(top: Radius.circular(25.0))),
-              builder: (context) => LoturaBottomSheet(),
+              builder: (context) => LoturaBottomSheet(
+                subtitle: "장치 설정하기",
+                title: "장치에 변경사항이 생겼나요?",
+                leftText: "장치 삭제하기",
+                rightText: "장치 수정하기",
+                onLeftPressed: () {
+                  print("장치 삭제하기");
+                },
+                onRightPressed: () {
+                  print("장치 수정하기");
+                },
+              ),
             );
           },
           text: Text(
