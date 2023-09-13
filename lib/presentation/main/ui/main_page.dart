@@ -23,8 +23,7 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     context.read<MainBloc>().add(GetUserDeviceListEvent(
-        getUserDeviceListRequest:
-            GetUserDeviceListRequest(accessToken: "", userId: "")));
+        getUserDeviceListRequest: GetUserDeviceListRequest(accessToken: "")));
   }
 
   @override

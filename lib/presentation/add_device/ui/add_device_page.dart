@@ -124,8 +124,8 @@ class _AddDevicePageState extends State<AddDevicePage> {
                   Future.delayed(const Duration(milliseconds: 300))
                       .then((value) {
                     context.read<MainBloc>().add(GetUserDeviceListEvent(
-                        getUserDeviceListRequest: GetUserDeviceListRequest(
-                            userId: "", accessToken: "")));
+                        getUserDeviceListRequest:
+                            GetUserDeviceListRequest(accessToken: "")));
                   });
                 },
                 text: Text(
