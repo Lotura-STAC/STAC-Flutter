@@ -1,3 +1,4 @@
+import 'package:design_system/bottom_sheet/lotura_bottom_sheet.dart';
 import 'package:design_system/button/lotura_icon_button.dart';
 import 'package:design_system/color/lotura_color.dart';
 import 'package:design_system/list_tile/lotura_list_tile.dart';
@@ -83,6 +84,20 @@ class _MainPageState extends State<MainPage> {
                           itemCount: state.list.list.length,
                           itemBuilder: (context, index) {
                             return LoturaListTile(
+                              onPressed: () => showModalBottomSheet(
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(25.0))),
+                                context: (context),
+                                builder: (context) => LoturaBottomSheet(
+                                  subtitle: "장치 설정하기",
+                                  title: "장치에 변경사항이 생겼나요?",
+                                  leftText: "장치 수정하기",
+                                  rightText: "장치 삭제하기",
+                                  onLeftPressed: () => print("장치 수정하기"),
+                                  onRightPressed: () => print("장치 삭제하기"),
+                                ),
+                              ),
                               width: 382.0.r,
                               height: 78.0.r,
                               deviceType: state.list.list[index].deviceType,
