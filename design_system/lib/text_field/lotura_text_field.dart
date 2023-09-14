@@ -8,7 +8,7 @@ class LoturaTextField extends StatefulWidget {
     required this.controller,
     this.autofocus = false,
     this.isPasswordTextField = false,
-    this.obscureText = false,
+    this.obscureText = true,
     this.iconSize = 24,
     this.focusNode,
     this.hintText,
