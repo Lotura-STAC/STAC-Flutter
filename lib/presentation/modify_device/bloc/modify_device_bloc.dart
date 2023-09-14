@@ -11,10 +11,10 @@ class ModifyDeviceBloc extends Bloc<ModifyDeviceEvent, ModifyDeviceState> {
   }
 
   void _modifyDeviceHandler(
-      ModifyDevice event, Emitter<ModifyDeviceState> emit) {
+      ModifyDevice event, Emitter<ModifyDeviceState> emit) async {
     try {
       emit(Loading());
-      _modifyDeviceUseCase.execute(event.modifyDeviceRequest);
+      await _modifyDeviceUseCase.execute(event.modifyDeviceRequest);
       emit(Loaded());
     } catch (e) {
       emit(Error(message: e.toString()));
