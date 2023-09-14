@@ -25,8 +25,8 @@ class _LoturaCheckBoxState extends State<LoturaCheckBox> {
     return GestureDetector(
       onTap: widget.onPressed,
       child: Container(
-        width: widget.width ?? 40.0.r,
-        height: widget.height ?? 40.0.r,
+        width: widget.width ?? 30.0.r,
+        height: widget.height ?? 30.0.r,
         decoration: BoxDecoration(
           color: widget.isSelected == true
               ? LoturaColor.gray100
