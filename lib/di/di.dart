@@ -54,8 +54,9 @@ Future<List<BlocProvider>> di() async {
   ModifyDeviceRepository modifyDeviceRepository = ModifyDeviceRepositoryImpl(
       remoteModifyDeviceDataSource: remoteModifyDeviceDataSource);
 
-  AddDeviceUseCase addDeviceUseCase =
-      AddDeviceUseCase(addDeviceRepository: addDeviceRepository);
+  AddDeviceUseCase addDeviceUseCase = AddDeviceUseCase(
+      addDeviceRepository: addDeviceRepository,
+      socketRepository: socketRepository);
   GetUserDeviceListUseCase getUserDeviceListUseCase =
       GetUserDeviceListUseCase(repository: socketRepository);
   SignInUseCase signInUseCase = SignInUseCase(repository: authRepository);
