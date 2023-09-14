@@ -10,10 +10,10 @@ class AddDeviceBloc extends Bloc<AddDeviceEvent, AddDeviceState> {
     on<AddDevice>(_addDeviceHandler);
   }
 
-  void _addDeviceHandler(AddDevice event, Emitter<AddDeviceState> emit) {
+  void _addDeviceHandler(AddDevice event, Emitter<AddDeviceState> emit) async {
     try {
       emit(Loading());
-      _addDeviceUseCase.execute(event.addDeviceRequest);
+      await _addDeviceUseCase.execute(event.addDeviceRequest);
       emit(Loaded());
     } catch (e) {
       emit(Error(message: e.toString()));
