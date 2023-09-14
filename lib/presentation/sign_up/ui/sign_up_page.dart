@@ -34,6 +34,17 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: LoturaColor.gray100,
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: LoturaColor.gray100,
+        leading: IconButton(
+          onPressed: () => Navigator.of(context).pop(),
+          icon: Icon(
+            Icons.arrow_back,
+            color: LoturaColor.black,
+          ),
+        ),
+      ),
       body: Padding(
         padding: EdgeInsets.only(
           left: 24.0.r,
@@ -49,7 +60,7 @@ class _SignUpPageState extends State<SignUpPage> {
           },
           child: Column(
             children: [
-              SizedBox(height: 145.0.r),
+              SizedBox(height: 30.0.r),
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(
@@ -145,7 +156,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
