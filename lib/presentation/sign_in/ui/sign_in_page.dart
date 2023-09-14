@@ -23,7 +23,7 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   late final TextEditingController idController;
   late final TextEditingController pwdController;
-  final storage = const FlutterSecureStorage();
+  final _storage = const FlutterSecureStorage();
   bool firstSelected = false, secondSelected = false;
 
   @override
@@ -35,13 +35,16 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   _asyncMethod() async {
-    dynamic userInfo = '';
-    userInfo = await storage.read(key: 'autoLogin');
-    if (userInfo != null) {
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const MainPage()),
-          (route) => false);
+    dynamic autoLogin = '', saveId = '';
+    saveId = await _storage.read(key: 'saveId');
+    autoLogin = await _storage.read(key: 'autoLogin');
+    if (saveId != null) {
+      idController.text = saveId;
     }
+    // if (autoLogin != null) {
+    //   Navigator.of(context)
+    //       .push(MaterialPageRoute(builder: (context) => const MainPage()));
+    // }
   }
 
   @override
@@ -53,6 +56,12 @@ class _SignInPageState extends State<SignInPage> {
         child: BlocListener<SignInBloc, SignInState>(
           listener: (context, state) {
             if (state is Loaded) {
+              if (firstSelected) {
+                _storage.write(key: 'autoLogin', value: 'true');
+              }
+              if (secondSelected) {
+                _storage.write(key: 'saveId', value: idController.text);
+              }
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (context) => const MainPage()),
                   (route) => false);
@@ -96,8 +105,35 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 70.0.r),
                     SizedBox(height: 20.0.r),
+                    Row(
+                      children: [
+                        LoturaCheckBox(
+                          isSelected: firstSelected,
+                          onPressed: () =>
+                              setState(() => firstSelected = !firstSelected),
+                        ),
+                        SizedBox(width: 8.0.r),
+                        Text(
+                          "자동 로그인",
+                          style: TextStyle(
+                              fontSize: 15.0.sp, fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(width: 20.0.r),
+                        LoturaCheckBox(
+                          isSelected: secondSelected,
+                          onPressed: () =>
+                              setState(() => secondSelected = !secondSelected),
+                        ),
+                        SizedBox(width: 8.0.r),
+                        Text(
+                          "아이디 저장",
+                          style: TextStyle(
+                              fontSize: 15.0.sp, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 60.0.r),
                     LoturaTextButton(
                       text: Text(
                         "로그인",
@@ -116,10 +152,8 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     SizedBox(height: 20.0.r),
                     GestureDetector(
-                      onTap: () => Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) => const SignUpPage()),
-                          (route) => false),
+                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const SignUpPage())),
                       child: Text.rich(
                         TextSpan(
                           children: [
@@ -207,7 +241,19 @@ class _SignInPageState extends State<SignInPage> {
                         Text(
                           "자동 로그인",
                           style: TextStyle(
-                              fontSize: 16.0.sp, fontWeight: FontWeight.w500),
+                              fontSize: 15.0.sp, fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(width: 20.0.r),
+                        LoturaCheckBox(
+                          isSelected: secondSelected,
+                          onPressed: () =>
+                              setState(() => secondSelected = !secondSelected),
+                        ),
+                        SizedBox(width: 8.0.r),
+                        Text(
+                          "아이디 저장",
+                          style: TextStyle(
+                              fontSize: 15.0.sp, fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
@@ -230,10 +276,8 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     SizedBox(height: 20.0.r),
                     GestureDetector(
-                      onTap: () => Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) => const SignUpPage()),
-                          (route) => false),
+                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const SignUpPage())),
                       child: Text.rich(
                         TextSpan(
                           children: [
