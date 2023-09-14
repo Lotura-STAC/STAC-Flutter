@@ -1,9 +1,11 @@
 import 'package:design_system/button/lotura_text_button.dart';
+import 'package:design_system/check_box/loutra_check_box.dart';
 import 'package:design_system/color/lotura_color.dart';
 import 'package:design_system/text_field/lotura_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:stac_flutter/data/auth/dto/request/sign_in_request.dart';
 import 'package:stac_flutter/presentation/main/ui/main_page.dart';
 import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_bloc.dart';
@@ -21,17 +23,31 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   late final TextEditingController idController;
   late final TextEditingController pwdController;
+  final storage = const FlutterSecureStorage();
+  bool firstSelected = false, secondSelected = false;
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) => _asyncMethod());
     idController = TextEditingController();
     pwdController = TextEditingController();
     super.initState();
   }
 
+  _asyncMethod() async {
+    dynamic userInfo = '';
+    userInfo = await storage.read(key: 'autoLogin');
+    if (userInfo != null) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const MainPage()),
+          (route) => false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: LoturaColor.gray100,
       body: Padding(
         padding: EdgeInsets.only(left: 24.0.r, right: 24.0.r),
         child: BlocListener<SignInBloc, SignInState>(
@@ -81,6 +97,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                     SizedBox(height: 70.0.r),
+                    SizedBox(height: 20.0.r),
                     LoturaTextButton(
                       text: Text(
                         "로그인",
@@ -178,7 +195,23 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 70.0.r),
+                    SizedBox(height: 10.0.r),
+                    Row(
+                      children: [
+                        LoturaCheckBox(
+                          isSelected: firstSelected,
+                          onPressed: () =>
+                              setState(() => firstSelected = !firstSelected),
+                        ),
+                        SizedBox(width: 5.0.r),
+                        Text(
+                          "자동 로그인",
+                          style: TextStyle(
+                              fontSize: 16.0.sp, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 60.0.r),
                     LoturaTextButton(
                       text: Text(
                         "로그인",
