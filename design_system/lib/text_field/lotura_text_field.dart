@@ -36,7 +36,7 @@ class _LoturaTextFieldState extends State<LoturaTextField> {
       focusNode: widget.focusNode,
       cursorColor: LoturaColor.black,
       obscureText: widget.obscureText && widget.isPasswordTextField,
-      maxLength: 20,
+      maxLength: 15,
       decoration: InputDecoration(
         hintText: widget.hintText,
         hintStyle: widget.hintTextStyle,
