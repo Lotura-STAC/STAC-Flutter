@@ -67,7 +67,7 @@ class _ModifyDevicePageState extends State<ModifyDevicePage> {
             Align(
               alignment: Alignment.topLeft,
               child: Text(
-                "기기수정을 위한\n새로운 이름을 입력해주세요.",
+                "이 장치의\n새로운 이름을 입력해주세요.",
                 style: TextStyle(
                   color: LoturaColor.black,
                   fontSize: 30.0.sp,
