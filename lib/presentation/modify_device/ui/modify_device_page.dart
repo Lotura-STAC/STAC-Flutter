@@ -103,7 +103,7 @@ class _ModifyDevicePageState extends State<ModifyDevicePage> {
               child: Row(
                 children: [
                   Text(
-                    "현재 수정할 기기의 고유번호 : ",
+                    "현재 장치의 고유번호 : ",
                     style: TextStyle(
                       fontSize: 18.0.sp,
                     ),
@@ -145,12 +145,6 @@ class _ModifyDevicePageState extends State<ModifyDevicePage> {
                           ),
                         ),
                       );
-                  Future.delayed(const Duration(milliseconds: 300))
-                      .then((value) {
-                    context.read<MainBloc>().add(GetUserDeviceListEvent(
-                        getUserDeviceListRequest:
-                            GetUserDeviceListRequest(accessToken: "")));
-                  });
                 },
                 text: Text(
                   "수정하기",
