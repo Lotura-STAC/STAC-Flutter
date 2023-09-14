@@ -7,7 +7,7 @@ class ModifyDeviceUseCase {
   ModifyDeviceUseCase({required ModifyDeviceRepository modifyDeviceRepository})
       : _modifyDeviceRepository = modifyDeviceRepository;
 
-  Future<bool> modifyDevice(ModifyDeviceRequest modifyDeviceRequest) async {
+  Future<bool> execute(ModifyDeviceRequest modifyDeviceRequest) async {
     return await _modifyDeviceRepository.modifyDevice(modifyDeviceRequest);
   }
 }
