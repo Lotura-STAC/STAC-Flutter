@@ -40,6 +40,7 @@ class _SignInPageState extends State<SignInPage> {
     autoLogin = await _storage.read(key: 'autoLogin');
     if (saveId != null) {
       idController.text = saveId;
+      secondSelected = true;
     }
     // if (autoLogin != null) {
     //   Navigator.of(context)
