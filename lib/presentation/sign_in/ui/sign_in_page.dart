@@ -195,7 +195,7 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10.0.r),
+                    SizedBox(height: 20.0.r),
                     Row(
                       children: [
                         LoturaCheckBox(
@@ -203,7 +203,7 @@ class _SignInPageState extends State<SignInPage> {
                           onPressed: () =>
                               setState(() => firstSelected = !firstSelected),
                         ),
-                        SizedBox(width: 5.0.r),
+                        SizedBox(width: 8.0.r),
                         Text(
                           "자동 로그인",
                           style: TextStyle(
