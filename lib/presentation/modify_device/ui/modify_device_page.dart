@@ -5,12 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stac_flutter/data/add_device/dto/request/add_device_request.dart';
+import 'package:stac_flutter/data/modify_device/dto/request/modify_device_request.dart';
 import 'package:stac_flutter/data/socket/dto/request/get_user_device_list_request.dart';
 import 'package:stac_flutter/presentation/add_device/bloc/add_device_bloc.dart';
 import 'package:stac_flutter/presentation/add_device/bloc/add_device_event.dart';
 import 'package:stac_flutter/presentation/add_device/bloc/add_device_state.dart';
 import 'package:stac_flutter/presentation/main/bloc/main_bloc.dart';
 import 'package:stac_flutter/presentation/main/bloc/main_event.dart';
+import 'package:stac_flutter/presentation/modify_device/bloc/modify_device_bloc.dart';
+import 'package:stac_flutter/presentation/modify_device/bloc/modify_device_event.dart';
 
 class ModifyDevicePage extends StatefulWidget {
   const ModifyDevicePage({
@@ -135,6 +138,22 @@ class _ModifyDevicePageState extends State<ModifyDevicePage> {
                 }
               },
               child: LoturaTextButton(
+                onPressed: () {
+                  context.read<ModifyDeviceBloc>().add(
+                        ModifyDevice(
+                          modifyDeviceRequest: ModifyDeviceRequest(
+                            deviceNo: widget.deviceNum,
+                            newName: nameController.text,
+                          ),
+                        ),
+                      );
+                  Future.delayed(const Duration(milliseconds: 300))
+                      .then((value) {
+                    context.read<MainBloc>().add(GetUserDeviceListEvent(
+                        getUserDeviceListRequest:
+                            GetUserDeviceListRequest(accessToken: "")));
+                  });
+                },
                 text: Text(
                   "수정하기",
                   style: TextStyle(
