@@ -63,8 +63,9 @@ Future<List<BlocProvider>> di() async {
   SignUpUseCase signUpUseCase = SignUpUseCase(repository: authRepository);
   RemoveDeviceUseCase removeDeviceUseCase =
       RemoveDeviceUseCase(removeDeviceRepository: removeDeviceRepository);
-  ModifyDeviceUseCase modifyDeviceUseCase =
-      ModifyDeviceUseCase(modifyDeviceRepository: modifyDeviceRepository);
+  ModifyDeviceUseCase modifyDeviceUseCase = ModifyDeviceUseCase(
+      modifyDeviceRepository: modifyDeviceRepository,
+      socketRepository: socketRepository);
   return [
     BlocProvider<SignInBloc>(create: (context) => SignInBloc(signInUseCase)),
     BlocProvider<SignUpBloc>(create: (context) => SignUpBloc(signUpUseCase)),
