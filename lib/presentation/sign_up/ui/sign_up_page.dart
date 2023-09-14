@@ -9,6 +9,7 @@ import 'package:stac_flutter/presentation/sign_in/ui/sign_in_page.dart';
 import 'package:stac_flutter/presentation/sign_up/bloc/sign_up_bloc.dart';
 import 'package:stac_flutter/presentation/sign_up/bloc/sign_up_event.dart';
 import 'package:stac_flutter/presentation/sign_up/bloc/sign_up_state.dart';
+import 'package:stac_flutter/presentation/sign_up/ui/public_sign_up_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -123,14 +124,13 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               SizedBox(height: 20.0.r),
               GestureDetector(
-                onTap: () => Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => const SignInPage()),
-                    (route) => false),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const PublicSignUpPage())),
                 child: Text.rich(
                   TextSpan(
                     children: [
                       TextSpan(
-                        text: '이미 계정이 있으신가요? ',
+                        text: '공용시설에서 사용하나요? ',
                         style: TextStyle(
                           color: LoturaColor.gray500,
                           fontSize: 16.0.sp,
@@ -138,7 +138,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ),
                       TextSpan(
-                        text: '로그인',
+                        text: '공용계정',
                         style: TextStyle(
                           color: LoturaColor.primary700,
                           fontSize: 16.0.sp,
@@ -146,7 +146,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ),
                       TextSpan(
-                        text: '하기',
+                        text: '만들기',
                         style: TextStyle(
                           color: LoturaColor.gray500,
                           fontSize: 16.0.sp,
