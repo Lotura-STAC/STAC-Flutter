@@ -29,8 +29,8 @@ class _LoturaCheckBoxState extends State<LoturaCheckBox> {
         height: widget.height ?? 30.0.r,
         decoration: BoxDecoration(
           color: widget.isSelected == true
-              ? LoturaColor.gray100
-              : LoturaColor.primary900,
+              ? LoturaColor.primary900
+              : LoturaColor.gray100,
           border: Border.all(color: LoturaColor.gray200, width: 3),
           borderRadius: const BorderRadius.all(Radius.circular(99)),
         ),
