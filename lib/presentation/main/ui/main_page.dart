@@ -96,25 +96,27 @@ class _MainPageState extends State<MainPage> {
                                     title: "장치에 변경사항이 생겼나요?",
                                     leftText: "이름 수정하기",
                                     rightText: "장치 삭제하기",
-                                    onLeftPressed: () =>
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                ModifyDevicePage(
-                                              selectedIndex: state
-                                                          .list
-                                                          .list[index]
-                                                          .deviceType ==
-                                                      "DRY"
-                                                  ? 1
-                                                  : 0,
-                                              deviceName:
-                                                  state.list.list[index].name,
-                                              deviceNum: state
-                                                  .list.list[index].deviceNo,
-                                            ),
+                                    onLeftPressed: () {
+                                      Navigator.of(context).pop();
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ModifyDevicePage(
+                                            selectedIndex: state
+                                                        .list
+                                                        .list[index]
+                                                        .deviceType ==
+                                                    "DRY"
+                                                ? 1
+                                                : 0,
+                                            deviceName:
+                                                state.list.list[index].name,
+                                            deviceNum:
+                                                state.list.list[index].deviceNo,
                                           ),
                                         ),
+                                      );
+                                    },
                                     onRightPressed: () {
                                       Navigator.of(context).pop();
                                       context
