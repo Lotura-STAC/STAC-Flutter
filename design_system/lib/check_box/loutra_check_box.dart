@@ -25,13 +25,13 @@ class _LoturaCheckBoxState extends State<LoturaCheckBox> {
     return GestureDetector(
       onTap: widget.onPressed,
       child: Container(
-        width: widget.width ?? 30.0.r,
-        height: widget.height ?? 30.0.r,
+        width: widget.width ?? 25.0.r,
+        height: widget.height ?? 25.0.r,
         decoration: BoxDecoration(
           color: widget.isSelected == true
               ? LoturaColor.primary900
-              : LoturaColor.gray100,
-          border: Border.all(color: LoturaColor.gray200, width: 3),
+              : LoturaColor.white,
+          border: Border.all(color: LoturaColor.gray200, width: 2),
           borderRadius: const BorderRadius.all(Radius.circular(99)),
         ),
       ),
