@@ -118,7 +118,8 @@ class _SignUpPageState extends State<SignUpPage> {
                 onPressed: () => context.read<SignUpBloc>().add(
                       SignUp(
                         signUpRequest: SignUpRequest(
-                            id: idController.text, pw: pwdController.text),
+                            adminId: idController.text,
+                            adminPw: pwdController.text),
                       ),
                     ),
               ),
