@@ -5,6 +5,8 @@ import 'package:stac_flutter/data/add_device/repository/add_device_repository_im
 import 'package:stac_flutter/data/auth/data_source/local_auth_data_source.dart';
 import 'package:stac_flutter/data/auth/data_source/remote_auth_data_source.dart';
 import 'package:stac_flutter/data/auth/repository/auth_repository_impl.dart';
+import 'package:stac_flutter/data/modify_device/data_source/remote_modify_device_data_source.dart';
+import 'package:stac_flutter/data/modify_device/repository/modify_device_repository_impl.dart';
 import 'package:stac_flutter/data/remove_device/data_source/remote_remove_device_data_source.dart';
 import 'package:stac_flutter/data/remove_device/repository/remove_device_repository_impl.dart';
 import 'package:stac_flutter/data/socket/data_source/remote_socket_data_source.dart';
@@ -12,6 +14,8 @@ import 'package:stac_flutter/data/socket/dto/response/get_user_device_list_respo
 import 'package:stac_flutter/data/socket/repository/socket_repository_impl.dart';
 import 'package:stac_flutter/domain/add_device/repository/add_device_repository.dart';
 import 'package:stac_flutter/domain/auth/repository/auth_repository.dart';
+import 'package:stac_flutter/domain/modify_device/repository/modify_device_repository.dart';
+import 'package:stac_flutter/domain/modify_device/use_case/modify_device_use_case.dart';
 import 'package:stac_flutter/domain/remove_device/repository/remove_device_repository.dart';
 import 'package:stac_flutter/domain/remove_device/use_case/remove_device_use_case.dart';
 import 'package:stac_flutter/domain/socket/repository/socket_repository.dart';
@@ -21,6 +25,7 @@ import 'package:stac_flutter/domain/auth/use_case/sign_in_use_case.dart';
 import 'package:stac_flutter/domain/auth/use_case/sign_up_use_case.dart';
 import 'package:stac_flutter/presentation/add_device/bloc/add_device_bloc.dart';
 import 'package:stac_flutter/presentation/main/bloc/main_bloc.dart';
+import 'package:stac_flutter/presentation/modify_device/bloc/modify_device_bloc.dart';
 import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_bloc.dart';
 import 'package:stac_flutter/presentation/sign_up/bloc/sign_up_bloc.dart';
 
@@ -32,6 +37,8 @@ Future<List<BlocProvider>> di() async {
       RemoteAddDeviceDataSource();
   RemoteRemoveDeviceDataSource remoteRemoveDeviceDataSource =
       RemoteRemoveDeviceDataSource();
+  RemoteModifyDeviceDataSource remoteModifyDeviceDataSource =
+      RemoteModifyDeviceDataSource();
 
   LocalAuthDateSource localAuthDateSource = LocalAuthDateSource();
 
@@ -42,9 +49,10 @@ Future<List<BlocProvider>> di() async {
       remoteRemoveDeviceDataSource: remoteRemoveDeviceDataSource);
   SocketRepository socketRepository =
       SocketRepositoryImpl(remoteSocketDataSource: remoteSocketDataSource);
-
   AddDeviceRepository addDeviceRepository = AddDeviceRepositoryImpl(
       remoteAddDeviceDataSource: remoteAddDeviceDataSource);
+  ModifyDeviceRepository modifyDeviceRepository = ModifyDeviceRepositoryImpl(
+      remoteModifyDeviceDataSource: remoteModifyDeviceDataSource);
 
   AddDeviceUseCase addDeviceUseCase =
       AddDeviceUseCase(addDeviceRepository: addDeviceRepository);
@@ -54,7 +62,8 @@ Future<List<BlocProvider>> di() async {
   SignUpUseCase signUpUseCase = SignUpUseCase(repository: authRepository);
   RemoveDeviceUseCase removeDeviceUseCase =
       RemoveDeviceUseCase(removeDeviceRepository: removeDeviceRepository);
-
+  ModifyDeviceUseCase modifyDeviceUseCase =
+      ModifyDeviceUseCase(modifyDeviceRepository: modifyDeviceRepository);
   return [
     BlocProvider<SignInBloc>(create: (context) => SignInBloc(signInUseCase)),
     BlocProvider<SignUpBloc>(create: (context) => SignUpBloc(signUpUseCase)),
@@ -62,6 +71,8 @@ Future<List<BlocProvider>> di() async {
         create: (context) => AddDeviceBloc(addDeviceUseCase)),
     BlocProvider<MainBloc>(
         create: (context) =>
-            MainBloc(getUserDeviceListUseCase, removeDeviceUseCase))
+            MainBloc(getUserDeviceListUseCase, removeDeviceUseCase)),
+    BlocProvider<ModifyDeviceBloc>(
+        create: (context) => ModifyDeviceBloc(modifyDeviceUseCase)),
   ];
 }
