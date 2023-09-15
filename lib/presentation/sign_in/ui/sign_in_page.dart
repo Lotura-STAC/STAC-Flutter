@@ -61,7 +61,6 @@ class _SignInPageState extends State<SignInPage> {
           });
         }
       });
-      print(widget.secondSelected);
     }
     return Scaffold(
       backgroundColor: LoturaColor.gray100,
