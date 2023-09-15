@@ -2,6 +2,7 @@ import 'package:design_system/color/lotura_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stac_flutter/core/utils/jwt_store.dart';
 import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_bloc.dart';
 import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_event.dart';
 import 'package:stac_flutter/presentation/sign_in/ui/sign_in_page.dart';
@@ -75,19 +76,13 @@ class SettingPage extends StatelessWidget {
               padding: EdgeInsets.all(12.0.r),
               child: GestureDetector(
                 onTap: () async {
-                  const storage = FlutterSecureStorage();
-                  await storage.delete(key: 'accessToken');
-                  await storage.delete(key: 'refreshToken');
-                  await storage.delete(key: 'autoLogin');
-                  final saveId = await storage.read(key: 'saveId') ?? "";
+                  JWTStore.deleteAll();
                   context.read<SignInBloc>().add(ResetEvent());
-                  Future.microtask(() => Navigator.pushAndRemoveUntil(
+                  Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SignInPage(
-                                secondSelected: saveId == "" ? false : true,
-                              )),
-                      (route) => false));
+                          builder: (context) => const SignInPage()),
+                      (route) => false);
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

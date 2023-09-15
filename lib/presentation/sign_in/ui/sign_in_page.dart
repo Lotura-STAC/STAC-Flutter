@@ -14,9 +14,7 @@ import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_state.dart';
 import 'package:stac_flutter/presentation/sign_up/ui/sign_up_page.dart';
 
 class SignInPage extends StatefulWidget {
-  const SignInPage({super.key, this.secondSelected});
-
-  final bool? secondSelected;
+  const SignInPage({super.key});
 
   @override
   State<SignInPage> createState() => _SignInPageState();
@@ -27,20 +25,24 @@ class _SignInPageState extends State<SignInPage> {
   final TextEditingController pwdController = TextEditingController();
   final _storage = const FlutterSecureStorage();
   int buildCount = 0;
-  bool firstSelected = false, secondSelected = false;
+  bool firstSelected = false;
 
-  _asyncMethod() async {
-    dynamic autoLogin = '', saveId = '';
+  _asyncMethod(BuildContext context) async {
+    dynamic autoLogin = '', saveId = '', savePw = '';
     saveId = await _storage.read(key: 'saveId');
+    savePw = await _storage.read(key: 'savePw');
     autoLogin = await _storage.read(key: 'autoLogin');
-    if (saveId != null) {
-      idController.text = saveId;
-      secondSelected = true;
+    if (autoLogin == 'true') {
+      context
+          .read<SignInBloc>()
+          .add(SignIn(signInRequest: SignInRequest(id: saveId, pw: savePw)));
     }
-    if (autoLogin != null) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const MainPage()));
-    }
+  }
+
+  @override
+  void initState() {
+    _asyncMethod(context);
+    super.initState();
   }
 
   @override
@@ -51,17 +53,6 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (buildCount == 0) {
-      _asyncMethod();
-      setState(() {
-        if (widget.secondSelected == true) {
-          setState(() {
-            secondSelected = true;
-            buildCount = 1;
-          });
-        }
-      });
-    }
     return Scaffold(
       backgroundColor: LoturaColor.gray100,
       body: Padding(
@@ -71,14 +62,14 @@ class _SignInPageState extends State<SignInPage> {
             if (state is Loaded) {
               if (firstSelected == true) {
                 await _storage.write(key: 'autoLogin', value: 'true');
-              }
-              if (secondSelected == true) {
                 await _storage.write(key: 'saveId', value: idController.text);
-              } else {
-                await _storage.delete(key: 'saveId');
+                await _storage.write(key: 'savePw', value: pwdController.text);
               }
               Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => const MainPage()),
+                  MaterialPageRoute(
+                      builder: (context) => MainPage(
+                            role: state.jwtTokenEntity.role,
+                          )),
                   (route) => false);
             }
           },
@@ -131,18 +122,6 @@ class _SignInPageState extends State<SignInPage> {
                         SizedBox(width: 8.0.r),
                         Text(
                           "자동 로그인",
-                          style: TextStyle(
-                              fontSize: 15.0.sp, fontWeight: FontWeight.w500),
-                        ),
-                        SizedBox(width: 20.0.r),
-                        LoturaCheckBox(
-                          isSelected: secondSelected,
-                          onPressed: () =>
-                              setState(() => secondSelected = !secondSelected),
-                        ),
-                        SizedBox(width: 8.0.r),
-                        Text(
-                          "아이디 저장",
                           style: TextStyle(
                               fontSize: 15.0.sp, fontWeight: FontWeight.w500),
                         ),
@@ -255,18 +234,6 @@ class _SignInPageState extends State<SignInPage> {
                         SizedBox(width: 8.0.r),
                         Text(
                           "자동 로그인",
-                          style: TextStyle(
-                              fontSize: 15.0.sp, fontWeight: FontWeight.w500),
-                        ),
-                        SizedBox(width: 20.0.r),
-                        LoturaCheckBox(
-                          isSelected: secondSelected,
-                          onPressed: () =>
-                              setState(() => secondSelected = !secondSelected),
-                        ),
-                        SizedBox(width: 8.0.r),
-                        Text(
-                          "아이디 저장",
                           style: TextStyle(
                               fontSize: 15.0.sp, fontWeight: FontWeight.w500),
                         ),
