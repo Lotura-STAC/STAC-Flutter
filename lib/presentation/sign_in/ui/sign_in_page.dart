@@ -14,25 +14,20 @@ import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_state.dart';
 import 'package:stac_flutter/presentation/sign_up/ui/sign_up_page.dart';
 
 class SignInPage extends StatefulWidget {
-  const SignInPage({super.key});
+  const SignInPage({super.key, this.secondSelected});
+
+  final bool? secondSelected;
 
   @override
   State<SignInPage> createState() => _SignInPageState();
 }
 
 class _SignInPageState extends State<SignInPage> {
-  late final TextEditingController idController;
-  late final TextEditingController pwdController;
+  final TextEditingController idController = TextEditingController();
+  final TextEditingController pwdController = TextEditingController();
   final _storage = const FlutterSecureStorage();
+  int buildCount = 0;
   bool firstSelected = false, secondSelected = false;
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => _asyncMethod());
-    idController = TextEditingController();
-    pwdController = TextEditingController();
-    super.initState();
-  }
 
   _asyncMethod() async {
     dynamic autoLogin = '', saveId = '';
@@ -42,26 +37,46 @@ class _SignInPageState extends State<SignInPage> {
       idController.text = saveId;
       secondSelected = true;
     }
-    // if (autoLogin != null) {
-    //   Navigator.of(context)
-    //       .push(MaterialPageRoute(builder: (context) => const MainPage()));
-    // }
+    if (autoLogin != null) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const MainPage()));
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    buildCount = 0;
   }
 
   @override
   Widget build(BuildContext context) {
+    if (buildCount == 0) {
+      _asyncMethod();
+      setState(() {
+        if (widget.secondSelected == true) {
+          setState(() {
+            secondSelected = true;
+            buildCount = 1;
+          });
+        }
+      });
+      print(widget.secondSelected);
+    }
     return Scaffold(
       backgroundColor: LoturaColor.gray100,
       body: Padding(
         padding: EdgeInsets.only(left: 24.0.r, right: 24.0.r),
         child: BlocListener<SignInBloc, SignInState>(
-          listener: (context, state) {
+          listener: (context, state) async {
             if (state is Loaded) {
-              if (firstSelected) {
-                _storage.write(key: 'autoLogin', value: 'true');
+              if (firstSelected == true) {
+                await _storage.write(key: 'autoLogin', value: 'true');
               }
-              if (secondSelected) {
-                _storage.write(key: 'saveId', value: idController.text);
+              if (secondSelected == true) {
+                await _storage.write(key: 'saveId', value: idController.text);
+              } else {
+                await _storage.delete(key: 'saveId');
               }
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (context) => const MainPage()),
@@ -313,7 +328,7 @@ class _SignInPageState extends State<SignInPage> {
                   ],
                 );
               }
-              return Container();
+              return const SizedBox.shrink();
             },
           ),
         ),

@@ -1,10 +1,12 @@
 import 'package:design_system/color/lotura_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stac_flutter/core/utils/jwt_store.dart';
+import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_bloc.dart';
+import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_event.dart';
 import 'package:stac_flutter/presentation/sign_in/ui/sign_in_page.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -72,13 +74,20 @@ class SettingPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(12.0.r),
               child: GestureDetector(
-                onTap: () {
-                  JWTStore.deleteAll();
-                  Navigator.pushAndRemoveUntil(
+                onTap: () async {
+                  const storage = FlutterSecureStorage();
+                  await storage.delete(key: 'accessToken');
+                  await storage.delete(key: 'refreshToken');
+                  await storage.delete(key: 'autoLogin');
+                  final saveId = await storage.read(key: 'saveId') ?? "";
+                  context.read<SignInBloc>().add(ResetEvent());
+                  Future.microtask(() => Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SignInPage()),
-                      (route) => false);
+                          builder: (context) => SignInPage(
+                                secondSelected: saveId == "" ? false : true,
+                              )),
+                      (route) => false));
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
