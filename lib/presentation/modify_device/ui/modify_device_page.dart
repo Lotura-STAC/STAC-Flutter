@@ -99,16 +99,14 @@ class _ModifyDevicePageState extends State<ModifyDevicePage> {
               child: Row(
                 children: [
                   Text(
-                    "현재 장치의 고유번호 : ",
+                    "고유번호 : ",
                     style: TextStyle(
-                      fontSize: 18.0.sp,
-                    ),
+                        fontSize: 20.0.sp, fontWeight: FontWeight.bold),
                   ),
                   Text(
                     widget.deviceNum,
                     style: TextStyle(
-                      fontSize: 24.0.sp,
-                    ),
+                        fontSize: 24.0.sp, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
