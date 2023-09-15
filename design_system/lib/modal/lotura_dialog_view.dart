@@ -2,8 +2,8 @@ import 'package:design_system/button/lotura_text_button.dart';
 import 'package:design_system/color/lotura_color.dart';
 import 'package:flutter/material.dart';
 
-class LoturaModalView extends StatelessWidget {
-  const LoturaModalView({super.key});
+class LoturaDialogView extends StatelessWidget {
+  const LoturaDialogView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class LoturaModalView extends StatelessWidget {
       body: Center(
         child: LoturaTextButton(
           text: Text(
-            "모달 창 열기",
+            "다이얼로그 창 열기",
             style: TextStyle(color: LoturaColor.white),
           ),
         ),

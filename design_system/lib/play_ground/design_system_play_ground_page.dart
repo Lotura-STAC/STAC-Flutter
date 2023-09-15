@@ -7,7 +7,7 @@ import 'package:design_system/icon/lotura_icon_view.dart';
 import 'package:design_system/image/lotura_image_view.dart';
 import 'package:design_system/list_tile/lotura_list_tile_view.dart';
 import 'package:design_system/message_box/lotura_message_box_view.dart';
-import 'package:design_system/modal/lotura_modal_view.dart';
+import 'package:design_system/modal/lotura_dialog_view.dart';
 import 'package:design_system/text_field/lotura_text_field_view.dart';
 import 'package:flutter/material.dart';
 
@@ -19,12 +19,12 @@ class DesignSystemPlayGroundPage extends StatelessWidget {
     "button",
     "check_box",
     "color",
+    "dialog",
     "icon",
     "image",
     "text_field",
     "list_tile",
     "message_box",
-    "modal"
   ];
 
   final Map<String, Widget> components = {
@@ -37,7 +37,7 @@ class DesignSystemPlayGroundPage extends StatelessWidget {
     "text_field": LoturaTextFieldView(),
     "list_tile": LoturaListTileView(),
     "message_box": LoturaMessageBoxView(),
-    "modal": LoturaModalView()
+    "dialog": LoturaDialogView()
   };
 
   @override
