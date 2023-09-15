@@ -8,6 +8,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   SignInBloc(this._signInUseCase) : super(Empty()) {
     on<SignIn>(_signInHandler);
+    on<ResetEvent>(_resetEventHandler);
   }
 
   void _signInHandler(SignIn event, Emitter<SignInState> emit) async {
@@ -19,4 +20,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(Error(message: e.toString()));
     }
   }
+
+  void _resetEventHandler(ResetEvent event, Emitter<SignInState> emit) =>
+      emit(Empty());
 }
