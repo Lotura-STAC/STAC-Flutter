@@ -11,3 +11,8 @@ class SignIn extends SignInEvent {
   @override
   List<Object?> get props => [signInRequest];
 }
+
+class ResetEvent extends SignInEvent {
+  @override
+  List<Object?> get props => [];
+}
