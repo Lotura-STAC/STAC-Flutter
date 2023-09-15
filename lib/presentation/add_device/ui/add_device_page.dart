@@ -70,7 +70,9 @@ class _AddDevicePageState extends State<AddDevicePage> {
                           color: selectedIndex == 0
                               ? LoturaColor.black
                               : LoturaColor.gray200,
-                          fontSize: 20.0.sp),
+                          fontSize: 20.0.sp,
+                          fontWeight:
+                              selectedIndex == 0 ? FontWeight.bold : null),
                     ),
                   ),
                   TextButton(
@@ -81,7 +83,9 @@ class _AddDevicePageState extends State<AddDevicePage> {
                           color: selectedIndex == 1
                               ? LoturaColor.black
                               : LoturaColor.gray200,
-                          fontSize: 20.0.sp),
+                          fontSize: 20.0.sp,
+                          fontWeight:
+                              selectedIndex == 1 ? FontWeight.bold : null),
                     ),
                   ),
                 ],
