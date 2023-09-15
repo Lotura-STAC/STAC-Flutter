@@ -90,7 +90,7 @@ class _AddDevicePageState extends State<AddDevicePage> {
                   ),
                 ],
               ),
-              SizedBox(height: 40.0.r),
+              SizedBox(height: 80.0.r),
               SizedBox(
                 width: 382.0.r,
                 child: LoturaTextField(
@@ -110,7 +110,7 @@ class _AddDevicePageState extends State<AddDevicePage> {
                   ),
                 ),
               ),
-              SizedBox(height: 330.0.r),
+              SizedBox(height: 300.0.r),
               LoturaTextButton(
                 onPressed: () {
                   context.read<AddDeviceBloc>().add(
