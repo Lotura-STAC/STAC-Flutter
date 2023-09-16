@@ -1,6 +1,7 @@
 import 'package:design_system/bottom_sheet/lotura_bottom_sheet.dart';
 import 'package:design_system/button/lotura_icon_button.dart';
 import 'package:design_system/color/lotura_color.dart';
+import 'package:design_system/dialog/lotura_dialog.dart';
 import 'package:design_system/list_tile/lotura_list_tile.dart';
 import 'package:design_system/message_box/lotura_message_box.dart';
 import 'package:flutter/material.dart';
@@ -92,6 +93,12 @@ class _MainPageState extends State<MainPage> {
                           itemCount: state.list.list.length,
                           itemBuilder: (context, index) {
                             return LoturaListTile(
+                              onLongPressed: () => showDialog(
+                                  context: context,
+                                  builder: (context) => LoturaDialog(
+                                        title: Text("제목"),
+                                        content: Text("내용"),
+                                      )),
                               onPressed: () => widget.role == Role.admin
                                   ? showModalBottomSheet(
                                       shape: const RoundedRectangleBorder(
