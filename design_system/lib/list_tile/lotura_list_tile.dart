@@ -12,6 +12,7 @@ class LoturaListTile extends StatelessWidget {
     required this.status,
     this.margin,
     this.onPressed,
+    this.onLongPressed,
   });
 
   final double width, height;
@@ -19,49 +20,56 @@ class LoturaListTile extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final String text, deviceType;
   final void Function()? onPressed;
+  final void Function()? onLongPressed;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: margin,
-      padding: EdgeInsets.only(
-          top: 12.0.r, bottom: 12.0.r, left: 24.0.r, right: 12.0.r),
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        color: LoturaColor.white,
-        border: Border.all(color: LoturaColor.gray200),
-        borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Icon(
-                deviceType == 'DRY'
-                    ? Icons.add
-                    : Icons.accessible_forward_rounded,
-                size: 28.0.r,
-              ),
-              SizedBox(width: 20.0.r),
-              Text(
-                text,
-                style: TextStyle(fontSize: 16.0.sp),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Icon(
-                status == 0 ? Icons.accessible : Icons.ac_unit,
-                size: 24.0.r,
-              ),
-              IconButton(
-                  onPressed: onPressed, icon: const Icon(Icons.more_horiz))
-            ],
-          ),
-        ],
+    return GestureDetector(
+      onLongPress: onLongPressed,
+      onTap: onPressed,
+      child: Container(
+        margin: margin,
+        padding: EdgeInsets.only(
+            top: 12.0.r, bottom: 12.0.r, left: 24.0.r, right: 12.0.r),
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: LoturaColor.white,
+          border: Border.all(color: LoturaColor.gray200),
+          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  deviceType == 'DRY'
+                      ? Icons.add
+                      : Icons.accessible_forward_rounded,
+                  size: 28.0.r,
+                ),
+                SizedBox(width: 20.0.r),
+                Text(
+                  text,
+                  style: TextStyle(fontSize: 16.0.sp),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(
+                  status == 0 ? Icons.accessible : Icons.ac_unit,
+                  size: 24.0.r,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 15.0.r, right: 12.0.r),
+                  child: Icon(Icons.more_horiz),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
