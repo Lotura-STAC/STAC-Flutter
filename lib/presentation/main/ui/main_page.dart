@@ -4,6 +4,7 @@ import 'package:design_system/color/lotura_color.dart';
 import 'package:design_system/dialog/lotura_dialog.dart';
 import 'package:design_system/list_tile/lotura_list_tile.dart';
 import 'package:design_system/message_box/lotura_message_box.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -102,12 +103,15 @@ class _MainPageState extends State<MainPage> {
                                         state.list.list[index].name,
                                         style: TextStyle(fontSize: 20.0.sp),
                                       ),
-                                      onPressed: () {
+                                      onPressed: () async {
+                                        final token = await FirebaseMessaging
+                                            .instance
+                                            .getToken();
                                         context
                                             .read<MainBloc>()
                                             .add(NotifyEvent(
                                               notifyRequest: NotifyRequest(
-                                                  deviceToken: "",
+                                                  deviceToken: token.toString(),
                                                   deviceNo: state.list
                                                       .list[index].deviceNo),
                                             ));
