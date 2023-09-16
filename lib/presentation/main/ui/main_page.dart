@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stac_flutter/data/auth/dto/response/sign_in_response.dart';
+import 'package:stac_flutter/data/notify/dto/request/notify_request.dart';
 import 'package:stac_flutter/data/remove_device/dto/remove_device_request.dart';
 import 'package:stac_flutter/data/socket/dto/request/get_user_device_list_request.dart';
 import 'package:stac_flutter/presentation/add_device/ui/add_device_page.dart';
@@ -96,9 +97,22 @@ class _MainPageState extends State<MainPage> {
                               onLongPressed: () => showDialog(
                                   context: context,
                                   builder: (context) => LoturaDialog(
-                                        title: Text("제목"),
-                                        content: Text("내용"),
-                                      )),
+                                      title: Text("알림 신청하시겠습니까?"),
+                                      content: Text(
+                                        state.list.list[index].name,
+                                        style: TextStyle(fontSize: 20.0.sp),
+                                      ),
+                                      onPressed: () {
+                                        context
+                                            .read<MainBloc>()
+                                            .add(NotifyEvent(
+                                              notifyRequest: NotifyRequest(
+                                                  deviceToken: "",
+                                                  deviceNo: state.list
+                                                      .list[index].deviceNo),
+                                            ));
+                                        Navigator.pop(context);
+                                      })),
                               onPressed: () => widget.role == Role.admin
                                   ? showModalBottomSheet(
                                       shape: const RoundedRectangleBorder(
