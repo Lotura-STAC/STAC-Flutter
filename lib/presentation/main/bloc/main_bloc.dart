@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stac_flutter/data/socket/dto/request/get_user_device_list_request.dart';
+import 'package:stac_flutter/domain/notify/use_case/notify_use_case.dart';
 import 'package:stac_flutter/domain/socket/use_case/get_user_device_list_use_case.dart';
 import 'package:stac_flutter/presentation/main/bloc/main_event.dart';
 import 'package:stac_flutter/presentation/main/bloc/main_state.dart';
@@ -8,11 +9,14 @@ import 'package:stac_flutter/domain/remove_device/use_case/remove_device_use_cas
 class MainBloc extends Bloc<MainEvent, MainState> {
   final GetUserDeviceListUseCase _getUserDeviceListUseCase;
   final RemoveDeviceUseCase _removeDeviceUseCase;
+  final NotifyUseCase _notifyUseCase;
 
-  MainBloc(this._getUserDeviceListUseCase, this._removeDeviceUseCase)
+  MainBloc(this._getUserDeviceListUseCase, this._removeDeviceUseCase,
+      this._notifyUseCase)
       : super(Empty()) {
     on<GetUserDeviceListEvent>(_getUserDeviceListEventHandler);
     on<RemoveDeviceEvent>(_removeDeviceEventHandler);
+    on<NotifyEvent>(_notifyEventHandler);
   }
 
   void _getUserDeviceListEventHandler(
@@ -33,6 +37,16 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     try {
       emit(Loading());
       await _removeDeviceUseCase.execute(event.removeDeviceRequest);
+      _getUserDeviceListUseCase
+          .execute(GetUserDeviceListRequest(accessToken: ""));
+    } catch (e) {
+      emit(Error(message: e.toString()));
+    }
+  }
+
+  void _notifyEventHandler(NotifyEvent event, Emitter<MainState> emit) async {
+    try {
+      await _notifyUseCase.execute(event.notifyRequest);
       _getUserDeviceListUseCase
           .execute(GetUserDeviceListRequest(accessToken: ""));
     } catch (e) {
