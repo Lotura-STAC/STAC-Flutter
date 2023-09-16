@@ -3,11 +3,11 @@ import 'package:design_system/button/lotura_buttom_view.dart';
 import 'package:design_system/check_box/lotura_check_box_view.dart';
 import 'package:design_system/color/lotura_color.dart';
 import 'package:design_system/color/lotura_color_view.dart';
+import 'package:design_system/dialog/lotura_dialog_view.dart';
 import 'package:design_system/icon/lotura_icon_view.dart';
 import 'package:design_system/image/lotura_image_view.dart';
 import 'package:design_system/list_tile/lotura_list_tile_view.dart';
 import 'package:design_system/message_box/lotura_message_box_view.dart';
-import 'package:design_system/modal/lotura_dialog_view.dart';
 import 'package:design_system/text_field/lotura_text_field_view.dart';
 import 'package:flutter/material.dart';
 

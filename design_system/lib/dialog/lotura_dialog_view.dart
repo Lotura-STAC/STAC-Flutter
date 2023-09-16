@@ -1,6 +1,6 @@
 import 'package:design_system/button/lotura_text_button.dart';
 import 'package:design_system/color/lotura_color.dart';
-import 'package:design_system/modal/lotura_dialog.dart';
+import 'package:design_system/dialog/lotura_dialog.dart';
 import 'package:flutter/material.dart';
 
 class LoturaDialogView extends StatelessWidget {
