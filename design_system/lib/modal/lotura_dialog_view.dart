@@ -15,12 +15,13 @@ class LoturaDialogView extends StatelessWidget {
           onPressed: () => showDialog(
             context: context,
             builder: (context) => LoturaDialog(
-                title: Text("제목~~~~~~~~"),
-                content: Text("내용~~~~~~~~~"),
-                onPressed: () {
-                  print("onPressed");
-                  Navigator.pop(context);
-                }),
+              title: Text("제목~~~~~~~~"),
+              content: Text("내용~~~~~~~~~"),
+              onPressed: () {
+                print("onPressed");
+                Navigator.pop(context);
+              },
+            ),
           ),
           text: Text(
             "다이얼로그 창 열기",
