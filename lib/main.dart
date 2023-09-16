@@ -24,10 +24,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    fcmInit(context);
     return ScreenUtilInit(
       designSize: const Size(430, 932),
       builder: (context, child) {
-        fcmInit(context);
         return const MaterialApp(
           debugShowCheckedModeBanner: false,
           home: SignInPage(),
