@@ -13,7 +13,6 @@ class MainBloc extends Bloc<MainEvent, MainState> {
       : super(Empty()) {
     on<GetUserDeviceListEvent>(_getUserDeviceListEventHandler);
     on<RemoveDeviceEvent>(_removeDeviceEventHandler);
-    on<ModifyDeviceNameEvent>(_modifyDeviceEventHandler);
   }
 
   void _getUserDeviceListEventHandler(
@@ -40,7 +39,4 @@ class MainBloc extends Bloc<MainEvent, MainState> {
       emit(Error(message: e.toString()));
     }
   }
-
-  void _modifyDeviceEventHandler(
-      ModifyDeviceNameEvent event, Emitter<MainState> emit) {}
 }
