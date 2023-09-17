@@ -20,20 +20,27 @@ class LoturaMessageBox extends StatelessWidget {
       margin: margin,
       padding: EdgeInsets.all(24.0.r),
       width: 382.0.r,
-      height: 270.0.r,
+      height: 240.0.r,
       decoration: BoxDecoration(
         color: LoturaColor.white,
         border: Border.all(color: LoturaColor.gray200),
-        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(20.0)),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Image.asset('assets/images/washer1.png', width: 50.0.r),
+              Image.asset('assets/images/washer2.png', width: 50.0.r),
+              Image.asset('assets/images/washer3.png', width: 50.0.r),
+            ],
+          ),
           Text(
             "장치를 추가해서 기기들을 관리해보세요",
-            style: TextStyle(fontSize: 20.0.sp),
+            style: TextStyle(fontSize: 20.0.sp, fontWeight: FontWeight.w500),
           ),
-          SizedBox(height: 20.0.r),
           LoturaIconButton(
               icon: Icon(Icons.add, color: LoturaColor.white),
               function: onPressed),
