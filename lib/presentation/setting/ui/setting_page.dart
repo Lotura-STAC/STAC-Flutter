@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stac_flutter/core/utils/jwt_store.dart';
 import 'package:stac_flutter/data/auth/dto/response/sign_in_response.dart';
+import 'package:stac_flutter/presentation/setting/bloc/setting_bloc.dart';
+import 'package:stac_flutter/presentation/setting/bloc/setting_event.dart';
+import 'package:stac_flutter/presentation/setting/bloc/setting_state.dart';
 import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_bloc.dart';
 import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_event.dart';
 import 'package:stac_flutter/presentation/sign_in/ui/sign_in_page.dart';
@@ -65,32 +68,38 @@ class SettingPage extends StatelessWidget {
             SizedBox(height: 12.0.h),
             Padding(
               padding: EdgeInsets.all(12.0.r),
-              child: GestureDetector(
-                onTap: () async {
-                  JWTStore.deleteAll();
-                  context.read<SignInBloc>().add(ResetEvent());
-                  if (role == Role.admin){
-                    context.read()
+              child: BlocListener<SettingBloc, SettingState>(
+                listener: (context, state) {
+                  if (state is Loaded) {
+                    JWTStore.deleteAll();
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignInPage()),
+                        (route) => false);
                   }
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SignInPage()),
-                      (route) => false);
                 },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "로그아웃",
-                      style: TextStyle(fontSize: 18.0.sp),
-                    ),
-                    Icon(
-                      Icons.keyboard_arrow_right,
-                      color: LoturaColor.gray300,
-                      size: 30.0.r,
-                    ),
-                  ],
+                child: GestureDetector(
+                  onTap: () async {
+                    context.read<SignInBloc>().add(ResetEvent());
+                    if (role == Role.admin) {
+                      context.read<SettingBloc>().add(SignOutEvent());
+                    }
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "로그아웃",
+                        style: TextStyle(fontSize: 18.0.sp),
+                      ),
+                      Icon(
+                        Icons.keyboard_arrow_right,
+                        color: LoturaColor.gray300,
+                        size: 30.0.r,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
