@@ -1,4 +1,5 @@
 import 'package:design_system/color/lotura_color.dart';
+import 'package:design_system/icon/lotura_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -34,7 +35,7 @@ class LoturaListTile extends StatelessWidget {
         width: width,
         height: height,
         decoration: BoxDecoration(
-          color: LoturaColor.white,
+          color: status == 0 ? LoturaColor.primary50 : LoturaColor.green50,
           border: Border.all(color: LoturaColor.gray200),
           borderRadius: const BorderRadius.all(Radius.circular(16.0)),
         ),
@@ -44,10 +45,9 @@ class LoturaListTile extends StatelessWidget {
             Row(
               children: [
                 Icon(
-                  deviceType == 'DRY'
-                      ? Icons.add
-                      : Icons.accessible_forward_rounded,
+                  deviceType == 'DRY' ? LoturaIcons.dry : LoturaIcons.laundry,
                   size: 28.0.r,
+                  color: LoturaColor.gray300,
                 ),
                 SizedBox(width: 20.0.r),
                 Text(
@@ -59,12 +59,16 @@ class LoturaListTile extends StatelessWidget {
             Row(
               children: [
                 Icon(
-                  status == 0 ? Icons.accessible : Icons.ac_unit,
-                  size: 24.0.r,
+                  status == 0 ? LoturaIcons.working : LoturaIcons.checkCircle,
+                  size: 22.0.r,
+                  color: status == 0
+                      ? LoturaColor.primary700
+                      : LoturaColor.green700,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 15.0.r, right: 12.0.r),
-                  child: Icon(Icons.more_horiz),
+                  padding: EdgeInsets.only(
+                      left: status == 0 ? 20.0.r : 16.0.r, right: 12.0.r),
+                  child: const Icon(Icons.more_horiz),
                 ),
               ],
             ),
