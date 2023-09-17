@@ -75,21 +75,31 @@ class _ModifyDevicePageState extends State<ModifyDevicePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(
-                  "세탁기",
-                  style: TextStyle(
-                      color: widget.selectedIndex == 0
-                          ? LoturaColor.black
-                          : LoturaColor.gray200,
-                      fontSize: 20.0.sp),
+                LoturaTextButton(
+                  color: LoturaColor.white,
+                  width: 180.0.r,
+                  text: Text(
+                    "세탁기",
+                    style: TextStyle(
+                        color: widget.selectedIndex == 0
+                            ? LoturaColor.primary700
+                            : LoturaColor.gray200,
+                        fontSize: 20.0.sp,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
-                Text(
-                  "건조기",
-                  style: TextStyle(
-                      color: widget.selectedIndex == 1
-                          ? LoturaColor.black
-                          : LoturaColor.gray200,
-                      fontSize: 20.0.sp),
+                LoturaTextButton(
+                  color: LoturaColor.white,
+                  width: 180.0.r,
+                  text: Text(
+                    "건조기",
+                    style: TextStyle(
+                        color: widget.selectedIndex == 1
+                            ? LoturaColor.primary700
+                            : LoturaColor.gray200,
+                        fontSize: 20.0.sp,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
