@@ -85,7 +85,7 @@ class _PublicSignUpPageState extends State<PublicSignUpPage> {
                 ),
                 SizedBox(height: 67.0.r),
                 SizedBox(
-                  width: 382.0.r,
+                  width: double.infinity,
                   child: LoturaTextField(
                     controller: adminIdController,
                     hintText: "관리자 아이디를 입력해주세요",
@@ -94,7 +94,7 @@ class _PublicSignUpPageState extends State<PublicSignUpPage> {
                 ),
                 SizedBox(height: 35.0.r),
                 SizedBox(
-                  width: 382.0.r,
+                  width: double.infinity,
                   child: LoturaTextField(
                     controller: adminPwdController,
                     isPasswordTextField: true,
@@ -106,7 +106,7 @@ class _PublicSignUpPageState extends State<PublicSignUpPage> {
                 ),
                 SizedBox(height: 35.0.r),
                 SizedBox(
-                  width: 382.0.r,
+                  width: double.infinity,
                   child: LoturaTextField(
                     controller: adminPwdCheckController,
                     isPasswordTextField: true,
@@ -118,7 +118,7 @@ class _PublicSignUpPageState extends State<PublicSignUpPage> {
                 ),
                 SizedBox(height: 35.0.r),
                 SizedBox(
-                  width: 382.0.r,
+                  width: double.infinity,
                   child: LoturaTextField(
                     controller: guestIdController,
                     isPasswordTextField: false,
@@ -130,7 +130,7 @@ class _PublicSignUpPageState extends State<PublicSignUpPage> {
                 ),
                 SizedBox(height: 35.0.r),
                 SizedBox(
-                  width: 382.0.r,
+                  width: double.infinity,
                   child: LoturaTextField(
                     controller: guestPwdController,
                     isPasswordTextField: true,
@@ -142,7 +142,7 @@ class _PublicSignUpPageState extends State<PublicSignUpPage> {
                 ),
                 SizedBox(height: 35.0.r),
                 SizedBox(
-                  width: 382.0.r,
+                  width: double.infinity,
                   child: LoturaTextField(
                     controller: guestPwdCheckController,
                     isPasswordTextField: true,

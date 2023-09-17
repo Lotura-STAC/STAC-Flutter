@@ -80,7 +80,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 SizedBox(height: 67.0.r),
                 SizedBox(
-                  width: 382.0.r,
+                  width: double.infinity,
                   child: LoturaTextField(
                     controller: idController,
                     hintText: "아이디를 입력해주세요",
@@ -89,7 +89,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 SizedBox(height: 35.0.r),
                 SizedBox(
-                  width: 382.0.r,
+                  width: double.infinity,
                   child: LoturaTextField(
                     controller: pwdController,
                     isPasswordTextField: true,
@@ -101,7 +101,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 SizedBox(height: 35.0.r),
                 SizedBox(
-                  width: 382.0.r,
+                  width: double.infinity,
                   child: LoturaTextField(
                     controller: pwdCheckController,
                     isPasswordTextField: true,
