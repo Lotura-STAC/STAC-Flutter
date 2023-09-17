@@ -17,7 +17,7 @@ import 'package:stac_flutter/presentation/main/bloc/main_bloc.dart';
 import 'package:stac_flutter/presentation/main/bloc/main_event.dart';
 import 'package:stac_flutter/presentation/main/bloc/main_state.dart';
 import 'package:stac_flutter/presentation/modify_device/ui/modify_device_page.dart';
-import 'package:stac_flutter/presentation/setting/setting_page.dart';
+import 'package:stac_flutter/presentation/setting/ui/setting_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key, required this.role});
@@ -67,8 +67,10 @@ class _MainPageState extends State<MainPage> {
         actions: [
           IconButton(
             padding: EdgeInsets.only(right: 30.0.r),
-            onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const SettingPage())),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => SettingPage(
+                      role: widget.role,
+                    ))),
             icon: Icon(
               Icons.settings,
               color: LoturaColor.black,
