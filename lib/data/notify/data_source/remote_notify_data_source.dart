@@ -16,7 +16,7 @@ class RemoteNotifyDataSource {
         },
         body: jsonEncode(notifyRequest.toJson()));
     if (response.statusCode == 400) {
-      return false;
+      throw Exception("알림 신청에 실패했습니다");
     }
     return true;
   }
@@ -29,7 +29,9 @@ class RemoteNotifyDataSource {
           "Authorization": "Bearer $token"
         },
         body: jsonEncode(notifyAdminRequest.toJson()));
-    if (response.statusCode == 400) return false;
+    if (response.statusCode == 400) {
+      throw Exception("관리자 계정 최초 알림 신청에 실패했습니다");
+    }
     return true;
   }
 }
