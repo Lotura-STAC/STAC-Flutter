@@ -5,10 +5,17 @@ abstract class SignUpEvent extends Equatable {}
 
 class SignUp extends SignUpEvent {
   final SignUpRequest signUpRequest;
-  final String pwdCheck;
+  final String adminPwdCheck;
+  String? guestPwdCheck;
+  bool isPublicSignUp;
 
-  SignUp({required this.signUpRequest, required this.pwdCheck});
+  SignUp(
+      {required this.signUpRequest,
+      required this.adminPwdCheck,
+      required this.isPublicSignUp,
+      this.guestPwdCheck});
 
   @override
-  List<Object?> get props => [signUpRequest, pwdCheck];
+  List<Object?> get props =>
+      [signUpRequest, adminPwdCheck, isPublicSignUp, guestPwdCheck];
 }
