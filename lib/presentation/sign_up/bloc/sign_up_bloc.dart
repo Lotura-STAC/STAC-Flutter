@@ -13,8 +13,16 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   void _signUpHandler(SignUp event, Emitter<SignUpState> emit) async {
     try {
       emit(Loading());
-      final response = await _signUpUseCase.execute(event.signUpRequest);
-      emit(Loaded(isSuccess: response));
+      if (event.signUpRequest.adminId.isEmpty) {
+        emit(Error(message: "관리자 계정 아이디를 1글자 이상 입력해주세요"));
+      } else if (event.signUpRequest.adminPw.isEmpty) {
+        emit(Error(message: "관리자 계정 비밀번호를 1글자 이상 입력해주세요"));
+      } else if (event.pwdCheck != event.signUpRequest.adminPw) {
+        emit(Error(message: "비밀번호를 한번 더 확인해주세요"));
+      } else {
+        final response = await _signUpUseCase.execute(event.signUpRequest);
+        emit(Loaded(isSuccess: response));
+      }
     } catch (e) {
       emit(Error(message: e.toString()));
     }
