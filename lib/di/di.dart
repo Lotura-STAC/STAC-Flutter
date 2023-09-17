@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stac_flutter/data/add_device/data_source/remote_add_device_data_source.dart';
 import 'package:stac_flutter/data/add_device/repository/add_device_repository_impl.dart';
-import 'package:stac_flutter/data/auth/data_source/local_auth_data_source.dart';
 import 'package:stac_flutter/data/auth/data_source/remote_auth_data_source.dart';
 import 'package:stac_flutter/data/auth/repository/auth_repository_impl.dart';
 import 'package:stac_flutter/data/modify_device/data_source/remote_modify_device_data_source.dart';
@@ -45,11 +44,9 @@ Future<List<BlocProvider>> di() async {
   RemoteModifyDeviceDataSource remoteModifyDeviceDataSource =
       RemoteModifyDeviceDataSource();
   RemoteNotifyDataSource remoteNotifyDataSource = RemoteNotifyDataSource();
-  LocalAuthDateSource localAuthDateSource = LocalAuthDateSource();
 
-  AuthRepository authRepository = AuthRepositoryImpl(
-      remoteAuthDataSource: remoteAuthDataSource,
-      localAuthDateSource: localAuthDateSource);
+  AuthRepository authRepository =
+      AuthRepositoryImpl(remoteAuthDataSource: remoteAuthDataSource);
   RemoveDeviceRepository removeDeviceRepository = RemoveDeviceRepositoryImpl(
       remoteRemoveDeviceDataSource: remoteRemoveDeviceDataSource);
   SocketRepository socketRepository =
