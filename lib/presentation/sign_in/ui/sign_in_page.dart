@@ -59,6 +59,11 @@ class _SignInPageState extends State<SignInPage> {
         padding: EdgeInsets.only(left: 24.0.r, right: 24.0.r),
         child: BlocListener<SignInBloc, SignInState>(
           listener: (context, state) async {
+            if (state is Error) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(state.message),
+              ));
+            }
             if (state is Loaded) {
               if (firstSelected == true) {
                 await _storage.write(key: 'autoLogin', value: 'true');
