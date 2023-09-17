@@ -84,6 +84,8 @@ class SettingPage extends StatelessWidget {
                     context.read<SignInBloc>().add(ResetEvent());
                     if (role == Role.admin) {
                       context.read<SettingBloc>().add(SignOutEvent());
+                    } else {
+                      context.read<SettingBloc>().add(GuestSignOutEvent());
                     }
                   },
                   child: Row(
