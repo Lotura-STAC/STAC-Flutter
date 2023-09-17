@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stac_flutter/core/utils/jwt_store.dart';
+import 'package:stac_flutter/data/auth/dto/response/sign_in_response.dart';
 import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_bloc.dart';
 import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_event.dart';
 import 'package:stac_flutter/presentation/sign_in/ui/sign_in_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingPage extends StatelessWidget {
-  const SettingPage({super.key});
+  const SettingPage({super.key, required this.role});
+
+  final Role role;
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +69,9 @@ class SettingPage extends StatelessWidget {
                 onTap: () async {
                   JWTStore.deleteAll();
                   context.read<SignInBloc>().add(ResetEvent());
+                  if (role == Role.admin){
+                    context.read()
+                  }
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
