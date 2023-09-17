@@ -86,14 +86,17 @@ class _MainPageState extends State<MainPage> {
             }
             if (state is Loaded) {
               if (state.list.list.isEmpty) {
-                return LoturaMessageBox(
-                    margin: EdgeInsets.only(top: 100.0.r),
-                    onPressed: () => widget.role == Role.admin
-                        ? Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context) => const AddDevicePage()),
-                          )
-                        : null);
+                return Align(
+                  alignment: Alignment.topCenter,
+                  child: LoturaMessageBox(
+                      margin: EdgeInsets.only(top: 100.0.r),
+                      onPressed: () => widget.role == Role.admin
+                          ? Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => const AddDevicePage()),
+                            )
+                          : null),
+                );
               } else {
                 return Padding(
                   padding: EdgeInsets.only(bottom: 40.0.r),
