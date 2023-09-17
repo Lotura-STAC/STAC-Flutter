@@ -103,10 +103,14 @@ class _MainPageState extends State<MainPage> {
                                         state.list.list[index].name,
                                         style: TextStyle(fontSize: 20.0.sp),
                                       ),
-                                      onPressed: () async {
-                                        final token = await FirebaseMessaging
-                                            .instance
-                                            .getToken();
+                                      onPressed: () {
+                                        String token = "";
+                                        () async {
+                                          token = await FirebaseMessaging
+                                                  .instance
+                                                  .getToken() ??
+                                              "";
+                                        };
                                         context
                                             .read<MainBloc>()
                                             .add(NotifyEvent(
