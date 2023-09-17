@@ -1,5 +1,4 @@
 import 'package:stac_flutter/core/utils/jwt_store.dart';
-import 'package:stac_flutter/data/auth/data_source/local_auth_data_source.dart';
 import 'package:stac_flutter/data/auth/data_source/remote_auth_data_source.dart';
 import 'package:stac_flutter/data/auth/dto/request/refresh_request.dart';
 import 'package:stac_flutter/data/auth/dto/request/sign_in_request.dart';
@@ -9,13 +8,9 @@ import 'package:stac_flutter/domain/auth/repository/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final RemoteAuthDataSource _remoteAuthDataSource;
-  final LocalAuthDateSource _localAuthDateSource;
 
-  AuthRepositoryImpl(
-      {required RemoteAuthDataSource remoteAuthDataSource,
-      required LocalAuthDateSource localAuthDateSource})
-      : _remoteAuthDataSource = remoteAuthDataSource,
-        _localAuthDateSource = localAuthDateSource;
+  AuthRepositoryImpl({required RemoteAuthDataSource remoteAuthDataSource})
+      : _remoteAuthDataSource = remoteAuthDataSource;
 
   @override
   Future<JWTTokenEntity> signIn(SignInRequest signInRequest) async {
@@ -33,7 +28,7 @@ class AuthRepositoryImpl implements AuthRepository {
       await _remoteAuthDataSource.refresh(refreshRequest);
 
   @override
-  Future<void> signOut() async {
-    await _localAuthDateSource.signOut();
+  Future<bool> signOut() async {
+    return await _remoteAuthDataSource.signOut();
   }
 }
