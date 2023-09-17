@@ -53,6 +53,10 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
         child: BlocListener<SignUpBloc, SignUpState>(
           listener: (context, state) {
+            if (state is Error) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text(state.message)));
+            }
             if (state is Loaded) {
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (context) => const SignInPage()),
@@ -120,6 +124,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         signUpRequest: SignUpRequest(
                             adminId: idController.text,
                             adminPw: pwdController.text),
+                        pwdCheck: pwdCheckController.text,
                       ),
                     ),
               ),
