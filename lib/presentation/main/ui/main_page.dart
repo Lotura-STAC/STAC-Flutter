@@ -99,117 +99,127 @@ class _MainPageState extends State<MainPage> {
                   );
                 }
               } else {
-                return Padding(
-                  padding: EdgeInsets.only(bottom: 40.0.r),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: state.list.list.length,
-                          itemBuilder: (context, index) {
-                            return LoturaListTile(
-                              onLongPressed: () => widget.role == Role.guest
-                                  ? showDialog(
-                                      context: context,
-                                      builder: (context) => LoturaDialog(
-                                          title: Text("알림 신청하시겠습니까?"),
-                                          content: Text(
-                                            state.list.list[index].name,
-                                            style: TextStyle(fontSize: 20.0.sp),
-                                          ),
-                                          onPressed: () async {
-                                            String? token =
-                                                await FirebaseMessaging.instance
-                                                    .getToken();
-                                            context
-                                                .read<MainBloc>()
-                                                .add(NotifyEvent(
-                                                  notifyRequest: NotifyRequest(
-                                                      deviceToken:
-                                                          token.toString(),
-                                                      deviceNo: state
-                                                          .list
-                                                          .list[index]
-                                                          .deviceNo),
-                                                ));
-                                            Navigator.pop(context);
-                                          }))
-                                  : null,
-                              onPressed: () => widget.role == Role.admin
-                                  ? showModalBottomSheet(
-                                      shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.vertical(
-                                              top: Radius.circular(25.0))),
-                                      context: (context),
-                                      builder: (context) => LoturaBottomSheet(
-                                          subtitle: "장치 설정하기",
-                                          title: "장치에 변경사항이 생겼나요?",
-                                          leftText: "수정하기",
-                                          leftIcon: Icon(Icons.edit,
-                                              color: LoturaColor.primary700),
-                                          rightText: "삭제하기",
-                                          rightIcon: const Icon(
-                                              Icons.restore_from_trash,
-                                              color: Colors.red),
-                                          onLeftPressed: () {
-                                            Navigator.of(context).pop();
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ModifyDevicePage(
-                                                  selectedIndex: state
-                                                              .list
-                                                              .list[index]
-                                                              .deviceType ==
-                                                          "DRY"
-                                                      ? 1
-                                                      : 0,
-                                                  deviceName: state
-                                                      .list.list[index].name,
-                                                  deviceNum: state.list
-                                                      .list[index].deviceNo,
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          onRightPressed: () {
-                                            Navigator.of(context).pop();
-                                            context
-                                                .read<MainBloc>()
-                                                .add(RemoveDeviceEvent(
-                                                  removeDeviceRequest:
-                                                      RemoveDeviceRequest(
-                                                    deviceNo: state.list
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    context.read<MainBloc>().add(GetUserDeviceListEvent(
+                        getUserDeviceListRequest:
+                            GetUserDeviceListRequest(accessToken: "")));
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 40.0.r),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: state.list.list.length,
+                            itemBuilder: (context, index) {
+                              return LoturaListTile(
+                                onLongPressed: () => widget.role == Role.guest
+                                    ? showDialog(
+                                        context: context,
+                                        builder: (context) => LoturaDialog(
+                                            title: Text("알림 신청하시겠습니까?"),
+                                            content: Text(
+                                              state.list.list[index].name,
+                                              style:
+                                                  TextStyle(fontSize: 20.0.sp),
+                                            ),
+                                            onPressed: () async {
+                                              String? token =
+                                                  await FirebaseMessaging
+                                                      .instance
+                                                      .getToken();
+                                              context
+                                                  .read<MainBloc>()
+                                                  .add(NotifyEvent(
+                                                    notifyRequest:
+                                                        NotifyRequest(
+                                                            deviceToken: token
+                                                                .toString(),
+                                                            deviceNo: state
+                                                                .list
+                                                                .list[index]
+                                                                .deviceNo),
+                                                  ));
+                                              Navigator.pop(context);
+                                            }))
+                                    : null,
+                                onPressed: () => widget.role == Role.admin
+                                    ? showModalBottomSheet(
+                                        shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.vertical(
+                                                top: Radius.circular(25.0))),
+                                        context: (context),
+                                        builder: (context) => LoturaBottomSheet(
+                                            subtitle: "장치 설정하기",
+                                            title: "장치에 변경사항이 생겼나요?",
+                                            leftText: "수정하기",
+                                            leftIcon: Icon(Icons.edit,
+                                                color: LoturaColor.primary700),
+                                            rightText: "삭제하기",
+                                            rightIcon: const Icon(
+                                                Icons.restore_from_trash,
+                                                color: Colors.red),
+                                            onLeftPressed: () {
+                                              Navigator.of(context).pop();
+                                              Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ModifyDevicePage(
+                                                    selectedIndex: state
+                                                                .list
+                                                                .list[index]
+                                                                .deviceType ==
+                                                            "DRY"
+                                                        ? 1
+                                                        : 0,
+                                                    deviceName: state
+                                                        .list.list[index].name,
+                                                    deviceNum: state.list
                                                         .list[index].deviceNo,
                                                   ),
-                                                ));
-                                          }),
-                                    )
-                                  : null,
-                              width: 382.0.r,
-                              height: 90.0.r,
-                              deviceType: state.list.list[index].deviceType,
-                              text: state.list.list[index].name,
-                              status: state.list.list[index].currStatus,
-                              margin: EdgeInsets.all(8.0.r),
-                            );
-                          },
+                                                ),
+                                              );
+                                            },
+                                            onRightPressed: () {
+                                              Navigator.of(context).pop();
+                                              context
+                                                  .read<MainBloc>()
+                                                  .add(RemoveDeviceEvent(
+                                                    removeDeviceRequest:
+                                                        RemoveDeviceRequest(
+                                                      deviceNo: state.list
+                                                          .list[index].deviceNo,
+                                                    ),
+                                                  ));
+                                            }),
+                                      )
+                                    : null,
+                                width: 382.0.r,
+                                height: 90.0.r,
+                                deviceType: state.list.list[index].deviceType,
+                                text: state.list.list[index].name,
+                                status: state.list.list[index].currStatus,
+                                margin: EdgeInsets.all(8.0.r),
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                      widget.role == Role.admin
-                          ? LoturaIconButton(
-                              width: 375.0.r,
-                              icon: Icon(
-                                Icons.add,
-                                color: LoturaColor.white,
-                              ),
-                              function: () => Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const AddDevicePage())),
-                            )
-                          : const SizedBox.shrink(),
-                    ],
+                        widget.role == Role.admin
+                            ? LoturaIconButton(
+                                width: 375.0.r,
+                                icon: Icon(
+                                  Icons.add,
+                                  color: LoturaColor.white,
+                                ),
+                                function: () => Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const AddDevicePage())),
+                              )
+                            : const SizedBox.shrink(),
+                      ],
+                    ),
                   ),
                 );
               }
