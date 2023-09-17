@@ -17,8 +17,18 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         emit(Error(message: "관리자 계정 아이디를 1글자 이상 입력해주세요"));
       } else if (event.signUpRequest.adminPw.isEmpty) {
         emit(Error(message: "관리자 계정 비밀번호를 1글자 이상 입력해주세요"));
-      } else if (event.pwdCheck != event.signUpRequest.adminPw) {
-        emit(Error(message: "비밀번호를 한번 더 확인해주세요"));
+      } else if (event.adminPwdCheck != event.signUpRequest.adminPw) {
+        emit(Error(message: "관리자 계정 비밀번호를 한번 더 확인해주세요"));
+      } else if (event.isPublicSignUp == true &&
+          event.signUpRequest.guestId == null) {
+        emit(Error(message: "게스트 계정 아이디를 1글자 이상 입력해주세요"));
+      } else if (event.isPublicSignUp == true &&
+          event.signUpRequest.guestPw == null) {
+        emit(Error(message: "게스트 계정 비밀번호를 1글자 이상 입력해주세요"));
+      } else if (event.isPublicSignUp == true &&
+          event.signUpRequest.adminPw.isNotEmpty &&
+          event.guestPwdCheck != event.signUpRequest.guestPw) {
+        emit(Error(message: "게스트 계정 비밀번호를 한번 더 확인해주세요"));
       } else {
         final response = await _signUpUseCase.execute(event.signUpRequest);
         emit(Loaded(isSuccess: response));
