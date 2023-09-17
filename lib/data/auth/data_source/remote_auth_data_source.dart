@@ -24,7 +24,10 @@ class RemoteAuthDataSource {
         headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode(signUpRequest.toJson()));
     if (response.statusCode == 500) {
-      return false;
+      throw Exception("회원가입에 실패하였습니다");
+    }
+    if (response.statusCode == 400) {
+      throw Exception("중복된 아이디입니다");
     }
     return true;
   }
