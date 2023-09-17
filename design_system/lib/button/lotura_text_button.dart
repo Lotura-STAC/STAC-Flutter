@@ -10,10 +10,12 @@ class LoturaTextButton extends StatelessWidget {
       ),
       this.width = 382,
       this.height = 50,
+      this.color,
       this.onPressed});
 
   final double width, height;
   final Text text;
+  final Color? color;
   final void Function()? onPressed;
 
   @override
@@ -24,7 +26,7 @@ class LoturaTextButton extends StatelessWidget {
         width: width,
         height: height,
         decoration: BoxDecoration(
-          color: LoturaColor.primary700,
+          color: color ?? LoturaColor.primary700,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Center(
