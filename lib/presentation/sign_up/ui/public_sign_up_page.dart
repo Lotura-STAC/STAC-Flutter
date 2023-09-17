@@ -69,109 +69,116 @@ class _PublicSignUpPageState extends State<PublicSignUpPage> {
                     (route) => false);
               }
             },
-            child: Column(
-              children: [
-                SizedBox(height: 30.0.r),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "공용 계정 사용을 위한\n정보를 입력해주세요.",
-                    style: TextStyle(
-                      color: LoturaColor.black,
-                      fontSize: 30.0.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 67.0.r),
-                SizedBox(
-                  width: double.infinity,
-                  child: LoturaTextField(
-                    controller: adminIdController,
-                    hintText: "관리자 아이디를 입력해주세요",
-                    hintTextStyle: TextStyle(fontSize: 16.0.sp),
-                  ),
-                ),
-                SizedBox(height: 35.0.r),
-                SizedBox(
-                  width: double.infinity,
-                  child: LoturaTextField(
-                    controller: adminPwdController,
-                    isPasswordTextField: true,
-                    hintText: "관리자 비밀번호를 입력해주세요",
-                    hintTextStyle: TextStyle(
-                      fontSize: 16.0.sp,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 35.0.r),
-                SizedBox(
-                  width: double.infinity,
-                  child: LoturaTextField(
-                    controller: adminPwdCheckController,
-                    isPasswordTextField: true,
-                    hintText: "관리자 비밀번호를 확인해주세요",
-                    hintTextStyle: TextStyle(
-                      fontSize: 16.0.sp,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 35.0.r),
-                SizedBox(
-                  width: double.infinity,
-                  child: LoturaTextField(
-                    controller: guestIdController,
-                    isPasswordTextField: false,
-                    hintText: "공용 계정 아이디를 입력해주세요",
-                    hintTextStyle: TextStyle(
-                      fontSize: 16.0.sp,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 35.0.r),
-                SizedBox(
-                  width: double.infinity,
-                  child: LoturaTextField(
-                    controller: guestPwdController,
-                    isPasswordTextField: true,
-                    hintText: "공용 계정 비밀번호를 입력해주세요",
-                    hintTextStyle: TextStyle(
-                      fontSize: 16.0.sp,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 35.0.r),
-                SizedBox(
-                  width: double.infinity,
-                  child: LoturaTextField(
-                    controller: guestPwdCheckController,
-                    isPasswordTextField: true,
-                    hintText: "공용 계정 비밀번호를 확인해주세요",
-                    hintTextStyle: TextStyle(
-                      fontSize: 16.0.sp,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 70.0.r),
-                LoturaTextButton(
-                  text: Text(
-                    "회원가입",
-                    style: TextStyle(
-                        color: LoturaColor.white,
-                        fontSize: 16.0.sp,
-                        fontWeight: FontWeight.w700),
-                  ),
-                  onPressed: () => context.read<SignUpBloc>().add(
-                        SignUp(
-                            signUpRequest: SignUpRequest(
-                                adminId: adminIdController.text,
-                                adminPw: adminPwdController.text,
-                                guestId: guestIdController.text,
-                                guestPw: guestPwdCheckController.text),
-                            pwdCheck: adminPwdCheckController.text),
+            child: BlocBuilder<SignUpBloc, SignUpState>(
+              builder: (context, state) {
+                if (state is Empty || state is Error) {
+                  return Column(
+                    children: [
+                      SizedBox(height: 30.0.r),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "공용 계정 사용을 위한\n정보를 입력해주세요.",
+                          style: TextStyle(
+                            color: LoturaColor.black,
+                            fontSize: 30.0.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
-                ),
-              ],
+                      SizedBox(height: 67.0.r),
+                      SizedBox(
+                        width: double.infinity,
+                        child: LoturaTextField(
+                          controller: adminIdController,
+                          hintText: "관리자 아이디를 입력해주세요",
+                          hintTextStyle: TextStyle(fontSize: 16.0.sp),
+                        ),
+                      ),
+                      SizedBox(height: 35.0.r),
+                      SizedBox(
+                        width: double.infinity,
+                        child: LoturaTextField(
+                          controller: adminPwdController,
+                          isPasswordTextField: true,
+                          hintText: "관리자 비밀번호를 입력해주세요",
+                          hintTextStyle: TextStyle(
+                            fontSize: 16.0.sp,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 35.0.r),
+                      SizedBox(
+                        width: double.infinity,
+                        child: LoturaTextField(
+                          controller: adminPwdCheckController,
+                          isPasswordTextField: true,
+                          hintText: "관리자 비밀번호를 확인해주세요",
+                          hintTextStyle: TextStyle(
+                            fontSize: 16.0.sp,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 35.0.r),
+                      SizedBox(
+                        width: double.infinity,
+                        child: LoturaTextField(
+                          controller: guestIdController,
+                          isPasswordTextField: false,
+                          hintText: "공용 계정 아이디를 입력해주세요",
+                          hintTextStyle: TextStyle(
+                            fontSize: 16.0.sp,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 35.0.r),
+                      SizedBox(
+                        width: double.infinity,
+                        child: LoturaTextField(
+                          controller: guestPwdController,
+                          isPasswordTextField: true,
+                          hintText: "공용 계정 비밀번호를 입력해주세요",
+                          hintTextStyle: TextStyle(
+                            fontSize: 16.0.sp,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 35.0.r),
+                      SizedBox(
+                        width: double.infinity,
+                        child: LoturaTextField(
+                          controller: guestPwdCheckController,
+                          isPasswordTextField: true,
+                          hintText: "공용 계정 비밀번호를 확인해주세요",
+                          hintTextStyle: TextStyle(
+                            fontSize: 16.0.sp,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 70.0.r),
+                      LoturaTextButton(
+                        text: Text(
+                          "회원가입",
+                          style: TextStyle(
+                              color: LoturaColor.white,
+                              fontSize: 16.0.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        onPressed: () => context.read<SignUpBloc>().add(
+                              SignUp(
+                                  signUpRequest: SignUpRequest(
+                                      adminId: adminIdController.text,
+                                      adminPw: adminPwdController.text,
+                                      guestId: guestIdController.text,
+                                      guestPw: guestPwdCheckController.text),
+                                  pwdCheck: adminPwdCheckController.text),
+                            ),
+                      ),
+                    ],
+                  );
+                }
+                return const SizedBox.shrink();
+              },
             ),
           ),
         ),

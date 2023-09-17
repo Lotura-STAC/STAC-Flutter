@@ -60,6 +60,11 @@ class _SignInPageState extends State<SignInPage> {
           padding: EdgeInsets.only(left: 24.0.r, right: 24.0.r),
           child: BlocListener<SignInBloc, SignInState>(
             listener: (context, state) async {
+              if (state is Loading) {
+                const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
               if (state is Error) {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Text(state.message),
@@ -82,123 +87,9 @@ class _SignInPageState extends State<SignInPage> {
             },
             child: BlocBuilder<SignInBloc, SignInState>(
               builder: (context, state) {
-                if (state is Error) {
+                if (state is Error || state is Empty) {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 145.0.r),
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          "Lotura",
-                          style: TextStyle(
-                            color: LoturaColor.primary700,
-                            fontSize: 50.0.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 82.0.r),
-                      SizedBox(
-                        width: double.infinity,
-                        child: LoturaTextField(
-                          controller: idController,
-                          hintText: "아이디를 입력해주세요",
-                          hintTextStyle: TextStyle(fontSize: 16.0.sp),
-                        ),
-                      ),
-                      SizedBox(height: 35.0.r),
-                      SizedBox(
-                        width: double.infinity,
-                        child: LoturaTextField(
-                          controller: pwdController,
-                          isPasswordTextField: true,
-                          hintText: "비밀번호를 입력해주세요",
-                          hintTextStyle: TextStyle(
-                            fontSize: 16.0.sp,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 20.0.r),
-                      Row(
-                        children: [
-                          SizedBox(width: 5.0.r),
-                          LoturaCheckBox(
-                            isSelected: firstSelected,
-                            onPressed: () =>
-                                setState(() => firstSelected = !firstSelected),
-                          ),
-                          SizedBox(width: 8.0.r),
-                          Text(
-                            "자동 로그인",
-                            style: TextStyle(
-                                fontSize: 15.0.sp, fontWeight: FontWeight.w500),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 60.0.r),
-                      LoturaTextButton(
-                        text: Text(
-                          "로그인",
-                          style: TextStyle(
-                              color: LoturaColor.white,
-                              fontSize: 16.0.sp,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        onPressed: () => context.read<SignInBloc>().add(
-                              SignIn(
-                                signInRequest: SignInRequest(
-                                    id: idController.text,
-                                    pw: pwdController.text),
-                              ),
-                            ),
-                      ),
-                      SizedBox(height: 20.0.r),
-                      GestureDetector(
-                        onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context) => const SignUpPage())),
-                        child: Text.rich(
-                          TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Lotura가 처음이신가요? ',
-                                style: TextStyle(
-                                  color: LoturaColor.gray500,
-                                  fontSize: 16.0.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              TextSpan(
-                                text: '회원가입',
-                                style: TextStyle(
-                                  color: LoturaColor.primary700,
-                                  fontSize: 16.0.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              TextSpan(
-                                text: '하기',
-                                style: TextStyle(
-                                  color: LoturaColor.gray500,
-                                  fontSize: 16.0.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  );
-                }
-                if (state is Loading) {
-                  const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                if (state is Empty) {
-                  return Column(
                     children: [
                       SizedBox(height: 145.0.r),
                       Align(
