@@ -128,7 +128,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                 signUpRequest: SignUpRequest(
                                     adminId: idController.text,
                                     adminPw: pwdController.text),
-                                pwdCheck: pwdCheckController.text,
+                                adminPwdCheck: pwdCheckController.text,
+                                isPublicSignUp: false,
                               ),
                             ),
                       ),
