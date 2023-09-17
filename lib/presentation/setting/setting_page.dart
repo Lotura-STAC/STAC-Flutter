@@ -7,7 +7,6 @@ import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_bloc.dart';
 import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_event.dart';
 import 'package:stac_flutter/presentation/sign_in/ui/sign_in_page.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -19,23 +18,12 @@ class SettingPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: LoturaColor.gray100,
         elevation: 0.0,
-        leadingWidth: 300.0.w,
-        leading: Row(
-          children: [
-            IconButton(
-              padding: EdgeInsets.only(left: 24.0.w, right: 12.0.w),
-              onPressed: () => Navigator.pop(context),
-              icon: Icon(
-                Icons.arrow_back,
-                color: LoturaColor.black,
-                size: 24.0.r,
-              ),
-            ),
-            Text(
-              "설정",
-              style: TextStyle(fontSize: 24.0.sp, color: LoturaColor.black),
-            ),
-          ],
+        leading: IconButton(
+          onPressed: () => Navigator.of(context).pop(),
+          icon: Icon(
+            Icons.arrow_back,
+            color: LoturaColor.black,
+          ),
         ),
       ),
       body: Padding(
@@ -60,12 +48,12 @@ class SettingPage extends StatelessWidget {
                   children: [
                     Text(
                       "문의하기",
-                      style: TextStyle(fontSize: 16.0.sp),
+                      style: TextStyle(fontSize: 18.0.sp),
                     ),
                     Icon(
                       Icons.keyboard_arrow_right,
                       color: LoturaColor.gray300,
-                      size: 24.0.r,
+                      size: 30.0.r,
                     ),
                   ],
                 ),
@@ -89,12 +77,12 @@ class SettingPage extends StatelessWidget {
                   children: [
                     Text(
                       "로그아웃",
-                      style: TextStyle(fontSize: 16.0.sp),
+                      style: TextStyle(fontSize: 18.0.sp),
                     ),
                     Icon(
                       Icons.keyboard_arrow_right,
                       color: LoturaColor.gray300,
-                      size: 24.0.r,
+                      size: 30.0.r,
                     ),
                   ],
                 ),
