@@ -15,7 +15,7 @@ class RemoteModifyDeviceDataSource {
         },
         body: jsonEncode(modifyDeviceRequest.toJson()));
     if (response.statusCode == 400) {
-      return false;
+      throw Exception("장치 이름 변경에 실패했습니다");
     }
     return true;
   }
