@@ -2,6 +2,7 @@ import 'package:design_system/button/lotura_text_button.dart';
 import 'package:design_system/color/lotura_color.dart';
 import 'package:design_system/text_field/lotura_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stac_flutter/data/add_device/dto/request/add_device_request.dart';
@@ -97,7 +98,11 @@ class _AddDevicePageState extends State<AddDevicePage> {
                 SizedBox(
                   width: 382.0.r,
                   child: LoturaTextField(
+                    filteringTextInputFormatter:
+                        FilteringTextInputFormatter.deny(
+                            RegExp("/^[a-z]+[a-z0-9]\$/g")),
                     controller: numController,
+                    maxLength: 6,
                     hintText: "기기에 부착된 장치의 고유 번호를 입력해주세요.",
                     hintTextStyle: TextStyle(fontSize: 16.0.sp),
                   ),
