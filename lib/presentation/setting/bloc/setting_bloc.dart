@@ -8,6 +8,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
 
   SettingBloc(this._signOutUseCase) : super(Empty()) {
     on<SignOutEvent>(_signOutEventHandler);
+    on<GuestSignOutEvent>(_guestSignOutEventHandler);
   }
 
   void _signOutEventHandler(
@@ -22,5 +23,10 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
     } catch (e) {
       emit(Error(message: e.toString()));
     }
+  }
+
+  void _guestSignOutEventHandler(
+      GuestSignOutEvent event, Emitter<SettingState> emit) {
+    emit(Loaded());
   }
 }
