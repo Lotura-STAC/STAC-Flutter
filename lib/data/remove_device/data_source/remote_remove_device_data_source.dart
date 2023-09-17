@@ -15,7 +15,7 @@ class RemoteRemoveDeviceDataSource {
         },
         body: jsonEncode(removeDeviceRequest.toJson()));
     if (response.statusCode == 400) {
-      return false;
+      throw Exception("장치 삭제에 실패했습니다");
     }
     return true;
   }
