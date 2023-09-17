@@ -98,7 +98,7 @@ class _AddDevicePageState extends State<AddDevicePage> {
                   width: 382.0.r,
                   child: LoturaTextField(
                     controller: numController,
-                    hintText: "기기에 부착할 장치의 고유 번호를 입력해주세요.",
+                    hintText: "기기에 부착된 장치의 고유 번호를 입력해주세요.",
                     hintTextStyle: TextStyle(fontSize: 16.0.sp),
                   ),
                 ),
@@ -107,7 +107,7 @@ class _AddDevicePageState extends State<AddDevicePage> {
                   width: 382.0.r,
                   child: LoturaTextField(
                     controller: nameController,
-                    hintText: "화면에 표시될 기기의 이름을 입력해주세요.",
+                    hintText: "화면에 표시될 장치의 이름을 입력해주세요.",
                     hintTextStyle: TextStyle(
                       fontSize: 16.0.sp,
                     ),
