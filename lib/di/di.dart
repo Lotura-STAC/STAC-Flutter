@@ -15,6 +15,7 @@ import 'package:stac_flutter/data/socket/dto/response/get_user_device_list_respo
 import 'package:stac_flutter/data/socket/repository/socket_repository_impl.dart';
 import 'package:stac_flutter/domain/add_device/repository/add_device_repository.dart';
 import 'package:stac_flutter/domain/auth/repository/auth_repository.dart';
+import 'package:stac_flutter/domain/auth/use_case/sign_out_use_case.dart';
 import 'package:stac_flutter/domain/modify_device/repository/modify_device_repository.dart';
 import 'package:stac_flutter/domain/modify_device/use_case/modify_device_use_case.dart';
 import 'package:stac_flutter/domain/notify/repository/notify_repository.dart';
@@ -30,6 +31,7 @@ import 'package:stac_flutter/domain/auth/use_case/sign_up_use_case.dart';
 import 'package:stac_flutter/presentation/add_device/bloc/add_device_bloc.dart';
 import 'package:stac_flutter/presentation/main/bloc/main_bloc.dart';
 import 'package:stac_flutter/presentation/modify_device/bloc/modify_device_bloc.dart';
+import 'package:stac_flutter/presentation/setting/bloc/setting_bloc.dart';
 import 'package:stac_flutter/presentation/sign_in/bloc/sign_in_bloc.dart';
 import 'package:stac_flutter/presentation/sign_up/bloc/sign_up_bloc.dart';
 
@@ -74,6 +76,9 @@ Future<List<BlocProvider>> di() async {
       NotifyUseCase(notifyRepository: notifyRepository);
   NotifyAdminUseCase notifyAdminUseCase =
       NotifyAdminUseCase(notifyRepository: notifyRepository);
+  SignOutUseCase signOutUseCase =
+      SignOutUseCase(authRepository: authRepository);
+
   return [
     BlocProvider<SignInBloc>(
         create: (context) => SignInBloc(signInUseCase, notifyAdminUseCase)),
@@ -85,5 +90,6 @@ Future<List<BlocProvider>> di() async {
             getUserDeviceListUseCase, removeDeviceUseCase, notifyUseCase)),
     BlocProvider<ModifyDeviceBloc>(
         create: (context) => ModifyDeviceBloc(modifyDeviceUseCase)),
+    BlocProvider<SettingBloc>(create: (context) => SettingBloc(signOutUseCase)),
   ];
 }
