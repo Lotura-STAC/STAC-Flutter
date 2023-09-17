@@ -10,5 +10,5 @@ abstract class AuthRepository {
 
   Future<JWTTokenEntity> refresh(RefreshRequest refreshRequest);
 
-  Future<void> signOut();
+  Future<bool> signOut();
 }
