@@ -108,28 +108,33 @@ class _MainPageState extends State<MainPage> {
                           itemCount: state.list.list.length,
                           itemBuilder: (context, index) {
                             return LoturaListTile(
-                              onLongPressed: () => showDialog(
-                                  context: context,
-                                  builder: (context) => LoturaDialog(
-                                      title: Text("알림 신청하시겠습니까?"),
-                                      content: Text(
-                                        state.list.list[index].name,
-                                        style: TextStyle(fontSize: 20.0.sp),
-                                      ),
-                                      onPressed: () async {
-                                        String? token = await FirebaseMessaging
-                                            .instance
-                                            .getToken();
-                                        context
-                                            .read<MainBloc>()
-                                            .add(NotifyEvent(
-                                              notifyRequest: NotifyRequest(
-                                                  deviceToken: token.toString(),
-                                                  deviceNo: state.list
-                                                      .list[index].deviceNo),
-                                            ));
-                                        Navigator.pop(context);
-                                      })),
+                              onLongPressed: () => widget.role == Role.guest
+                                  ? showDialog(
+                                      context: context,
+                                      builder: (context) => LoturaDialog(
+                                          title: Text("알림 신청하시겠습니까?"),
+                                          content: Text(
+                                            state.list.list[index].name,
+                                            style: TextStyle(fontSize: 20.0.sp),
+                                          ),
+                                          onPressed: () async {
+                                            String? token =
+                                                await FirebaseMessaging.instance
+                                                    .getToken();
+                                            context
+                                                .read<MainBloc>()
+                                                .add(NotifyEvent(
+                                                  notifyRequest: NotifyRequest(
+                                                      deviceToken:
+                                                          token.toString(),
+                                                      deviceNo: state
+                                                          .list
+                                                          .list[index]
+                                                          .deviceNo),
+                                                ));
+                                            Navigator.pop(context);
+                                          }))
+                                  : null,
                               onPressed: () => widget.role == Role.admin
                                   ? showModalBottomSheet(
                                       shape: const RoundedRectangleBorder(
@@ -182,7 +187,7 @@ class _MainPageState extends State<MainPage> {
                                     )
                                   : null,
                               width: 382.0.r,
-                              height: 78.0.r,
+                              height: 90.0.r,
                               deviceType: state.list.list[index].deviceType,
                               text: state.list.list[index].name,
                               status: state.list.list[index].currStatus,
