@@ -22,7 +22,9 @@ class LoturaBottomSheetView extends StatelessWidget {
                 subtitle: "장치 설정하기",
                 title: "장치에 변경사항이 생겼나요?",
                 leftText: "장치 삭제하기",
+                leftIcon: Icon(Icons.restore_from_trash, color: Colors.red),
                 rightText: "장치 수정하기",
+                rightIcon: Icon(Icons.edit, color: Colors.blue),
                 onLeftPressed: () {
                   print("장치 삭제하기");
                 },
