@@ -6,3 +6,9 @@ class SignOutEvent extends SettingEvent {
   @override
   List<Object?> get props => [];
 }
+
+class GuestSignOutEvent extends SettingEvent {
+
+  @override
+  List<Object?> get props => [];
+}
