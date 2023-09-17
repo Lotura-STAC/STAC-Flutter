@@ -84,6 +84,7 @@ class _SignInPageState extends State<SignInPage> {
               builder: (context, state) {
                 if (state is Error) {
                   return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(height: 145.0.r),
                       Align(
@@ -99,7 +100,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                       SizedBox(height: 82.0.r),
                       SizedBox(
-                        width: 382.0.r,
+                        width: double.infinity,
                         child: LoturaTextField(
                           controller: idController,
                           hintText: "아이디를 입력해주세요",
@@ -108,7 +109,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                       SizedBox(height: 35.0.r),
                       SizedBox(
-                        width: 382.0.r,
+                        width: double.infinity,
                         child: LoturaTextField(
                           controller: pwdController,
                           isPasswordTextField: true,
@@ -121,6 +122,7 @@ class _SignInPageState extends State<SignInPage> {
                       SizedBox(height: 20.0.r),
                       Row(
                         children: [
+                          SizedBox(width: 5.0.r),
                           LoturaCheckBox(
                             isSelected: firstSelected,
                             onPressed: () =>
@@ -212,7 +214,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                       SizedBox(height: 82.0.r),
                       SizedBox(
-                        width: 382.0.r,
+                        width: double.infinity,
                         child: LoturaTextField(
                           controller: idController,
                           hintText: "아이디를 입력해주세요",
@@ -221,7 +223,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                       SizedBox(height: 35.0.r),
                       SizedBox(
-                        width: 382.0.r,
+                        width: double.infinity,
                         child: LoturaTextField(
                           controller: pwdController,
                           isPasswordTextField: true,
@@ -234,6 +236,7 @@ class _SignInPageState extends State<SignInPage> {
                       SizedBox(height: 20.0.r),
                       Row(
                         children: [
+                          SizedBox(width: 5.0.r),
                           LoturaCheckBox(
                             isSelected: firstSelected,
                             onPressed: () =>
