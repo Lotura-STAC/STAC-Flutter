@@ -30,7 +30,7 @@ class RemoteNotifyDataSource {
         },
         body: jsonEncode(notifyAdminRequest.toJson()));
     if (response.statusCode == 400) {
-      throw Exception("관리자 계정 최초 알림 신청에 실패했습니다");
+      return false;
     }
     return true;
   }
