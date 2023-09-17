@@ -1,5 +1,4 @@
 import 'package:design_system/button/lotura_icon_text_button.dart';
-import 'package:design_system/button/lotura_text_button.dart';
 import 'package:design_system/color/lotura_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -57,8 +56,10 @@ class LoturaBottomSheet extends StatelessWidget {
                   width: 180.0.r,
                   text: Text(
                     leftText,
-                    style:
-                        TextStyle(color: LoturaColor.black, fontSize: 16.0.sp),
+                    style: TextStyle(
+                        color: LoturaColor.black,
+                        fontSize: 16.0.sp,
+                        fontWeight: FontWeight.w600),
                   ),
                   icon: leftIcon,
                 ),
@@ -68,8 +69,10 @@ class LoturaBottomSheet extends StatelessWidget {
                   width: 180.0.r,
                   text: Text(
                     rightText,
-                    style:
-                        TextStyle(color: LoturaColor.black, fontSize: 16.0.sp),
+                    style: TextStyle(
+                        color: LoturaColor.black,
+                        fontSize: 16.0.sp,
+                        fontWeight: FontWeight.w600),
                   ),
                   icon: rightIcon,
                 ),
