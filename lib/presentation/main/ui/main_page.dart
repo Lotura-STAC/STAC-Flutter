@@ -46,13 +46,22 @@ class _MainPageState extends State<MainPage> {
         leadingWidth: 200.0.w,
         leading: Padding(
           padding: EdgeInsets.only(left: 40.0.r, top: 8.0.r),
-          child: Text(
-            "Lotura",
-            style: TextStyle(
-              fontSize: 28.0.sp,
-              fontWeight: FontWeight.w700,
-              color: LoturaColor.primary700,
-            ),
+          child: Row(
+            children: [
+              Image.asset(
+                'assets/images/lotura_logo.jpg',
+                width: 30.0.r,
+              ),
+              SizedBox(width: 9.0.r),
+              Text(
+                "Lotura",
+                style: TextStyle(
+                  fontSize: 32.0.sp,
+                  fontWeight: FontWeight.w700,
+                  color: LoturaColor.primary700,
+                ),
+              ),
+            ],
           ),
         ),
         actions: [
