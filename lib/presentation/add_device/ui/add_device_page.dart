@@ -62,30 +62,32 @@ class _AddDevicePageState extends State<AddDevicePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  TextButton(
+                  LoturaTextButton(
                     onPressed: () => setState(() => selectedIndex = 0),
-                    child: Text(
+                    color: LoturaColor.white,
+                    width: 180.0.r,
+                    text: Text(
                       "세탁기",
                       style: TextStyle(
                           color: selectedIndex == 0
-                              ? LoturaColor.black
+                              ? LoturaColor.primary700
                               : LoturaColor.gray200,
                           fontSize: 20.0.sp,
-                          fontWeight:
-                              selectedIndex == 0 ? FontWeight.bold : null),
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
-                  TextButton(
+                  LoturaTextButton(
                     onPressed: () => setState(() => selectedIndex = 1),
-                    child: Text(
+                    color: LoturaColor.white,
+                    width: 180.0.r,
+                    text: Text(
                       "건조기",
                       style: TextStyle(
                           color: selectedIndex == 1
-                              ? LoturaColor.black
+                              ? LoturaColor.primary700
                               : LoturaColor.gray200,
                           fontSize: 20.0.sp,
-                          fontWeight:
-                              selectedIndex == 1 ? FontWeight.bold : null),
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
