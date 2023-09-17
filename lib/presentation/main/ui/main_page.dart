@@ -120,11 +120,15 @@ class _MainPageState extends State<MainPage> {
                                     ? showDialog(
                                         context: context,
                                         builder: (context) => LoturaDialog(
-                                            title: Text("알림 신청하시겠습니까?"),
-                                            content: Text(
-                                              state.list.list[index].name,
+                                            title: Text(
+                                              "알림 신청하기",
                                               style:
-                                                  TextStyle(fontSize: 20.0.sp),
+                                                  TextStyle(fontSize: 16.0.sp),
+                                            ),
+                                            content: Text(
+                                              "${state.list.list[index].name} 장치의\n알림을 신청하시겠습니까?",
+                                              style:
+                                                  TextStyle(fontSize: 22.0.sp),
                                             ),
                                             onPressed: () async {
                                               String? token =
