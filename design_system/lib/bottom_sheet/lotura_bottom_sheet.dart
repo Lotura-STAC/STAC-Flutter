@@ -1,3 +1,4 @@
+import 'package:design_system/button/lotura_icon_text_button.dart';
 import 'package:design_system/button/lotura_text_button.dart';
 import 'package:design_system/color/lotura_color.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +13,12 @@ class LoturaBottomSheet extends StatelessWidget {
     required this.rightText,
     required this.onLeftPressed,
     required this.onRightPressed,
+    required this.leftIcon,
+    required this.rightIcon,
   });
 
   final String subtitle, title, leftText, rightText;
+  final Icon leftIcon, rightIcon;
   final void Function()? onLeftPressed, onRightPressed;
 
   @override
@@ -47,23 +51,27 @@ class LoturaBottomSheet extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                LoturaTextButton(
-                  onPressed: onLeftPressed,
+                LoturaIconTextButton(
+                  function: onLeftPressed,
+                  color: LoturaColor.gray50,
                   width: 180.0.r,
                   text: Text(
                     leftText,
                     style:
-                        TextStyle(color: LoturaColor.white, fontSize: 16.0.sp),
+                        TextStyle(color: LoturaColor.black, fontSize: 16.0.sp),
                   ),
+                  icon: leftIcon,
                 ),
-                LoturaTextButton(
-                  onPressed: onRightPressed,
+                LoturaIconTextButton(
+                  function: onRightPressed,
+                  color: LoturaColor.gray50,
                   width: 180.0.r,
                   text: Text(
                     rightText,
                     style:
-                        TextStyle(color: LoturaColor.white, fontSize: 16.0.sp),
+                        TextStyle(color: LoturaColor.black, fontSize: 16.0.sp),
                   ),
+                  icon: rightIcon,
                 ),
               ],
             ),
