@@ -70,6 +70,11 @@ class SettingPage extends StatelessWidget {
               padding: EdgeInsets.all(12.0.r),
               child: BlocListener<SettingBloc, SettingState>(
                 listener: (context, state) {
+                  if (state is Loading) {
+                    const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
                   if (state is Loaded) {
                     JWTStore.deleteAll();
                     Navigator.pushAndRemoveUntil(
