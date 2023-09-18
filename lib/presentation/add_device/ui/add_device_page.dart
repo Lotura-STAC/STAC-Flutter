@@ -111,6 +111,7 @@ class _AddDevicePageState extends State<AddDevicePage> {
                 SizedBox(
                   width: 382.0.r,
                   child: LoturaTextField(
+                    maxLength: 12,
                     controller: nameController,
                     hintText: "화면에 표시될 장치의 이름을 입력해주세요.",
                     hintTextStyle: TextStyle(
