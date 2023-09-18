@@ -118,7 +118,7 @@ class _MainPageState extends State<MainPage> {
                               return LoturaListTile(
                                 onLongPressed: () => widget.role ==
                                             Role.guest &&
-                                        state.list.list[index].currStatus == 1
+                                        state.list.list[index].currStatus == 0
                                     ? showDialog(
                                         context: context,
                                         builder: (context) => LoturaDialog(
