@@ -13,8 +13,12 @@ class AddDeviceBloc extends Bloc<AddDeviceEvent, AddDeviceState> {
   void _addDeviceHandler(AddDevice event, Emitter<AddDeviceState> emit) async {
     try {
       emit(Loading());
-      await _addDeviceUseCase.execute(event.addDeviceRequest);
-      emit(Loaded());
+      if (event.addDeviceRequest.name.isEmpty) {
+        emit(Error(message: "장치 이름을 한 글자 이상 적어주세요"));
+      } else {
+        await _addDeviceUseCase.execute(event.addDeviceRequest);
+        emit(Loaded());
+      }
     } catch (e) {
       emit(Error(message: e.toString()));
     }
