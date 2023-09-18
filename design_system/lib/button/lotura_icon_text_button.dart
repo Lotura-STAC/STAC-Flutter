@@ -34,6 +34,7 @@ class LoturaIconTextButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             icon,
+            SizedBox(height: 5.0.r),
             text,
           ],
         ),
