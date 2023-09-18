@@ -102,7 +102,7 @@ class _AddDevicePageState extends State<AddDevicePage> {
                         FilteringTextInputFormatter.deny(
                             RegExp('[^a-zA-Z0-9\\s]')),
                     controller: numController,
-                    maxLength: 6,
+                    maxLength: 8,
                     hintText: "기기에 부착된 장치의 고유 번호를 입력해주세요.",
                     hintTextStyle: TextStyle(fontSize: 16.0.sp),
                   ),
