@@ -100,7 +100,7 @@ class _AddDevicePageState extends State<AddDevicePage> {
                   child: LoturaTextField(
                     filteringTextInputFormatter:
                         FilteringTextInputFormatter.deny(
-                            RegExp("/^[a-z]+[a-z0-9]\$/g")),
+                            RegExp('[^a-zA-Z0-9\\s]')),
                     controller: numController,
                     maxLength: 6,
                     hintText: "기기에 부착된 장치의 고유 번호를 입력해주세요.",
