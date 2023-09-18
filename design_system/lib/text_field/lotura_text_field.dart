@@ -1,6 +1,7 @@
 import 'package:design_system/color/lotura_color.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class LoturaTextField extends StatefulWidget {
   LoturaTextField({
@@ -10,8 +11,10 @@ class LoturaTextField extends StatefulWidget {
     this.isPasswordTextField = false,
     this.obscureText = true,
     this.iconSize = 24,
+    this.maxLength = 12,
     this.focusNode,
     this.hintText,
+    this.filteringTextInputFormatter,
     this.hintTextStyle = const TextStyle(fontSize: 24),
   });
 
@@ -22,6 +25,8 @@ class LoturaTextField extends StatefulWidget {
   final TextStyle hintTextStyle;
   bool obscureText;
   final FocusNode? focusNode;
+  final int maxLength;
+  final FilteringTextInputFormatter? filteringTextInputFormatter;
 
   @override
   State<LoturaTextField> createState() => _LoturaTextFieldState();
@@ -30,13 +35,16 @@ class LoturaTextField extends StatefulWidget {
 class _LoturaTextFieldState extends State<LoturaTextField> {
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      inputFormatters: widget.filteringTextInputFormatter != null
+          ? [widget.filteringTextInputFormatter!]
+          : null,
       autofocus: widget.autofocus,
       controller: widget.controller,
       focusNode: widget.focusNode,
       cursorColor: LoturaColor.black,
       obscureText: widget.obscureText && widget.isPasswordTextField,
-      maxLength: 12,
+      maxLength: widget.maxLength,
       decoration: InputDecoration(
         hintText: widget.hintText,
         hintStyle: widget.hintTextStyle,
