@@ -11,3 +11,8 @@ class AddDevice extends AddDeviceEvent {
   @override
   List<Object?> get props => [addDeviceRequest];
 }
+
+class AddDevicePageRefreshEvent extends AddDeviceEvent {
+  @override
+  List<Object?> get props => [];
+}
