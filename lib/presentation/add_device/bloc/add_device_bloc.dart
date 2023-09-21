@@ -8,6 +8,7 @@ class AddDeviceBloc extends Bloc<AddDeviceEvent, AddDeviceState> {
 
   AddDeviceBloc(this._addDeviceUseCase) : super(Empty()) {
     on<AddDevice>(_addDeviceHandler);
+    on<AddDevicePageRefreshEvent>(_addDevicePageRefreshHandler);
   }
 
   void _addDeviceHandler(AddDevice event, Emitter<AddDeviceState> emit) async {
@@ -22,5 +23,10 @@ class AddDeviceBloc extends Bloc<AddDeviceEvent, AddDeviceState> {
     } catch (e) {
       emit(Error(message: e.toString()));
     }
+  }
+
+  void _addDevicePageRefreshHandler(
+      AddDevicePageRefreshEvent event, Emitter<AddDeviceState> emit) {
+    emit(Empty());
   }
 }
