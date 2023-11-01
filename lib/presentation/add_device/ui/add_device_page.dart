@@ -49,7 +49,7 @@ class _AddDevicePageState extends State<AddDevicePage> {
           ),
         ),
         body: BlocBuilder<AddDeviceBloc, AddDeviceState>(
-          builder: (contex, state) {
+          builder: (context, state) {
             if (state is Empty || state is Error) {
               return SingleChildScrollView(
                 child: Padding(
